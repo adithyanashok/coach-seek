@@ -1,23 +1,22 @@
-import 'package:coach_seek/presentation/core/colors.dart';
-import 'package:coach_seek/presentation/widgets/signup_button.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/app_bar_widgets.dart';
 import '../widgets/signin_image.dart';
+import '../widgets/signup_button.dart';
 import '../widgets/text_form_field.dart';
 
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        //<-----------AppBar----------------->//
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(50),
-          child: AppBarWidget(title: "Sign In"),
+          child: AppBarWidget(title: "Sign up"),
         ),
+
         //<----------------------body--------------------->//
         body: SingleChildScrollView(
           child: Column(
@@ -29,6 +28,12 @@ class SignInScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //<----------------Email text form field------------------>
+                  buildTextFieldLabel(title: "Name"),
+                  buildTextFormField(
+                    hintText: "Enter your name",
+                    type: "name",
+                    iconName: const Icon(Icons.person),
+                  ),
                   buildTextFieldLabel(title: "Email"),
                   buildTextFormField(
                     hintText: "Enter your email",
@@ -42,7 +47,7 @@ class SignInScreen extends StatelessWidget {
                     type: "password",
                     iconName: const Icon(Icons.lock),
                   ),
-                  buildSignupButton(buttonName: "Sign In", buttonType: "signin")
+                  buildSignupButton(buttonName: "Sign Up", buttonType: "signup")
                 ],
               )
             ],

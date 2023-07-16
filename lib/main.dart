@@ -1,4 +1,5 @@
 import 'package:coach_seek/presentation/sign_in/sign_in.dart';
+import 'package:coach_seek/presentation/sign_up/sign_up.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,11 +13,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-      ),
-      home: const SignInScreen()
-    );
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(),
+        home: const SignUpScreen());
   }
 }

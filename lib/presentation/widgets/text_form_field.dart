@@ -20,7 +20,7 @@ Widget buildTextFieldLabel({required String title}) {
 
 // Text Form Field method ///
 
-Container buildTextFormField(
+Widget buildTextFormField(
     {required String hintText, required String type, required Icon iconName}) {
   return Container(
     width: 325,

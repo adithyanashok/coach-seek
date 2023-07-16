@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import '../core/colors.dart';
 
 // <-------------Signin button------------------->
-Widget buildSignupButton({required String buttonName}) {
+Widget buildSignupButton(
+    {required String buttonName, required String buttonType}) {
   return Container(
     width: 350,
     height: 60,
-    margin: const EdgeInsets.only(left: 40, right: 40, top: 200),
+    margin: EdgeInsets.only(
+        left: 40, right: 40, top: buttonType == "signin" ? 200 : 120),
     decoration: BoxDecoration(
       color: AppColors.BlueColor,
       borderRadius: BorderRadius.circular(20),
