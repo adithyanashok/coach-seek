@@ -1,58 +1,33 @@
-// Text form field label //
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import '../core/colors.dart';
 
-Widget buildTextFieldLabel({required String title}) {
+Widget buildSearchBar() {
   return Container(
-    margin: const EdgeInsets.only(left: 30, top: 10),
-    child: Text(
-      title,
-      style: const TextStyle(
-        color: Colors.black,
-        fontWeight: FontWeight.normal,
-        fontSize: 15,
-      ),
-    ),
-  );
-}
-
-// Text Form Field method ///
-
-Widget buildTextFormField(
-    {required String hintText, required String type, required Icon iconName}) {
-  return Container(
-    width: 325,
+    width: double.infinity,
     height: 50,
     margin: const EdgeInsets.only(
-      left: 30,
-      right: 30,
+      left: 15,
+      right: 15,
+      top: 15,
     ),
     decoration: BoxDecoration(
-      color: AppColors.WhiteColor,
+      color: AppColors.whiteColor,
       borderRadius: const BorderRadius.all(
-        Radius.circular(15),
+        Radius.circular(40),
       ),
-      border: Border.all(color: AppColors.BlackColor),
+      border: Border.all(color: AppColors.lightbluecolor),
     ),
     child: Row(
       children: [
         Container(
-          width: 50,
-          height: 50,
-          child: iconName,
-        ),
-        Container(
-          width: 270,
+          width: 300,
           height: 50,
           child: TextField(
-            cursorColor: AppColors.BlackColor,
+            cursorColor: AppColors.lightbluecolor,
             keyboardType: TextInputType.multiline,
-            obscureText: type == "password" ? true : false,
-            obscuringCharacter: "*",
             decoration: InputDecoration(
-              hintText: hintText,
+              hintText: "Search top coaches...",
               border: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.transparent),
               ),
@@ -66,17 +41,25 @@ Widget buildTextFormField(
                 borderSide: BorderSide(color: Colors.transparent),
               ),
               hintStyle: TextStyle(
-                color: AppColors.BlackColor,
+                color: AppColors.greycolor,
               ),
             ),
             style: TextStyle(
-              color: AppColors.BlackColor,
+              color: AppColors.blackColor,
               fontFamily: "Avenir",
               fontSize: 14,
               fontWeight: FontWeight.normal,
             ),
           ),
-        )
+        ),
+        Container(
+          width: 50,
+          height: 50,
+          child: Icon(
+            Icons.search,
+            color: AppColors.lightbluecolor,
+          ),
+        ),
       ],
     ),
   );

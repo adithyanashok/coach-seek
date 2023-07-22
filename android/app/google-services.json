@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "529768599346",
+    "project_id": "coach-seek",
+    "storage_bucket": "coach-seek.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529768599346:android:5cd34754848c0afad6512b",
+        "android_client_info": {
+          "package_name": "com.example.coach_seek"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "529768599346-3u2f40uv1370ti7alt137h8tj0b0d2a1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8KiSr2_AXTVL5tS3TBqIZz80Dt6ATNsk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "529768599346-3u2f40uv1370ti7alt137h8tj0b0d2a1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

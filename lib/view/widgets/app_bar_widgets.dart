@@ -1,14 +1,20 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
+import 'package:coach_seek/bloc/auth/auth_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../core/colors.dart';
 
 class AppBarWidget extends StatelessWidget {
   final String title;
+  Function()? func;
 
-  const AppBarWidget({
-    super.key,
+  AppBarWidget({
+    Key? key,
     required this.title,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,7 @@ class AppBarWidget extends StatelessWidget {
         ),
       ),
       elevation: 0,
-      backgroundColor: AppColors.BlueColor,
+      backgroundColor: AppColors.lightbluecolor,
       centerTitle: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
