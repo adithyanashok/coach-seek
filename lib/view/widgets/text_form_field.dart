@@ -120,14 +120,6 @@ Widget buildTextAreaFormField(
     ),
     child: Row(
       children: [
-        // SizedBox(
-        //   width: 50,
-        //   // height: 50,
-        //   child: Icon(
-        //     iconName,
-        //     color: AppColors.lightbluecolor,
-        //   ),
-        // ),
         SizedBox(
           width: 320,
           // height: 100,

@@ -1,5 +1,5 @@
 import 'package:coach_seek/database/functions/user/user.dart';
-import 'package:coach_seek/database/user/user.dart';
+import 'package:coach_seek/database/model/user/user.dart';
 import 'package:coach_seek/view/core/snack_bar.dart';
 import 'package:coach_seek/view/main_page/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';

@@ -1,4 +1,5 @@
 import 'package:coach_seek/view/core/colors.dart';
+import 'package:coach_seek/view/experience/experience_screen.dart';
 import 'package:coach_seek/view/profile_updating_form/profile_updating_form.dart';
 import 'package:flutter/material.dart';
 
@@ -208,7 +209,7 @@ Widget aboutMeContainer({required String text}) {
 }
 
 //<---------------------------ExperienceContainer------------------->
-Widget experienceContainer() {
+Widget experienceContainer(context) {
   return Container(
     padding: const EdgeInsets.all(10),
     margin: const EdgeInsets.only(top: 10),
@@ -234,10 +235,19 @@ Widget experienceContainer() {
               fontSize: 19,
             ),
             //<--------------------icon widget----------->
-            Icon(
-              Icons.add,
-              color: AppColors.whiteColor,
-              size: 30,
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const ExperienceScreen(),
+                  ),
+                );
+              },
+              child: Icon(
+                Icons.add,
+                color: AppColors.whiteColor,
+                size: 30,
+              ),
             )
           ],
         ),

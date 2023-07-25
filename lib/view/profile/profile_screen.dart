@@ -18,6 +18,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserDb().getExperience(userId);
     return StreamBuilder(
       stream: UserDb().getAUser(userId!),
       builder: (context, snapshot) {
@@ -57,7 +58,7 @@ class ProfileScreen extends StatelessWidget {
                       data: data),
                   aboutMeContainer(text: "${data['desc']}"),
                   //<-------------This widget is used for experience box--------------->
-                  experienceContainer()
+                  experienceContainer(context)
                 ],
               ),
             ),
