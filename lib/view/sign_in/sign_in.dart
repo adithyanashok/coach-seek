@@ -3,8 +3,6 @@ import 'package:coach_seek/bloc/signin_in/sign_in_bloc.dart';
 import 'package:coach_seek/services/firebase_sign_in_method.dart';
 import 'package:coach_seek/view/widgets/signup_button.dart';
 import 'package:coach_seek/view/widgets/sub_heading.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,9 +11,9 @@ import '../widgets/signin_image.dart';
 import '../widgets/text_form_field.dart';
 
 class SignInScreen extends StatelessWidget {
-  SignInScreen({super.key, this.email, this.password});
-  String? email;
-  String? password;
+  const SignInScreen({super.key, this.email, this.password});
+  final String? email;
+  final String? password;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +21,8 @@ class SignInScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         //<-----------AppBar----------------->//
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(50),
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(50),
           child: AppBarWidget(
             title: "Sign In",
           ),
@@ -69,14 +67,15 @@ class SignInScreen extends StatelessWidget {
                               },
                             ),
                             buildSignupButton(
-                                buttonName: "Sign In",
-                                buttonType: "signin",
-                                onBoardingbutton: "signin",
-                                value: 130,
-                                func: () {
-                                  FirabaseSignInMethod(context)
-                                      .signInHandle("email");
-                                })
+                              buttonName: "Sign In",
+                              buttonType: "signin",
+                              onBoardingbutton: "signin",
+                              value: 130,
+                              func: () {
+                                FirabaseSignInMethod(context)
+                                    .signInHandle("email");
+                              },
+                            )
                           ],
                         )
                       ],

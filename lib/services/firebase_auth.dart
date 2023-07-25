@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:coach_seek/bloc/auth/auth_bloc.dart';
+import 'package:coach_seek/database/functions/user/user.dart';
+import 'package:coach_seek/database/user/user.dart';
 import 'package:coach_seek/view/core/snack_bar.dart';
+import 'package:coach_seek/view/main_page/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FireBaseAuthClass {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -18,7 +18,7 @@ class FireBaseAuthClass {
   Future<void> signInWithEmail(
       {required String emailAddress,
       required String password,
-      required BuildContext context}) async {
+      required context}) async {
     try {
       final credential = await _auth.signInWithEmailAndPassword(
         email: emailAddress,
@@ -33,10 +33,12 @@ class FireBaseAuthClass {
         return;
       }
       final user = credential.user;
-      context.read<AuthBloc>().add(AuthEvent.signInEvent(userId: user!.uid));
+      // context.read<AuthBloc>().add(AuthEvent.signInEvent(userId: user!.uid));
       if (user != null) {
-        print(user.uid);
-        Navigator.of(context).pushNamedAndRemoveUntil("home", (route) => false);
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const MainScreen()),
+          (route) => false,
+        );
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == "invalid-email") {
@@ -59,41 +61,39 @@ class FireBaseAuthClass {
       required location,
       required amount,
       required desc,
+      required role,
       required context}) async {
     try {
       // <---------------------------Firebase Auth----------------------->
       final credential = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      final userId = _auth.currentUser!.uid;
       // checking that user is not null
       if (credential.user != null) {
         // sending email verification
         await credential.user!.sendEmailVerification();
         // updating display name
         await credential.user!.updateDisplayName(name);
-        // firestore instance
-        final db = FirebaseFirestore.instance;
 
-        // Create a new user with a first and last name
-        final user = <String, dynamic>{
-          "name": name,
-          "email": email,
-          "password": password,
-          "phone": phone,
-          "location": location,
-          "amount": amount,
-          "desc": desc,
-        };
+        final user = UserModel(
+          name: name,
+          role: role,
+          location: location,
+          amount: amount,
+          desc: desc,
+          phone: phone,
+          email: email,
+          userId: userId,
+        );
 
-        // Add a new document with a generated ID
-        db.collection("users").add(user).then((DocumentReference doc) =>
-            print('DocumentSnapshot added with ID: ${doc.id}'));
+        await UserDb().addUser(user, userId);
 
         snackBar(
           context: context,
           msg:
               "An email has been sent to your registered email. To activate it please check your email box",
         );
-        Navigator.of(context).pop();
+        Navigator.of(context).pushNamed("signin");
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == "weak-password") {
@@ -108,8 +108,14 @@ class FireBaseAuthClass {
     }
   }
 
+  Future<void> updateTheData({
+    required UserModel user,
+  }) async {
+    await UserDb().updateUser(userId: user.userId, value: user);
+  }
+
   Future<void> signOut(context) async {
     await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushReplacementNamed("signin");
+    Navigator.of(context).pushReplacementNamed("onboarding");
   }
 }

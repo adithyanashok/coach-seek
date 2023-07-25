@@ -8,8 +8,8 @@ class Coaches extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size(double.infinity, 50),
+      appBar: const PreferredSize(
+        preferredSize: Size(double.infinity, 50),
         child: AppBarWidget(title: "Coaches"),
       ),
       body: SafeArea(

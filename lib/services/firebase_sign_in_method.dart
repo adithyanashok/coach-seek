@@ -1,7 +1,6 @@
 import 'package:coach_seek/bloc/signin_in/sign_in_bloc.dart';
 import 'package:coach_seek/services/firebase_auth.dart';
 import 'package:coach_seek/view/core/snack_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

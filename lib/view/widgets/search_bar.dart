@@ -20,7 +20,7 @@ Widget buildSearchBar() {
     ),
     child: Row(
       children: [
-        Container(
+        SizedBox(
           width: 300,
           height: 50,
           child: TextField(
@@ -52,7 +52,7 @@ Widget buildSearchBar() {
             ),
           ),
         ),
-        Container(
+        SizedBox(
           width: 50,
           height: 50,
           child: Icon(

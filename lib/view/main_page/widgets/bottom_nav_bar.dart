@@ -7,7 +7,6 @@ ValueNotifier<int> changeIndexNotifier = ValueNotifier(0);
 
 class BottomNavBarWidget extends StatelessWidget {
   const BottomNavBarWidget({super.key});
-
   @override
   Widget build(BuildContext context) {
     // <-------------Value listenable builder------------>

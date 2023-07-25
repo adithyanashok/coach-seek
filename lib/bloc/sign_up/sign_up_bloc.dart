@@ -11,7 +11,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       emit(state.copyWith(email: event.email));
     });
     on<PasswordEvent>((event, emit) {
-      print("my password is: ${event.password}");
       emit(state.copyWith(password: event.password));
     });
     on<NameEvent>((event, emit) {

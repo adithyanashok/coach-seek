@@ -1,15 +1,19 @@
 import 'package:coach_seek/view/core/colors.dart';
+import 'package:coach_seek/view/profile_updating_form/profile_updating_form.dart';
 import 'package:flutter/material.dart';
 
 //,---------------------Profile Head------------------->
-Widget ProfileHead({
-  required String status,
-  required String imageurl,
-  required String coachName,
-  required String coachRole,
-  required String coachLocation,
-  required double amount,
-}) {
+Widget profileHead(
+    {required String status,
+    required String imageurl,
+    required String coachName,
+    required String coachRole,
+    required String coachLocation,
+    required String amount,
+    required String userId,
+    required String currentUserId,
+    required context,
+    required data}) {
   return Column(
     children: [
       Row(
@@ -17,7 +21,7 @@ Widget ProfileHead({
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //<------------------Status tag----------------------->
-          Tag(
+          tag(
               color: status == "Available" ? AppColors.greenColor : Colors.red,
               text: status),
           //<---------------coloumn for profile image, and other detais------------>
@@ -32,7 +36,7 @@ Widget ProfileHead({
               ),
               // <-------------------Name and others------------------->
               // <----------Name----------------->
-              TitleWidget(
+              titleWidget(
                 text: coachName,
                 color: AppColors.lightbluecolor,
                 fontWeight: FontWeight.w600,
@@ -40,14 +44,14 @@ Widget ProfileHead({
               ),
 
               // <------------------Role------------------->
-              TitleWidget(
+              titleWidget(
                 text: coachRole,
                 color: AppColors.lightbluecolor,
                 fontWeight: FontWeight.w400,
                 fontSize: 15,
               ),
               //<-----------------Location------------------->
-              TitleWidget(
+              titleWidget(
                 text: coachLocation,
                 color: AppColors.greycolor,
                 fontWeight: FontWeight.w400,
@@ -56,39 +60,58 @@ Widget ProfileHead({
             ],
           ),
           //<---------------------Price tag---------------------->
-          Tag(color: AppColors.lightbluecolor, text: "\$$amount"),
+          tag(color: AppColors.lightbluecolor, text: "\$$amount"),
         ],
       ),
       // <--------------------Action buttons------------------------>
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ProfileActionButton(
-            color: Colors.red,
-            text: "Hire",
-          ),
-          ProfileActionButton(
-            color: AppColors.greenColor,
-            text: "Call Now",
-          ),
-        ],
-      ),
-      //<------------------------About me container--------------------->
-      AboutMeContainer(),
-      //<--------------------------Experience container---------------------------->
-      ExperienceContainer()
+      currentUserId != userId
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                profileActionButton(
+                  color: Colors.red,
+                  text: "Hire",
+                ),
+                profileActionButton(
+                  color: AppColors.greenColor,
+                  text: "Call Now",
+                ),
+              ],
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return ProfileUpdatingScreen(
+                            data: data,
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  child: profileActionButton(
+                    color: AppColors.lightbluecolor,
+                    text: "Edit profile",
+                  ),
+                ),
+              ],
+            )
     ],
   );
 }
 
 //<-----------------------Profile Action buttons------------------>
-Widget ProfileActionButton({
+Widget profileActionButton({
   required String text,
   required Color color,
 }) {
   return Container(
     width: 140,
-    height: 40,
+    height: 34,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(40),
       color: color,
@@ -106,7 +129,7 @@ Widget ProfileActionButton({
 //<-----------------------Profile Action buttons Ending------------------>
 
 //<-----------------------Text widget------------------>
-Widget TitleWidget({
+Widget titleWidget({
   required String text,
   required Color color,
   required FontWeight fontWeight,
@@ -125,7 +148,7 @@ Widget TitleWidget({
 //<-----------------------Text widget ending------------------>
 
 //<-------------------------------Tag widget---------------->
-Widget Tag({required Color color, required String text}) {
+Widget tag({required Color color, required String text}) {
   return Container(
     margin: const EdgeInsets.only(top: 10, left: 10),
     height: 21,
@@ -152,7 +175,7 @@ Widget Tag({required Color color, required String text}) {
 
 //<-------------------------------About me container---------------->
 
-Widget AboutMeContainer() {
+Widget aboutMeContainer({required String text}) {
   return Container(
     padding: const EdgeInsets.all(10),
     margin: const EdgeInsets.only(top: 20),
@@ -166,16 +189,15 @@ Widget AboutMeContainer() {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         //<-----------------------Reusable text widget----------------->
-        TitleWidget(
+        titleWidget(
           text: "About me",
           color: AppColors.whiteColor,
           fontWeight: FontWeight.w600,
           fontSize: 16,
         ),
         //<-----------------------Reusable text widget----------------->
-        TitleWidget(
-          text:
-              "Rahul Sharad Dravid is an Indian cricket coach and former captain of the Indian national team, currently serving as its head coach. Prior to his appointment to the senior men's national team, Dravid was the Head of Cricket at the National Cricket Academy, and the head coach of the India Under-19 and India A teams",
+        titleWidget(
+          text: text,
           color: AppColors.whiteColor,
           fontWeight: FontWeight.w300,
           fontSize: 15,
@@ -186,7 +208,7 @@ Widget AboutMeContainer() {
 }
 
 //<---------------------------ExperienceContainer------------------->
-Widget ExperienceContainer() {
+Widget experienceContainer() {
   return Container(
     padding: const EdgeInsets.all(10),
     margin: const EdgeInsets.only(top: 10),
@@ -205,7 +227,7 @@ Widget ExperienceContainer() {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //<------------------Reusable text widget------->
-            TitleWidget(
+            titleWidget(
               text: "Experience",
               color: AppColors.whiteColor,
               fontWeight: FontWeight.w600,
@@ -236,14 +258,14 @@ Widget ExperienceContainer() {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //<------------------Reusable text widget------->
-                    TitleWidget(
+                    titleWidget(
                       text: "Batting Coach",
                       color: AppColors.greenColor,
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
                     ),
                     //<------------------Reusable text widget------->
-                    TitleWidget(
+                    titleWidget(
                       text: "Batting Coach at CSK",
                       color: AppColors.greyColor2,
                       fontWeight: FontWeight.w400,

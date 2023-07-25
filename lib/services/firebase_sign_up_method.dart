@@ -1,10 +1,7 @@
 import 'package:coach_seek/bloc/sign_up/sign_up_bloc.dart';
 import 'package:coach_seek/services/firebase_auth.dart';
 import 'package:coach_seek/view/core/snack_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FirebaseSignUpMethod {
@@ -21,6 +18,7 @@ class FirebaseSignUpMethod {
     final location = state.location;
     final amount = state.amount;
     final desc = state.desc;
+    final role = state.role;
     if (email.isEmpty) {
       snackBar(context: context, msg: "You need to fill email address");
       return;
@@ -37,6 +35,7 @@ class FirebaseSignUpMethod {
           location: location,
           amount: amount,
           desc: desc,
+          role: role,
           context: context,
         );
   }

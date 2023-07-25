@@ -1,7 +1,6 @@
 import 'package:coach_seek/view/core/colors.dart';
 import 'package:coach_seek/view/widgets/signin_image.dart';
 import 'package:coach_seek/view/widgets/signup_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,8 +14,8 @@ class OnboardingScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         //<-----------Appbar----------------->
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(50),
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(50),
           child: AppBarWidget(
             title: "Welcome",
           ),
@@ -82,13 +81,14 @@ class OnboardingScreen extends StatelessWidget {
                         Navigator.of(context).pushNamed("signin");
                       }),
                   buildSignupButton(
-                      buttonName: "Sign Up",
-                      buttonType: "",
-                      onBoardingbutton: "signup",
-                      value: 20,
-                      func: () {
-                        Navigator.of(context).pushNamed("signup");
-                      }),
+                    buttonName: "Sign Up",
+                    buttonType: "",
+                    onBoardingbutton: "signup",
+                    value: 20,
+                    func: () {
+                      Navigator.of(context).pushNamed("signup");
+                    },
+                  ),
                 ],
               )
             ],
@@ -97,10 +97,4 @@ class OnboardingScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-Future<void> signout(BuildContext context) async {
-  await FirebaseAuth.instance.signOut();
-  Navigator.of(context).pushNamedAndRemoveUntil("signin", (route) => false);
-  print("logouted");
 }
