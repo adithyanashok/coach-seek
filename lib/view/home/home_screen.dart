@@ -1,3 +1,5 @@
+import 'package:coach_seek/bloc/coach/coach_bloc.dart';
+import 'package:coach_seek/database/functions/user/user.dart';
 import 'package:coach_seek/services/firebase_auth.dart';
 import 'package:coach_seek/view/widgets/app_bar_widgets.dart';
 import 'package:coach_seek/view/widgets/search_bar.dart';
@@ -18,6 +20,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final user = context.read<FireBaseAuthClass>().user;
+    context.read<CoachBloc>().add(const GetCoaches());
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size(double.infinity, 60),
@@ -28,44 +31,38 @@ class HomeScreen extends StatelessWidget {
           valueListenable: scrollNotifier,
           builder: (context, value, child) {
             return NotificationListener<UserScrollNotification>(
-              onNotification: (notification) {
-                final ScrollDirection direction = notification.direction;
-                if (direction == ScrollDirection.reverse) {
-                  scrollNotifier.value = false;
-                } else if (direction == ScrollDirection.forward) {
-                  scrollNotifier.value = true;
-                }
-                return true;
-              },
-              child: Column(
-                children: [
-                  scrollNotifier.value == true
-                      ? AnimatedContainer(
-                          duration: const Duration(seconds: 2),
-                          child: Column(
-                            children: [
-                              buildSearchBar(),
-                              buildSubHeadings(
-                                text: "Discover cricket coaches\nnear you",
-                                left: 20,
-                                top: 10,
-                              ),
-                            ],
-                          ),
-                        )
-                      : const SizedBox(),
-                  coachCard(func: () {
-                    Navigator.of(context).pushNamed("profile");
-                  }),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.read<FireBaseAuthClass>().signOut(context);
-                    },
-                    child: Text("${user!.email}"),
-                  )
-                ],
-              ),
-            );
+                onNotification: (notification) {
+                  final ScrollDirection direction = notification.direction;
+                  if (direction == ScrollDirection.reverse) {
+                    scrollNotifier.value = false;
+                  } else if (direction == ScrollDirection.forward) {
+                    scrollNotifier.value = true;
+                  }
+                  return true;
+                },
+                child: AnimatedContainer(
+                  duration: const Duration(seconds: 2),
+                  child: Column(
+                    children: [
+                      buildSearchBar(),
+                      scrollNotifier.value == true
+                          ? buildSubHeadings(
+                              text: "Discover cricket coaches\nnear you",
+                              left: 20,
+                              top: 10,
+                            )
+                          : const SizedBox(
+                              height: 10,
+                            ),
+                      coachCard(context: context),
+                      ElevatedButton(
+                          onPressed: () {
+                            FireBaseAuthClass().signOut(context);
+                          },
+                          child: Text("Signout"))
+                    ],
+                  ),
+                ));
           },
         ),
       ),

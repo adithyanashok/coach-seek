@@ -11,4 +11,5 @@ class SignUpEvent with _$SignUpEvent {
   const factory SignUpEvent.locationEvent(String location) = LocationEvent;
   const factory SignUpEvent.descEvent(String desc) = DescEvent;
   const factory SignUpEvent.phoneEvent(String phone) = PhoneEvent;
+  const factory SignUpEvent.profileImg(String profileImg) = ProfileImg;
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../core/colors.dart';
 
+// Text label widget
+// This widget returns a container containing a text label with the provided title.
 Widget buildTextFieldLabel({required String title}) {
   return Container(
     margin: const EdgeInsets.only(left: 30, top: 10),
@@ -17,7 +18,7 @@ Widget buildTextFieldLabel({required String title}) {
 }
 
 // Text Form Field method ///
-
+// This widget returns a container containing a row with an icon and a text field for user input.
 Widget buildTextFormField({
   required String hintText,
   required String type,
@@ -25,14 +26,14 @@ Widget buildTextFormField({
   String value = '',
   required Function(String value) func,
 }) {
+  // Text Editing controller to control the text field's value.
   final TextEditingController textCtrl = TextEditingController(text: value);
+
   return Container(
     width: 325,
     height: 50,
-    margin: const EdgeInsets.only(
-      left: 30,
-      right: 30,
-    ),
+    margin: const EdgeInsets.only(left: 30, right: 30),
+    // Box decoration for the text field.
     decoration: BoxDecoration(
       color: AppColors.whiteColor,
       borderRadius: const BorderRadius.all(
@@ -42,6 +43,7 @@ Widget buildTextFormField({
     ),
     child: Row(
       children: [
+        // Icon for the text field.
         SizedBox(
           width: 50,
           height: 50,
@@ -50,6 +52,7 @@ Widget buildTextFormField({
             color: AppColors.lightbluecolor,
           ),
         ),
+        // Text field for user input.
         SizedBox(
           width: 270,
           height: type == "desc" ? 100 : 50,
@@ -95,22 +98,24 @@ Widget buildTextFormField({
 }
 
 // Text Area Field method ///
-
-Widget buildTextAreaFormField(
-    {required String hintText,
-    required String type,
-    IconData? iconName,
-    String value = '',
-    required Function(String value) func}) {
+// This widget returns a container containing a text area (multi-line) for user input.
+Widget buildTextAreaFormField({
+  required String hintText,
+  required String type,
+  IconData? iconName,
+  String value = '',
+  required Function(String value) func,
+}) {
+  // Text Editing controller to control the text field's value.
   final TextEditingController textCtrl = TextEditingController(text: value);
 
   return Container(
     width: 325,
-    // height: 50,
     margin: const EdgeInsets.only(
       left: 30,
       right: 30,
     ),
+    // Box decoration for the text field.
     decoration: BoxDecoration(
       color: AppColors.whiteColor,
       borderRadius: const BorderRadius.all(
@@ -120,9 +125,9 @@ Widget buildTextAreaFormField(
     ),
     child: Row(
       children: [
+        // Text field for user input.
         SizedBox(
           width: 320,
-          // height: 100,
           child: TextField(
             onChanged: (value) {
               func(value);
@@ -131,9 +136,7 @@ Widget buildTextAreaFormField(
             cursorColor: AppColors.lightbluecolor,
             maxLines: 5,
             minLines: 4,
-            // maxLength: 10,
-            keyboardType:
-                type == "phone" ? TextInputType.phone : TextInputType.multiline,
+            keyboardType: TextInputType.multiline,
             decoration: InputDecoration(
               hintText: hintText,
               border: const OutlineInputBorder(

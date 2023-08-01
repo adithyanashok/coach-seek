@@ -13,5 +13,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<UpdateEvent>((event, emit) {
       emit(state.copyWith(loading: event.loading));
     });
+    on<LoadingEvent>((event, emit) {
+      emit(state.copyWith(loading: event.loading));
+    });
   }
 }

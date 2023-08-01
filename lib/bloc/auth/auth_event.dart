@@ -8,4 +8,5 @@ class AuthEvent with _$AuthEvent {
       SignInEvent;
 
   const factory AuthEvent.updateEvent({required bool loading}) = UpdateEvent;
+  const factory AuthEvent.loadingEvent({required bool loading}) = LoadingEvent;
 }

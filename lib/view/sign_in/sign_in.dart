@@ -1,6 +1,7 @@
 import 'package:coach_seek/bloc/auth/auth_bloc.dart';
 import 'package:coach_seek/bloc/signin_in/sign_in_bloc.dart';
 import 'package:coach_seek/services/firebase_sign_in_method.dart';
+import 'package:coach_seek/view/widgets/circle_loading_widget.dart';
 import 'package:coach_seek/view/widgets/signup_button.dart';
 import 'package:coach_seek/view/widgets/sub_heading.dart';
 import 'package:flutter/material.dart';
@@ -11,13 +12,16 @@ import '../widgets/signin_image.dart';
 import '../widgets/text_form_field.dart';
 
 class SignInScreen extends StatelessWidget {
-  const SignInScreen({super.key, this.email, this.password});
+  const SignInScreen({Key? key, this.email, this.password}) : super(key: key);
+
   final String? email;
   final String? password;
 
   @override
   Widget build(BuildContext context) {
+    // Get the current state of the AuthBloc
     BlocProvider.of<AuthBloc>(context).state;
+
     return SafeArea(
       child: Scaffold(
         //<-----------AppBar----------------->//
@@ -30,9 +34,10 @@ class SignInScreen extends StatelessWidget {
         //<----------------------body--------------------->//
         body: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
-            return state.loading == true
-                ? const CircularProgressIndicator()
-                : SingleChildScrollView(
+            return SafeArea(
+              child: Stack(
+                children: [
+                  SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -68,19 +73,34 @@ class SignInScreen extends StatelessWidget {
                             ),
                             buildSignupButton(
                               buttonName: "Sign In",
-                              buttonType: "signin",
-                              onBoardingbutton: "signin",
-                              value: 130,
-                              func: () {
+                              buttonColor: "blue",
+                              top: 130,
+                              func: () async {
+                                // Show loading widget during sign-in process
+                                context
+                                    .read<AuthBloc>()
+                                    .add(const LoadingEvent(loading: true));
+
+                                // Call the sign-in method to handle sign-in with email
                                 FirabaseSignInMethod(context)
                                     .signInHandle("email");
+
+                                // Hide loading widget after sign-in process
+                                context
+                                    .read<AuthBloc>()
+                                    .add(const LoadingEvent(loading: false));
                               },
                             )
                           ],
                         )
                       ],
                     ),
-                  );
+                  ),
+                  // Show a circular loading widget if state.loading is true
+                  if (state.loading) circleLoadingWidget()
+                ],
+              ),
+            );
           },
         ),
       ),

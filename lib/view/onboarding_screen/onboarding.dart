@@ -74,17 +74,15 @@ class OnboardingScreen extends StatelessWidget {
                 children: [
                   buildSignupButton(
                       buttonName: "Sign In",
-                      buttonType: "",
-                      onBoardingbutton: "signin",
-                      value: 140,
+                      buttonColor: "blue",
+                      top: 140,
                       func: () {
                         Navigator.of(context).pushNamed("signin");
                       }),
                   buildSignupButton(
                     buttonName: "Sign Up",
-                    buttonType: "",
-                    onBoardingbutton: "signup",
-                    value: 20,
+                    buttonColor: "white",
+                    top: 20,
                     func: () {
                       Navigator.of(context).pushNamed("signup");
                     },

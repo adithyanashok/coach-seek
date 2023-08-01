@@ -11,6 +11,7 @@ _$_ExperienceModel _$$_ExperienceModelFromJson(Map<String, dynamic> json) =>
       userId: json['userId'] as String?,
       role: json['role'] as String?,
       desc: json['desc'] as String?,
+      id: json['id'] as String?,
     );
 
 Map<String, dynamic> _$$_ExperienceModelToJson(_$_ExperienceModel instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$_ExperienceModelToJson(_$_ExperienceModel instance) =>
       'userId': instance.userId,
       'role': instance.role,
       'desc': instance.desc,
+      'id': instance.id,
     };

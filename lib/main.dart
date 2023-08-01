@@ -1,6 +1,12 @@
+import 'dart:developer';
+
 import 'package:coach_seek/bloc/auth/auth_bloc.dart';
+import 'package:coach_seek/bloc/coach/coach_bloc.dart';
+import 'package:coach_seek/bloc/experience/experience_bloc.dart';
 import 'package:coach_seek/bloc/sign_up/sign_up_bloc.dart';
 import 'package:coach_seek/bloc/signin_in/sign_in_bloc.dart';
+import 'package:coach_seek/database/functions/coaches/coaches.dart';
+import 'package:coach_seek/database/functions/experiences/experiences.dart';
 import 'package:coach_seek/services/firebase_auth.dart';
 import 'package:coach_seek/services/firebase_sign_up_method.dart';
 import 'package:coach_seek/view/home/home_screen.dart';
@@ -18,9 +24,8 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // final id = FirebaseAuth.instance.currentUser?.uid;
-  // log(id.toString());
-  // UserDb().getAUser(id!);
+  final d = await CoachDb().getCoaches();
+  log("MAIN DATAS ${d[0].name}");
   runApp(const MyApp());
 }
 
@@ -40,6 +45,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => SignUpBloc()),
           BlocProvider(create: (context) => SignUpBloc()),
           BlocProvider(create: (context) => AuthBloc()),
+          BlocProvider(create: (context) => ExperienceBloc()),
+          BlocProvider(create: (context) => CoachBloc()),
         ],
         child: MultiProvider(
           providers: [
@@ -48,6 +55,10 @@ class MyApp extends StatelessWidget {
             ),
             StreamProvider(
               create: (context) => context.read<FireBaseAuthClass>().authState,
+              initialData: null,
+            ),
+            StreamProvider(
+              create: (context) => context.read<ExperienceDb>().getExperience(),
               initialData: null,
             )
           ],
@@ -58,7 +69,7 @@ class MyApp extends StatelessWidget {
             home: const AuthWrapper(),
             routes: {
               "signin": (context) => const SignInScreen(),
-              "signup": (context) => const SignUpScreen(),
+              "signup": (context) => SignUpScreen(),
               "home": (context) => const HomeScreen(),
               "profile": (context) => ProfileScreen(userId: id),
               "onboarding": (context) => const OnboardingScreen(),

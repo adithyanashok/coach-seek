@@ -31,5 +31,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<PhoneEvent>((event, emit) {
       emit(state.copyWith(phone: event.phone));
     });
+    on<ProfileImg>((event, emit) {
+      emit(state.copyWith(profileImg: event.profileImg));
+    });
   }
 }

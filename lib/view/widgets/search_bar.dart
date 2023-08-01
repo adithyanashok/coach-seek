@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../core/colors.dart';
 
+// Search bar widget
 Widget buildSearchBar() {
   return Container(
     width: double.infinity,
@@ -20,6 +20,7 @@ Widget buildSearchBar() {
     ),
     child: Row(
       children: [
+        // Text field for user input
         SizedBox(
           width: 300,
           height: 50,
@@ -27,7 +28,7 @@ Widget buildSearchBar() {
             cursorColor: AppColors.lightbluecolor,
             keyboardType: TextInputType.multiline,
             decoration: InputDecoration(
-              hintText: "Search top coaches...",
+              hintText: "Search top coaches...", // Placeholder text
               border: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.transparent),
               ),
@@ -41,23 +42,24 @@ Widget buildSearchBar() {
                 borderSide: BorderSide(color: Colors.transparent),
               ),
               hintStyle: TextStyle(
-                color: AppColors.greycolor,
+                color: AppColors.greycolor, // Hint text color
               ),
             ),
             style: TextStyle(
-              color: AppColors.blackColor,
+              color: AppColors.blackColor, // Text color
               fontFamily: "Avenir",
               fontSize: 14,
               fontWeight: FontWeight.normal,
             ),
           ),
         ),
+        // Icon button for search
         SizedBox(
           width: 50,
           height: 50,
           child: Icon(
             Icons.search,
-            color: AppColors.lightbluecolor,
+            color: AppColors.lightbluecolor, // Search icon color
           ),
         ),
       ],

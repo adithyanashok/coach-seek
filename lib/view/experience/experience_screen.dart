@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:coach_seek/bloc/auth/auth_bloc.dart';
-import 'package:coach_seek/database/functions/user/user.dart';
-import 'package:coach_seek/database/model/experiences.dart';
+import 'package:coach_seek/database/functions/experiences/experiences.dart';
+import 'package:coach_seek/database/model/experience/experiences.dart';
 import 'package:coach_seek/view/widgets/app_bar_widgets.dart';
 import 'package:coach_seek/view/widgets/signup_button.dart';
 import 'package:coach_seek/view/widgets/text_form_field.dart';
@@ -47,12 +47,13 @@ class ExperienceScreen extends StatelessWidget {
             ),
             buildSignupButton(
               buttonName: "Done",
-              onBoardingbutton: "signin",
-              buttonType: "signin",
-              value: 50,
-              func: () {
+              buttonColor: "blue",
+              top: 50,
+              func: () async {
                 Map<String, dynamic> experienceMap = experience.toJson();
-                UserDb().addExperience(experienceMap);
+                await ExperienceDb().addExperience(experienceMap);
+
+                Navigator.of(context).pop();
               },
             ),
           ],
