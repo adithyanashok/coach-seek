@@ -23,6 +23,8 @@ Widget buildTextFormField({
   required String hintText,
   required String type,
   required IconData iconName,
+  double? width,
+  double? margin,
   String value = '',
   required Function(String value) func,
 }) {
@@ -30,9 +32,9 @@ Widget buildTextFormField({
   final TextEditingController textCtrl = TextEditingController(text: value);
 
   return Container(
-    width: 325,
+    width: width ?? 325, //325
     height: 50,
-    margin: const EdgeInsets.only(left: 30, right: 30),
+    margin: EdgeInsets.only(left: margin ?? 30, right: margin ?? 30),
     // Box decoration for the text field.
     decoration: BoxDecoration(
       color: AppColors.whiteColor,
@@ -54,8 +56,8 @@ Widget buildTextFormField({
         ),
         // Text field for user input.
         SizedBox(
-          width: 270,
-          height: type == "desc" ? 100 : 50,
+          width: 230,
+          height: 50,
           child: TextField(
             onChanged: (value) {
               func(value);

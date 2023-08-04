@@ -1,8 +1,6 @@
 import 'package:coach_seek/bloc/coach/coach_bloc.dart';
-import 'package:coach_seek/database/functions/user/user.dart';
 import 'package:coach_seek/services/firebase_auth.dart';
 import 'package:coach_seek/view/widgets/app_bar_widgets.dart';
-import 'package:coach_seek/view/widgets/search_bar.dart';
 import 'package:coach_seek/view/widgets/sub_heading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +17,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final user = context.read<FireBaseAuthClass>().user;
+    final state = context.read<CoachBloc>().state;
+
     context.read<CoachBloc>().add(const GetCoaches());
     return Scaffold(
       appBar: const PreferredSize(
@@ -44,7 +43,6 @@ class HomeScreen extends StatelessWidget {
                   duration: const Duration(seconds: 2),
                   child: Column(
                     children: [
-                      buildSearchBar(),
                       scrollNotifier.value == true
                           ? buildSubHeadings(
                               text: "Discover cricket coaches\nnear you",
@@ -54,12 +52,18 @@ class HomeScreen extends StatelessWidget {
                           : const SizedBox(
                               height: 10,
                             ),
-                      coachCard(context: context),
+                      coachCard(
+                          context: context,
+                          state: state,
+                          func: (id) {
+                            Navigator.of(context)
+                                .pushNamed('profile', arguments: id);
+                          }),
                       ElevatedButton(
                           onPressed: () {
                             FireBaseAuthClass().signOut(context);
                           },
-                          child: Text("Signout"))
+                          child: const Text("Signout"))
                     ],
                   ),
                 ));

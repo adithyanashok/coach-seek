@@ -1,18 +1,18 @@
-import 'dart:developer';
-
 import 'package:coach_seek/bloc/auth/auth_bloc.dart';
 import 'package:coach_seek/bloc/coach/coach_bloc.dart';
 import 'package:coach_seek/bloc/experience/experience_bloc.dart';
 import 'package:coach_seek/bloc/sign_up/sign_up_bloc.dart';
 import 'package:coach_seek/bloc/signin_in/sign_in_bloc.dart';
-import 'package:coach_seek/database/functions/coaches/coaches.dart';
+
 import 'package:coach_seek/database/functions/experiences/experiences.dart';
+import 'package:coach_seek/database/functions/profiecient_tag/proficient_tag.dart';
 import 'package:coach_seek/services/firebase_auth.dart';
 import 'package:coach_seek/services/firebase_sign_up_method.dart';
 import 'package:coach_seek/view/home/home_screen.dart';
 import 'package:coach_seek/view/main_page/main_page.dart';
 import 'package:coach_seek/view/onboarding_screen/onboarding.dart';
 import 'package:coach_seek/view/profile/profile_screen.dart';
+import 'package:coach_seek/view/search_result/search_result.dart';
 import 'package:coach_seek/view/sign_in/sign_in.dart';
 import 'package:coach_seek/view/sign_up/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,8 +24,6 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  final d = await CoachDb().getCoaches();
-  log("MAIN DATAS ${d[0].name}");
   runApp(const MyApp());
 }
 
@@ -58,9 +56,13 @@ class MyApp extends StatelessWidget {
               initialData: null,
             ),
             StreamProvider(
-              create: (context) => context.read<ExperienceDb>().getExperience(),
+              create: (context) => ExperienceDb.getExperience(),
               initialData: null,
-            )
+            ),
+            StreamProvider(
+              create: (context) => ProficientTag.getTag(),
+              initialData: null,
+            ),
           ],
           child: MaterialApp(
             title: 'Flutter Demo',
@@ -69,10 +71,11 @@ class MyApp extends StatelessWidget {
             home: const AuthWrapper(),
             routes: {
               "signin": (context) => const SignInScreen(),
-              "signup": (context) => SignUpScreen(),
+              "signup": (context) => const SignUpScreen(),
               "home": (context) => const HomeScreen(),
-              "profile": (context) => ProfileScreen(userId: id),
+              "profile": (context) => ProfileScreen(currentUserId: id),
               "onboarding": (context) => const OnboardingScreen(),
+              "search_result": (context) => const SearchResultScreen(),
               // "welcome": (context) => const OnboardingScreen(),
             },
           ),

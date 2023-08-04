@@ -7,14 +7,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 class ExperienceDb {
   // Adding Experience
 
-  Future<void> addExperience(model) async {
+  static Future<void> addExperience(model) async {
     final db = FirebaseFirestore.instance;
     final data = await db.collection("experience").add(model);
-    log(data.id);
   }
 
-  Stream<List<ExperienceModel>> getExperience() {
-    final userId = FirebaseAuth.instance.currentUser!.uid;
+  static Stream<List<ExperienceModel>> getExperience({String? userId}) {
+    // final userId = FirebaseAuth.instance.currentUser!.uid;
     final db = FirebaseFirestore.instance;
     return db
         .collection("experience")

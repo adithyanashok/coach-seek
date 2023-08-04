@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:coach_seek/database/model/coach/coach.dart';
 import 'package:coach_seek/database/model/user/user.dart';
 
 class CoachDb {
@@ -14,34 +13,36 @@ class CoachDb {
     for (var docSnapshot in querySnapshot.docs) {
       var userData = docSnapshot.data();
       var user = UserModel.fromMap(userData);
+
       users.add(user);
     }
 
     return users.toList();
   }
+
+  Future<List<UserModel>> searchItems({String? searchQuery}) async {
+    try {
+      // Access the "items" collection in Firestore
+      final db = FirebaseFirestore.instance;
+      QuerySnapshot querySnapshot = await db
+          .collection("users")
+          .where('role', isGreaterThanOrEqualTo: searchQuery)
+          .where('role', isLessThanOrEqualTo: '${searchQuery!}\uf8ff')
+          .get();
+
+      List<UserModel> users = [];
+      for (var docSnapshot in querySnapshot.docs) {
+        var userData = docSnapshot.data() as Map<String, dynamic>;
+
+        var user = UserModel.fromMap(userData);
+        users.shuffle();
+        users.add(user);
+      }
+
+      return users.toList();
+    } catch (e) {
+      log('Error searching items: $e');
+      return [];
+    }
+  }
 }
-
-// return db.collection("users").get().then(
-//       (querySnapshot) {
-//         for (var docSnapshot in querySnapshot.docs) {
-//           log('${docSnapshot.id} => FETCHED ALL DATAS ${docSnapshot.data()}');
-//         }
-//         return const CoachModel(coach: []);
-//       },
-//       onError: (e) => log("Error completing: $e"),
-//     );
-
-//   Future<CoachModel?> getCoaches() async {
-//     return db.collection("users").get().then(
-//       (querySnapshot) {
-//         List<CoachModel?> coaches = [];
-//         for (var docSnapshot in querySnapshot.docs) {
-//           final coachData = docSnapshot.data();
-//           coaches.add(CoachModel.fromJson(coachData));
-//         }
-//         return CoachModel(coach: coaches);
-//       },
-//       onError: (e) => log("Error completing: $e"),
-//     );
-//   }
-// }

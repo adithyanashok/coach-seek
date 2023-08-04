@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:coach_seek/database/functions/experiences/experiences.dart';
+import 'package:coach_seek/database/functions/profiecient_tag/proficient_tag.dart';
 import 'package:coach_seek/view/core/colors.dart';
 import 'package:coach_seek/view/experience/experience_screen.dart';
+import 'package:coach_seek/view/home/home_screen.dart';
 import 'package:coach_seek/view/profile_updating_form/profile_updating_form.dart';
 import 'package:coach_seek/view/widgets/sub_heading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -124,10 +126,12 @@ Widget profileHead({
 Widget profileActionButton({
   required String text,
   required Color color,
+  double? width,
+  double? height,
 }) {
   return Container(
-    width: 140,
-    height: 34,
+    width: width ?? 140,
+    height: height ?? 34,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(40),
       color: color,
@@ -165,6 +169,10 @@ Widget titleWidget({
 Widget tag({
   required Color color,
   required String text,
+  double? width,
+  double? height,
+  Color? textColor,
+  Color? backgroundColor,
 }) {
   return Container(
     margin: const EdgeInsets.only(top: 10, left: 10),
@@ -181,7 +189,7 @@ Widget tag({
           fontSize: 12,
           fontFamily: "inter",
           fontWeight: FontWeight.w400,
-          color: AppColors.whiteColor,
+          color: textColor ?? AppColors.whiteColor,
         ),
       ),
     ),
@@ -221,12 +229,15 @@ Widget aboutMeContainer({required String text}) {
 }
 
 class ExperienceList extends StatelessWidget {
-  const ExperienceList({super.key});
+  final userId;
+  final currentUserId;
+  const ExperienceList(
+      {super.key, required this.userId, required this.currentUserId});
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: ExperienceDb().getExperience(),
+      stream: ExperienceDb.getExperience(userId: userId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -266,17 +277,20 @@ class ExperienceList extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                           fontSize: 18,
                         ),
-                        IconButton(
-                          iconSize: 20,
-                          color: AppColors.greenColor,
-                          onPressed: () {
-                            // Get the ID of the item from the data list (assuming it exists)
-                            final id = data[index].id!;
-                            // Call the function to show the confirmation dialog before deleting
-                            _showDeleteConfirmationDialog(context, id);
-                          },
-                          icon: const Icon(Icons.delete),
-                        )
+                        userId == currentUserId
+                            ? IconButton(
+                                iconSize: 20,
+                                color: AppColors.greenColor,
+                                onPressed: () {
+                                  // Get the ID of the item from the data list (assuming it exists)
+                                  final id = data[index].id!;
+                                  // Call the function to show the confirmation dialog before deleting
+                                  showDeleteConfirmationDialog(context, id,
+                                      methodFor: "experience");
+                                },
+                                icon: const Icon(Icons.delete),
+                              )
+                            : const SizedBox()
                       ],
                     ),
                     // Description Text
@@ -301,82 +315,87 @@ class ExperienceList extends StatelessWidget {
       },
     );
   }
+}
 
-  // Define a custom function to show the confirmation dialog
-  void _showDeleteConfirmationDialog(BuildContext context, String id) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // The AlertDialog widget displays the confirmation dialog
-        return AlertDialog(
-          // Title of the dialog
-          title: Text(
-            'Confirm Delete',
-            style: TextStyle(
-              color: AppColors.whiteColor, // Custom text color
-            ),
+// Define a custom function to show the confirmation dialog
+void showDeleteConfirmationDialog(BuildContext context, String id,
+    {required String? methodFor}) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      // The AlertDialog widget displays the confirmation dialog
+      return AlertDialog(
+        // Title of the dialog
+        title: Text(
+          'Confirm Delete',
+          style: TextStyle(
+            color: AppColors.whiteColor, // Custom text color
           ),
+        ),
 
-          // Content of the dialog
-          content: Text(
-            'Are you sure you want to delete this item?',
-            style: TextStyle(
-              color: AppColors.whiteColor, // Custom text color
-              fontSize: 16, // Custom font size
-            ),
+        // Content of the dialog
+        content: Text(
+          'Are you sure you want to delete this item?',
+          style: TextStyle(
+            color: AppColors.whiteColor, // Custom text color
+            fontSize: 16, // Custom font size
           ),
+        ),
 
-          // Custom background color for the dialog
-          backgroundColor: AppColors.lightbluecolor,
+        // Custom background color for the dialog
+        backgroundColor: AppColors.lightbluecolor,
 
-          // Custom text style for the title
-          titleTextStyle: TextStyle(color: AppColors.whiteColor),
+        // Custom text style for the title
+        titleTextStyle: TextStyle(color: AppColors.whiteColor),
 
-          // Custom shape for the dialog with a border radius of 30
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
+        // Custom shape for the dialog with a border radius of 30
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
 
-          // Actions to be displayed at the bottom of the dialog
-          actions: <Widget>[
-            // "Yes" button to delete the item
-            TextButton(
-              onPressed: () {
-                // Close the dialog and delete the item
-                Navigator.of(context).pop();
-                // Call the function to delete the item using the given id
+        // Actions to be displayed at the bottom of the dialog
+        actions: <Widget>[
+          // "Yes" button to delete the item
+          TextButton(
+            onPressed: () {
+              // Close the dialog and delete the item
+              Navigator.of(context).pop();
+              // Call the function to delete the item using the given id
+              if (methodFor == "tag") {
+                ProficientTag.deleteTags(id);
+              } else {
                 ExperienceDb.deleteExperience(id);
-              },
-              child: Text(
-                'Yes',
-                style: TextStyle(
-                  color: AppColors.whiteColor, // Custom text color
-                ),
-              ), // Text displayed on the button
-            ),
+              }
+            },
+            child: Text(
+              'Yes',
+              style: TextStyle(
+                color: AppColors.whiteColor, // Custom text color
+              ),
+            ), // Text displayed on the button
+          ),
 
-            // "No" button to cancel the delete action
-            TextButton(
-              onPressed: () {
-                // Close the dialog without performing any action
-                Navigator.of(context).pop();
-              },
-              child: Text(
-                'No',
-                style: TextStyle(
-                  color: AppColors.whiteColor, // Custom text color
-                ),
-              ), // Text displayed on the button
-            ),
-          ],
-        );
-      },
-    );
-  }
+          // "No" button to cancel the delete action
+          TextButton(
+            onPressed: () {
+              // Close the dialog without performing any action
+              Navigator.of(context).pop();
+            },
+            child: Text(
+              'No',
+              style: TextStyle(
+                color: AppColors.whiteColor, // Custom text color
+              ),
+            ), // Text displayed on the button
+          ),
+        ],
+      );
+    },
+  );
 }
 
 // Experience Container Widget
-Widget experienceContainer(context) {
+Widget experienceContainer(context, {userId, currentUserId}) {
   return Container(
     padding: const EdgeInsets.all(10),
     margin: const EdgeInsets.only(top: 10, bottom: 30),
@@ -400,24 +419,29 @@ Widget experienceContainer(context) {
               fontSize: 19,
             ),
             // Add Icon Button
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const ExperienceScreen(),
-                  ),
-                );
-              },
-              child: Icon(
-                Icons.add,
-                color: AppColors.whiteColor,
-                size: 30,
-              ),
-            ),
+            userId == currentUserId
+                ? GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const ExperienceScreen(),
+                        ),
+                      );
+                    },
+                    child: Icon(
+                      Icons.add,
+                      color: AppColors.whiteColor,
+                      size: 30,
+                    ),
+                  )
+                : const SizedBox(),
           ],
         ),
         Expanded(
-          child: ExperienceList(), // Use the extracted widget here
+          child: ExperienceList(
+            userId: userId,
+            currentUserId: currentUserId,
+          ), // Use the extracted widget here
         ),
       ],
     ),

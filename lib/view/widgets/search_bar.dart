@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import '../core/colors.dart';
 
 // Search bar widget
-Widget buildSearchBar() {
+Widget buildSearchBar({
+  required Function(String value) func,
+  required Function() onClick,
+}) {
   return Container(
     width: double.infinity,
     height: 50,
@@ -25,6 +28,9 @@ Widget buildSearchBar() {
           width: 300,
           height: 50,
           child: TextField(
+            onChanged: (value) {
+              func(value);
+            },
             cursorColor: AppColors.lightbluecolor,
             keyboardType: TextInputType.multiline,
             decoration: InputDecoration(
@@ -54,12 +60,17 @@ Widget buildSearchBar() {
           ),
         ),
         // Icon button for search
-        SizedBox(
-          width: 50,
-          height: 50,
-          child: Icon(
-            Icons.search,
-            color: AppColors.lightbluecolor, // Search icon color
+        GestureDetector(
+          onTap: () {
+            onClick();
+          },
+          child: SizedBox(
+            width: 50,
+            height: 50,
+            child: Icon(
+              Icons.search,
+              color: AppColors.lightbluecolor, // Search icon color
+            ),
           ),
         ),
       ],

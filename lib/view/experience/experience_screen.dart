@@ -51,7 +51,7 @@ class ExperienceScreen extends StatelessWidget {
               top: 50,
               func: () async {
                 Map<String, dynamic> experienceMap = experience.toJson();
-                await ExperienceDb().addExperience(experienceMap);
+                await ExperienceDb.addExperience(experienceMap);
 
                 Navigator.of(context).pop();
               },
