@@ -20,13 +20,9 @@ ExperienceModel _$ExperienceModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ExperienceModel {
-  @JsonKey(name: 'userId')
   String? get userId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'role')
   String? get role => throw _privateConstructorUsedError;
-  @JsonKey(name: 'desc')
   String? get desc => throw _privateConstructorUsedError;
-  @JsonKey(name: 'id')
   String? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,11 +37,7 @@ abstract class $ExperienceModelCopyWith<$Res> {
           ExperienceModel value, $Res Function(ExperienceModel) then) =
       _$ExperienceModelCopyWithImpl<$Res, ExperienceModel>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'userId') String? userId,
-      @JsonKey(name: 'role') String? role,
-      @JsonKey(name: 'desc') String? desc,
-      @JsonKey(name: 'id') String? id});
+  $Res call({String? userId, String? role, String? desc, String? id});
 }
 
 /// @nodoc
@@ -95,11 +87,7 @@ abstract class _$$_ExperienceModelCopyWith<$Res>
       __$$_ExperienceModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'userId') String? userId,
-      @JsonKey(name: 'role') String? role,
-      @JsonKey(name: 'desc') String? desc,
-      @JsonKey(name: 'id') String? id});
+  $Res call({String? userId, String? role, String? desc, String? id});
 }
 
 /// @nodoc
@@ -142,26 +130,18 @@ class __$$_ExperienceModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ExperienceModel implements _ExperienceModel {
-  _$_ExperienceModel(
-      {@JsonKey(name: 'userId') this.userId,
-      @JsonKey(name: 'role') this.role,
-      @JsonKey(name: 'desc') this.desc,
-      @JsonKey(name: 'id') this.id});
+  _$_ExperienceModel({this.userId, this.role, this.desc, this.id});
 
   factory _$_ExperienceModel.fromJson(Map<String, dynamic> json) =>
       _$$_ExperienceModelFromJson(json);
 
   @override
-  @JsonKey(name: 'userId')
   final String? userId;
   @override
-  @JsonKey(name: 'role')
   final String? role;
   @override
-  @JsonKey(name: 'desc')
   final String? desc;
   @override
-  @JsonKey(name: 'id')
   final String? id;
 
   @override
@@ -200,25 +180,21 @@ class _$_ExperienceModel implements _ExperienceModel {
 
 abstract class _ExperienceModel implements ExperienceModel {
   factory _ExperienceModel(
-      {@JsonKey(name: 'userId') final String? userId,
-      @JsonKey(name: 'role') final String? role,
-      @JsonKey(name: 'desc') final String? desc,
-      @JsonKey(name: 'id') final String? id}) = _$_ExperienceModel;
+      {final String? userId,
+      final String? role,
+      final String? desc,
+      final String? id}) = _$_ExperienceModel;
 
   factory _ExperienceModel.fromJson(Map<String, dynamic> json) =
       _$_ExperienceModel.fromJson;
 
   @override
-  @JsonKey(name: 'userId')
   String? get userId;
   @override
-  @JsonKey(name: 'role')
   String? get role;
   @override
-  @JsonKey(name: 'desc')
   String? get desc;
   @override
-  @JsonKey(name: 'id')
   String? get id;
   @override
   @JsonKey(ignore: true)

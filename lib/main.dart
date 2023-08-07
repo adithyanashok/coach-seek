@@ -1,6 +1,8 @@
 import 'package:coach_seek/bloc/auth/auth_bloc.dart';
 import 'package:coach_seek/bloc/coach/coach_bloc.dart';
 import 'package:coach_seek/bloc/experience/experience_bloc.dart';
+import 'package:coach_seek/bloc/hired_coach/hired_coach_bloc.dart';
+import 'package:coach_seek/bloc/search_coach/search_coach_bloc.dart';
 import 'package:coach_seek/bloc/sign_up/sign_up_bloc.dart';
 import 'package:coach_seek/bloc/signin_in/sign_in_bloc.dart';
 
@@ -8,6 +10,7 @@ import 'package:coach_seek/database/functions/experiences/experiences.dart';
 import 'package:coach_seek/database/functions/profiecient_tag/proficient_tag.dart';
 import 'package:coach_seek/services/firebase_auth.dart';
 import 'package:coach_seek/services/firebase_sign_up_method.dart';
+import 'package:coach_seek/view/coaches/coaches.dart';
 import 'package:coach_seek/view/home/home_screen.dart';
 import 'package:coach_seek/view/main_page/main_page.dart';
 import 'package:coach_seek/view/onboarding_screen/onboarding.dart';
@@ -34,7 +37,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final id = FirebaseAuth.instance.currentUser?.uid;
-
     return RepositoryProvider(
       create: (context) => FirebaseSignUpMethod(context),
       child: MultiBlocProvider(
@@ -45,6 +47,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => AuthBloc()),
           BlocProvider(create: (context) => ExperienceBloc()),
           BlocProvider(create: (context) => CoachBloc()),
+          BlocProvider(create: (context) => SearchCoachBloc()),
+          BlocProvider(create: (context) => HiredCoachBloc()),
         ],
         child: MultiProvider(
           providers: [
@@ -73,9 +77,10 @@ class MyApp extends StatelessWidget {
               "signin": (context) => const SignInScreen(),
               "signup": (context) => const SignUpScreen(),
               "home": (context) => const HomeScreen(),
-              "profile": (context) => ProfileScreen(currentUserId: id),
+              "profile": (context) => ProfileScreen(),
               "onboarding": (context) => const OnboardingScreen(),
               "search_result": (context) => const SearchResultScreen(),
+              "coaches": (context) => Coaches(),
               // "welcome": (context) => const OnboardingScreen(),
             },
           ),

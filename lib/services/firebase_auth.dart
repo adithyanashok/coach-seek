@@ -106,7 +106,9 @@ class FireBaseAuthClass {
         );
 
         // Add the user to the database.
-        await UserDb().addUser(user, userId);
+        if (credential.user!.emailVerified == true) {
+          await UserDb().addUser(user, userId);
+        }
 
         snackBar(
           context: context,

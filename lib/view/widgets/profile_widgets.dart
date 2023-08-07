@@ -1,7 +1,11 @@
 import 'dart:developer';
 
+import 'package:coach_seek/bloc/coach/coach_bloc.dart';
 import 'package:coach_seek/database/functions/experiences/experiences.dart';
+import 'package:coach_seek/database/functions/hired_coach/hired_coach.dart';
 import 'package:coach_seek/database/functions/profiecient_tag/proficient_tag.dart';
+import 'package:coach_seek/services/firebase_auth.dart';
+
 import 'package:coach_seek/view/core/colors.dart';
 import 'package:coach_seek/view/experience/experience_screen.dart';
 import 'package:coach_seek/view/home/home_screen.dart';
@@ -21,9 +25,14 @@ Widget profileHead({
   required String userId,
   required String currentUserId,
   required String profileImg,
+  required String email,
+  required String phone,
+  required String desc,
+  required String recruterId,
   required context,
   required data,
 }) {
+  log("recruterId: $recruterId, userId: $userId");
   // Return the Profile Head layout
   return Column(
     children: [
@@ -35,9 +44,7 @@ Widget profileHead({
           // Status Tag
           GestureDetector(
             onTap: () async {
-              await FirebaseAuth.instance.signOut();
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil("onboarding", (route) => false);
+              FireBaseAuthClass().signOut(context);
             },
             child: tag(
               color: status == "Available" ? AppColors.greenColor : Colors.red,
@@ -82,42 +89,70 @@ Widget profileHead({
         ],
       ),
       // Action Buttons
-      currentUserId != userId
-          ? Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                profileActionButton(
-                  color: Colors.red,
-                  text: "Hire",
-                ),
-                profileActionButton(
-                  color: AppColors.greenColor,
-                  text: "Call Now",
-                ),
-              ],
-            )
-          : Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return ProfileUpdatingScreen(
-                            data: data,
-                          );
+      if (currentUserId != userId)
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            status == "Available"
+                ? GestureDetector(
+                    onTap: () {
+                      HiredCoachDb.hireTheCoach(
+                          recruterId: currentUserId, userId: userId);
+                    },
+                    child: profileActionButton(
+                      color: Colors.red,
+                      text: "Hire",
+                    ))
+                : recruterId == currentUserId
+                    ? GestureDetector(
+                        onTap: () {
+                          HiredCoachDb.unHireCoach(userId: userId);
                         },
-                      ),
-                    );
-                  },
-                  child: profileActionButton(
-                    color: AppColors.lightbluecolor,
-                    text: "Edit profile",
-                  ),
-                ),
-              ],
+                        child: profileActionButton(
+                          color: Colors.blue,
+                          text: "Unhire",
+                        ),
+                      )
+                    : const SizedBox(),
+            const SizedBox(width: 20),
+            profileActionButton(
+              color: AppColors.greenColor,
+              text: "Call Now",
             ),
+          ],
+        )
+      else
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return ProfileUpdatingScreen(
+                        data: data,
+                      );
+                    },
+                  ),
+                );
+              },
+              child: profileActionButton(
+                color: AppColors.lightbluecolor,
+                text: "Edit profile",
+              ),
+            ),
+          ],
+        ),
+      const SizedBox(
+        height: 10,
+      ),
+      recruterId == currentUserId
+          ? profileActionButton(
+              color: AppColors.lightbluecolor,
+              text: "Pay \$$amount",
+            )
+          : const SizedBox(),
     ],
   );
 }
@@ -255,6 +290,7 @@ class ExperienceList extends StatelessWidget {
           ));
         } else {
           final data = snapshot.data;
+
           return ListView.separated(
             itemBuilder: (context, index) {
               return Container(

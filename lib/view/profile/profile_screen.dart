@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,18 +16,16 @@ import 'package:coach_seek/view/widgets/profile_widgets.dart';
 import 'package:coach_seek/view/widgets/text_form_field.dart';
 
 class ProfileScreen extends StatelessWidget {
-  final String? currentUserId;
-  const ProfileScreen({
+  final currentUserId = FirebaseAuth.instance.currentUser?.uid;
+  ProfileScreen({
     Key? key,
-    required this.currentUserId,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final id = ModalRoute.of(context)?.settings.arguments as String?;
-    TagModel tagModel = TagModel(userId: currentUserId!, text: "", id: "");
-    // log(args.toString());
-    // StreamBuilder to fetch user data from Firebase Firestore
+    TagModel tagModel =
+        TagModel(userId: id ?? currentUserId!, text: "", id: "");
 
     return StreamBuilder(
       stream: UserDb().getAUser(id ?? currentUserId!),
@@ -42,7 +41,6 @@ class ProfileScreen extends StatelessWidget {
           // Extract user data from snapshot
           final data = snapshot.data;
           // Update user state in AuthBloc
-
           context.read<AuthBloc>().add(AuthEvent.signInEvent(user: data));
 
           return Scaffold(
@@ -63,11 +61,15 @@ class ProfileScreen extends StatelessWidget {
                     coachRole: "${data['role']}",
                     coachLocation: "${data['location']}",
                     amount: "${data['amount']}",
-                    currentUserId: currentUserId ?? "${data['userId']}",
+                    currentUserId: currentUserId!,
                     userId: "${data['userId']}",
                     context: context,
                     data: data,
                     profileImg: "${data['profileImg']}",
+                    desc: "${data['desc']}",
+                    phone: "${data['phone']}",
+                    email: "${data['email']}",
+                    recruterId: "${data['recruterId']}",
                   ),
                   // This widget is used to display the "About Me" section
                   aboutMeContainer(text: "${data['desc']}"),

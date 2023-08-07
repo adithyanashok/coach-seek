@@ -24,8 +24,10 @@ class FirebaseSignUpMethod {
         // Updating user data in Firebase Authentication.
         FireBaseAuthClass().updateTheData(user: userData!);
       } catch (e) {
-        log(e.toString());
-        snackBar(context: context, msg: "$e");
+        log("Error at image uploading and update the user: $e");
+        snackBar(
+            context: context,
+            msg: "Error at image uploading and update the user: $e");
       }
     } else if (userData == null) {
       // If userData is null, this is for signup. We upload the profile image to Firebase Storage and handle the signup process.
@@ -43,8 +45,8 @@ class FirebaseSignUpMethod {
         final profileImg = await taskSnapshot.ref.getDownloadURL();
         handleSignUp(profileImg);
       } catch (e) {
-        log(e.toString());
-        snackBar(context: context, msg: "$e");
+        log("Error at file uplod: $e");
+        snackBar(context: context, msg: "Error at uploading file: $e");
       }
     } else {
       // If both imageFile and userData are provided, we upload the profile image to Firebase Storage and update the user data with the new profile image URL.
@@ -65,7 +67,7 @@ class FirebaseSignUpMethod {
         FireBaseAuthClass().updateTheData(user: userData);
       } catch (e) {
         log(e.toString());
-        snackBar(context: context, msg: "$e");
+        snackBar(context: context, msg: "Error at update the user data : $e");
       }
     }
   }

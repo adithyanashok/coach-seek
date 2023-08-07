@@ -19,38 +19,32 @@ mixin _$CoachEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getCoaches,
-    required TResult Function(String? query) getSearchedCoaches,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getCoaches,
-    TResult? Function(String? query)? getSearchedCoaches,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getCoaches,
-    TResult Function(String? query)? getSearchedCoaches,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetCoaches value) getCoaches,
-    required TResult Function(GetSearchedCoaches value) getSearchedCoaches,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetCoaches value)? getCoaches,
-    TResult? Function(GetSearchedCoaches value)? getSearchedCoaches,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetCoaches value)? getCoaches,
-    TResult Function(GetSearchedCoaches value)? getSearchedCoaches,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,7 +107,6 @@ class _$GetCoaches implements GetCoaches {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getCoaches,
-    required TResult Function(String? query) getSearchedCoaches,
   }) {
     return getCoaches();
   }
@@ -122,7 +115,6 @@ class _$GetCoaches implements GetCoaches {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getCoaches,
-    TResult? Function(String? query)? getSearchedCoaches,
   }) {
     return getCoaches?.call();
   }
@@ -131,7 +123,6 @@ class _$GetCoaches implements GetCoaches {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getCoaches,
-    TResult Function(String? query)? getSearchedCoaches,
     required TResult orElse(),
   }) {
     if (getCoaches != null) {
@@ -144,7 +135,6 @@ class _$GetCoaches implements GetCoaches {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetCoaches value) getCoaches,
-    required TResult Function(GetSearchedCoaches value) getSearchedCoaches,
   }) {
     return getCoaches(this);
   }
@@ -153,7 +143,6 @@ class _$GetCoaches implements GetCoaches {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetCoaches value)? getCoaches,
-    TResult? Function(GetSearchedCoaches value)? getSearchedCoaches,
   }) {
     return getCoaches?.call(this);
   }
@@ -162,7 +151,6 @@ class _$GetCoaches implements GetCoaches {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetCoaches value)? getCoaches,
-    TResult Function(GetSearchedCoaches value)? getSearchedCoaches,
     required TResult orElse(),
   }) {
     if (getCoaches != null) {
@@ -174,141 +162,6 @@ class _$GetCoaches implements GetCoaches {
 
 abstract class GetCoaches implements CoachEvent {
   const factory GetCoaches() = _$GetCoaches;
-}
-
-/// @nodoc
-abstract class _$$GetSearchedCoachesCopyWith<$Res> {
-  factory _$$GetSearchedCoachesCopyWith(_$GetSearchedCoaches value,
-          $Res Function(_$GetSearchedCoaches) then) =
-      __$$GetSearchedCoachesCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String? query});
-}
-
-/// @nodoc
-class __$$GetSearchedCoachesCopyWithImpl<$Res>
-    extends _$CoachEventCopyWithImpl<$Res, _$GetSearchedCoaches>
-    implements _$$GetSearchedCoachesCopyWith<$Res> {
-  __$$GetSearchedCoachesCopyWithImpl(
-      _$GetSearchedCoaches _value, $Res Function(_$GetSearchedCoaches) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? query = freezed,
-  }) {
-    return _then(_$GetSearchedCoaches(
-      query: freezed == query
-          ? _value.query
-          : query // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$GetSearchedCoaches implements GetSearchedCoaches {
-  const _$GetSearchedCoaches({this.query});
-
-  @override
-  final String? query;
-
-  @override
-  String toString() {
-    return 'CoachEvent.getSearchedCoaches(query: $query)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GetSearchedCoaches &&
-            (identical(other.query, query) || other.query == query));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, query);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GetSearchedCoachesCopyWith<_$GetSearchedCoaches> get copyWith =>
-      __$$GetSearchedCoachesCopyWithImpl<_$GetSearchedCoaches>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() getCoaches,
-    required TResult Function(String? query) getSearchedCoaches,
-  }) {
-    return getSearchedCoaches(query);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getCoaches,
-    TResult? Function(String? query)? getSearchedCoaches,
-  }) {
-    return getSearchedCoaches?.call(query);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getCoaches,
-    TResult Function(String? query)? getSearchedCoaches,
-    required TResult orElse(),
-  }) {
-    if (getSearchedCoaches != null) {
-      return getSearchedCoaches(query);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(GetCoaches value) getCoaches,
-    required TResult Function(GetSearchedCoaches value) getSearchedCoaches,
-  }) {
-    return getSearchedCoaches(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GetCoaches value)? getCoaches,
-    TResult? Function(GetSearchedCoaches value)? getSearchedCoaches,
-  }) {
-    return getSearchedCoaches?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(GetCoaches value)? getCoaches,
-    TResult Function(GetSearchedCoaches value)? getSearchedCoaches,
-    required TResult orElse(),
-  }) {
-    if (getSearchedCoaches != null) {
-      return getSearchedCoaches(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GetSearchedCoaches implements CoachEvent {
-  const factory GetSearchedCoaches({final String? query}) =
-      _$GetSearchedCoaches;
-
-  String? get query;
-  @JsonKey(ignore: true)
-  _$$GetSearchedCoachesCopyWith<_$GetSearchedCoaches> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

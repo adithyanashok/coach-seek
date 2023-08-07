@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class UserModel {
+  String recruterId;
   String name;
   String email;
   String role;
@@ -11,6 +12,7 @@ class UserModel {
   String userId;
   String profileImg;
   UserModel({
+    this.recruterId = '',
     this.name = '',
     this.email = '',
     this.role = '',
@@ -25,6 +27,7 @@ class UserModel {
   });
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
+      recruterId: '',
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       role: map['role'] ?? '',
@@ -40,6 +43,7 @@ class UserModel {
   }
   Map<String, dynamic> toMap() {
     return {
+      "recruterId": '',
       "name": name,
       "email": email,
       "role": role,

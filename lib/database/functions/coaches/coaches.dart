@@ -21,6 +21,7 @@ class CoachDb {
   }
 
   Future<List<UserModel>> searchItems({String? searchQuery}) async {
+    log("Search Query in Coaches File: $searchQuery");
     try {
       // Access the "items" collection in Firestore
       final db = FirebaseFirestore.instance;
@@ -29,6 +30,7 @@ class CoachDb {
           .where('role', isGreaterThanOrEqualTo: searchQuery)
           .where('role', isLessThanOrEqualTo: '${searchQuery!}\uf8ff')
           .get();
+      log("snapshot in Coaches File: $querySnapshot");
 
       List<UserModel> users = [];
       for (var docSnapshot in querySnapshot.docs) {
@@ -36,6 +38,8 @@ class CoachDb {
 
         var user = UserModel.fromMap(userData);
         users.shuffle();
+        log("Search Query in Coaches File: $user");
+
         users.add(user);
       }
 

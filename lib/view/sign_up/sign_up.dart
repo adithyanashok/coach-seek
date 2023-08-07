@@ -3,13 +3,11 @@ import 'dart:io';
 
 import 'package:coach_seek/bloc/auth/auth_bloc.dart';
 import 'package:coach_seek/bloc/sign_up/sign_up_bloc.dart';
-import 'package:coach_seek/services/firebase_auth.dart';
 import 'package:coach_seek/services/firebase_sign_up_method.dart';
 import 'package:coach_seek/view/core/colors.dart';
 import 'package:coach_seek/view/core/snack_bar.dart';
 import 'package:coach_seek/view/widgets/circle_loading_widget.dart';
 import 'package:coach_seek/view/widgets/sub_heading.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -36,10 +34,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
         setState(() {
           imageFile = File(pickedImage.path);
         });
-        log(imageFile.toString());
+        log("Image File Error: $imageFile");
+      } else {
+        return snackBar(context: context, msg: "Please upload image");
       }
     } catch (e) {
-      snackBar(context: context, msg: e.toString());
+      snackBar(context: context, msg: "Error at Signup $e");
     }
   }
 

@@ -5,10 +5,10 @@ part 'experiences.g.dart';
 @freezed
 class ExperienceModel with _$ExperienceModel {
   factory ExperienceModel({
-    @JsonKey(name: 'userId') String? userId,
-    @JsonKey(name: 'role') String? role,
-    @JsonKey(name: 'desc') String? desc,
-    @JsonKey(name: 'id') String? id,
+    String? userId,
+    String? role,
+    String? desc,
+    String? id,
   }) = _ExperienceModel;
 
   factory ExperienceModel.fromJson(Map<String, dynamic> json) =>
