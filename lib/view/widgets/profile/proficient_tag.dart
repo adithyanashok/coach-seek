@@ -60,8 +60,8 @@ Widget proficientTags(context, {currentUserId, id}) {
                   text: data[index].text,
                   color: AppColors
                       .textBlueColor, // Assuming AppColors.textBlueColor is Colors.blue
-                  width: 80,
-                  height: 30,
+                  width: 100,
+                  // height: 30,
                 ),
               );
             },

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:coach_seek/database/functions/hired_coach/hired_coach.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,9 +15,17 @@ class CoachBloc extends Bloc<CoachEvent, CoachState> {
       emit(state.copyWith(loading: true));
 
       final coaches = await CoachDb().getCoaches();
-      log("Coach at CoachBloc: $coaches");
 
       coaches.shuffle();
+      emit(state.copyWith(loading: false, coach: coaches));
+    });
+
+    on<GetWhoHiredMe>((event, emit) async {
+      emit(state.copyWith(loading: true));
+
+      final coaches =
+          await HiredCoachDb.getWhoHiredMe(event.recruterId, event.userId);
+
       emit(state.copyWith(loading: false, coach: coaches));
     });
   }

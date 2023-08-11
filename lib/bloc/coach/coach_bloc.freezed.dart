@@ -19,32 +19,38 @@ mixin _$CoachEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getCoaches,
+    required TResult Function(String recruterId, String userId) getWhoHiredMe,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getCoaches,
+    TResult? Function(String recruterId, String userId)? getWhoHiredMe,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getCoaches,
+    TResult Function(String recruterId, String userId)? getWhoHiredMe,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetCoaches value) getCoaches,
+    required TResult Function(GetWhoHiredMe value) getWhoHiredMe,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetCoaches value)? getCoaches,
+    TResult? Function(GetWhoHiredMe value)? getWhoHiredMe,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetCoaches value)? getCoaches,
+    TResult Function(GetWhoHiredMe value)? getWhoHiredMe,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -107,6 +113,7 @@ class _$GetCoaches implements GetCoaches {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getCoaches,
+    required TResult Function(String recruterId, String userId) getWhoHiredMe,
   }) {
     return getCoaches();
   }
@@ -115,6 +122,7 @@ class _$GetCoaches implements GetCoaches {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getCoaches,
+    TResult? Function(String recruterId, String userId)? getWhoHiredMe,
   }) {
     return getCoaches?.call();
   }
@@ -123,6 +131,7 @@ class _$GetCoaches implements GetCoaches {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getCoaches,
+    TResult Function(String recruterId, String userId)? getWhoHiredMe,
     required TResult orElse(),
   }) {
     if (getCoaches != null) {
@@ -135,6 +144,7 @@ class _$GetCoaches implements GetCoaches {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetCoaches value) getCoaches,
+    required TResult Function(GetWhoHiredMe value) getWhoHiredMe,
   }) {
     return getCoaches(this);
   }
@@ -143,6 +153,7 @@ class _$GetCoaches implements GetCoaches {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetCoaches value)? getCoaches,
+    TResult? Function(GetWhoHiredMe value)? getWhoHiredMe,
   }) {
     return getCoaches?.call(this);
   }
@@ -151,6 +162,7 @@ class _$GetCoaches implements GetCoaches {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetCoaches value)? getCoaches,
+    TResult Function(GetWhoHiredMe value)? getWhoHiredMe,
     required TResult orElse(),
   }) {
     if (getCoaches != null) {
@@ -162,6 +174,151 @@ class _$GetCoaches implements GetCoaches {
 
 abstract class GetCoaches implements CoachEvent {
   const factory GetCoaches() = _$GetCoaches;
+}
+
+/// @nodoc
+abstract class _$$GetWhoHiredMeCopyWith<$Res> {
+  factory _$$GetWhoHiredMeCopyWith(
+          _$GetWhoHiredMe value, $Res Function(_$GetWhoHiredMe) then) =
+      __$$GetWhoHiredMeCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String recruterId, String userId});
+}
+
+/// @nodoc
+class __$$GetWhoHiredMeCopyWithImpl<$Res>
+    extends _$CoachEventCopyWithImpl<$Res, _$GetWhoHiredMe>
+    implements _$$GetWhoHiredMeCopyWith<$Res> {
+  __$$GetWhoHiredMeCopyWithImpl(
+      _$GetWhoHiredMe _value, $Res Function(_$GetWhoHiredMe) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? recruterId = null,
+    Object? userId = null,
+  }) {
+    return _then(_$GetWhoHiredMe(
+      recruterId: null == recruterId
+          ? _value.recruterId
+          : recruterId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetWhoHiredMe implements GetWhoHiredMe {
+  const _$GetWhoHiredMe({required this.recruterId, required this.userId});
+
+  @override
+  final String recruterId;
+  @override
+  final String userId;
+
+  @override
+  String toString() {
+    return 'CoachEvent.getWhoHiredMe(recruterId: $recruterId, userId: $userId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetWhoHiredMe &&
+            (identical(other.recruterId, recruterId) ||
+                other.recruterId == recruterId) &&
+            (identical(other.userId, userId) || other.userId == userId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, recruterId, userId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetWhoHiredMeCopyWith<_$GetWhoHiredMe> get copyWith =>
+      __$$GetWhoHiredMeCopyWithImpl<_$GetWhoHiredMe>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getCoaches,
+    required TResult Function(String recruterId, String userId) getWhoHiredMe,
+  }) {
+    return getWhoHiredMe(recruterId, userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getCoaches,
+    TResult? Function(String recruterId, String userId)? getWhoHiredMe,
+  }) {
+    return getWhoHiredMe?.call(recruterId, userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getCoaches,
+    TResult Function(String recruterId, String userId)? getWhoHiredMe,
+    required TResult orElse(),
+  }) {
+    if (getWhoHiredMe != null) {
+      return getWhoHiredMe(recruterId, userId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetCoaches value) getCoaches,
+    required TResult Function(GetWhoHiredMe value) getWhoHiredMe,
+  }) {
+    return getWhoHiredMe(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetCoaches value)? getCoaches,
+    TResult? Function(GetWhoHiredMe value)? getWhoHiredMe,
+  }) {
+    return getWhoHiredMe?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetCoaches value)? getCoaches,
+    TResult Function(GetWhoHiredMe value)? getWhoHiredMe,
+    required TResult orElse(),
+  }) {
+    if (getWhoHiredMe != null) {
+      return getWhoHiredMe(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetWhoHiredMe implements CoachEvent {
+  const factory GetWhoHiredMe(
+      {required final String recruterId,
+      required final String userId}) = _$GetWhoHiredMe;
+
+  String get recruterId;
+  String get userId;
+  @JsonKey(ignore: true)
+  _$$GetWhoHiredMeCopyWith<_$GetWhoHiredMe> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

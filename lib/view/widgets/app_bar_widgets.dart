@@ -20,7 +20,6 @@ class AppBarWidget extends StatelessWidget {
           fontWeight: FontWeight.w800,
         ),
       ),
-      // automaticallyImplyLeading: false,
       elevation: 0,
       backgroundColor: AppColors.lightbluecolor,
       centerTitle: true,

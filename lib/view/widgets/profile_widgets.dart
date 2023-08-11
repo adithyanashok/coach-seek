@@ -1,22 +1,19 @@
-import 'dart:developer';
-
-import 'package:coach_seek/bloc/coach/coach_bloc.dart';
 import 'package:coach_seek/database/functions/experiences/experiences.dart';
 import 'package:coach_seek/database/functions/hired_coach/hired_coach.dart';
 import 'package:coach_seek/database/functions/profiecient_tag/proficient_tag.dart';
+import 'package:coach_seek/database/model/hired_coaches/hired_coaches.dart';
 import 'package:coach_seek/services/firebase_auth.dart';
 
 import 'package:coach_seek/view/core/colors.dart';
 import 'package:coach_seek/view/experience/experience_screen.dart';
-import 'package:coach_seek/view/home/home_screen.dart';
 import 'package:coach_seek/view/profile_updating_form/profile_updating_form.dart';
-import 'package:coach_seek/view/widgets/sub_heading.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // Profile Head Widget
 Widget profileHead({
-  required String status,
+  required bool status,
   required String imageurl,
   required String coachName,
   required String coachRole,
@@ -29,10 +26,39 @@ Widget profileHead({
   required String phone,
   required String desc,
   required String recruterId,
+  required String docId,
   required context,
   required data,
 }) {
-  log("recruterId: $recruterId, userId: $userId");
+  final HiredCoacheModel userModel = HiredCoacheModel(
+    name: coachName,
+    recruterId: currentUserId,
+    email: email,
+    role: coachRole,
+    location: coachLocation,
+    amount: amount,
+    desc: desc,
+    available: false,
+    phone: phone,
+    userId: userId,
+    profileImg: profileImg,
+  );
+
+  void makePhoneCall(phoneNumber) async {
+    try {
+      final encodedPhoneNumber = Uri.encodeComponent(phoneNumber);
+      final phoneUri = Uri(scheme: 'tel', path: encodedPhoneNumber);
+
+      if (await canLaunchUrl(phoneUri)) {
+        await launchUrl(phoneUri);
+      } else {
+        throw 'Could not launch $phoneUri';
+      }
+    } catch (e) {
+      print('Error launching phone call: $e');
+    }
+  }
+
   // Return the Profile Head layout
   return Column(
     children: [
@@ -47,8 +73,8 @@ Widget profileHead({
               FireBaseAuthClass().signOut(context);
             },
             child: tag(
-              color: status == "Available" ? AppColors.greenColor : Colors.red,
-              text: status,
+              color: status != false ? AppColors.greenColor : Colors.red,
+              text: status == false ? "Hired" : "Available",
             ),
           ),
           // Column for Profile Image and Other Details
@@ -85,7 +111,7 @@ Widget profileHead({
             ],
           ),
           // Price Tag
-          tag(color: AppColors.lightbluecolor, text: "\$$amount"),
+          tag(color: AppColors.lightbluecolor, text: "₹$amount"),
         ],
       ),
       // Action Buttons
@@ -93,11 +119,10 @@ Widget profileHead({
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            status == "Available"
+            status == true
                 ? GestureDetector(
                     onTap: () {
-                      HiredCoachDb.hireTheCoach(
-                          recruterId: currentUserId, userId: userId);
+                      HiredCoachDb.hireTheCoach(hiredCoacheModel: userModel);
                     },
                     child: profileActionButton(
                       color: Colors.red,
@@ -106,7 +131,10 @@ Widget profileHead({
                 : recruterId == currentUserId
                     ? GestureDetector(
                         onTap: () {
-                          HiredCoachDb.unHireCoach(userId: userId);
+                          HiredCoachDb.unHireCoach(
+                            userId: userId,
+                            docId: docId,
+                          );
                         },
                         child: profileActionButton(
                           color: Colors.blue,
@@ -115,9 +143,14 @@ Widget profileHead({
                       )
                     : const SizedBox(),
             const SizedBox(width: 20),
-            profileActionButton(
-              color: AppColors.greenColor,
-              text: "Call Now",
+            GestureDetector(
+              onTap: () {
+                makePhoneCall('8281168929');
+              },
+              child: profileActionButton(
+                color: AppColors.greenColor,
+                text: "Call Now",
+              ),
             ),
           ],
         )
@@ -148,9 +181,14 @@ Widget profileHead({
         height: 10,
       ),
       recruterId == currentUserId
-          ? profileActionButton(
-              color: AppColors.lightbluecolor,
-              text: "Pay \$$amount",
+          ? GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed('payment');
+              },
+              child: profileActionButton(
+                color: AppColors.lightbluecolor,
+                text: "Pay \$$amount",
+              ),
             )
           : const SizedBox(),
     ],

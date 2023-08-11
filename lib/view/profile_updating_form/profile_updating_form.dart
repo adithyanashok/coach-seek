@@ -1,9 +1,8 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:coach_seek/bloc/auth/auth_bloc.dart';
 import 'package:coach_seek/database/model/user/user.dart';
-import 'package:coach_seek/services/firebase_auth.dart';
+
 import 'package:coach_seek/services/firebase_sign_up_method.dart';
 import 'package:coach_seek/view/core/colors.dart';
 import 'package:coach_seek/view/core/snack_bar.dart';
@@ -38,7 +37,6 @@ class _ProfileUpdatingScreenState extends State<ProfileUpdatingScreen> {
         setState(() {
           imageFile = File(pickedImage.path);
         });
-        log(imageFile.toString());
       }
     } catch (e) {
       snackBar(context: context, msg: e.toString());

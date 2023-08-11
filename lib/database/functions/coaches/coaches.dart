@@ -21,7 +21,6 @@ class CoachDb {
   }
 
   Future<List<UserModel>> searchItems({String? searchQuery}) async {
-    log("Search Query in Coaches File: $searchQuery");
     try {
       // Access the "items" collection in Firestore
       final db = FirebaseFirestore.instance;
@@ -38,7 +37,6 @@ class CoachDb {
 
         var user = UserModel.fromMap(userData);
         users.shuffle();
-        log("Search Query in Coaches File: $user");
 
         users.add(user);
       }

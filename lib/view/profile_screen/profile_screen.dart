@@ -1,6 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +8,7 @@ import 'package:coach_seek/database/functions/user/user.dart';
 import 'package:coach_seek/database/model/proficient_tag/proficient_tag.dart';
 import 'package:coach_seek/view/core/colors.dart';
 import 'package:coach_seek/view/widgets/app_bar_widgets.dart';
-import 'package:coach_seek/view/widgets/profile/profile_widgets.dart';
+import 'package:coach_seek/view/widgets/profile/proficient_tag.dart';
 import 'package:coach_seek/view/widgets/profile_widgets.dart';
 import 'package:coach_seek/view/widgets/text_form_field.dart';
 
@@ -40,6 +37,18 @@ class ProfileScreen extends StatelessWidget {
         } else {
           // Extract user data from snapshot
           final data = snapshot.data;
+          final status = data!['available'];
+          final recruterId = data['recruterId'];
+          final amount = data['amount'];
+          final name = data['name'];
+          final role = data['role'];
+          final location = data['location'];
+          final userId = data['userId'];
+          final profileImg = data['profileImg'];
+          final desc = data['desc'];
+          final phone = data['phone'];
+          final email = data['email'];
+
           // Update user state in AuthBloc
           context.read<AuthBloc>().add(AuthEvent.signInEvent(user: data));
 
@@ -47,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
             //<--------------------AppBar----------------------->
             appBar: PreferredSize(
               preferredSize: const Size(double.infinity, 50),
-              child: AppBarWidget(title: "${data!['name']}"),
+              child: AppBarWidget(title: name),
             ),
             //<------------------body: Row------------------------>
             body: SingleChildScrollView(
@@ -55,38 +64,40 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   //<------------------This widget is used for the profile screen header portion----------->
                   profileHead(
-                    status: "${data['available']}",
+                    status: status,
                     imageurl: "assets/images/coach.jpg",
-                    coachName: "${data['name']}",
-                    coachRole: "${data['role']}",
-                    coachLocation: "${data['location']}",
-                    amount: "${data['amount']}",
+                    coachName: name,
+                    coachRole: role,
+                    coachLocation: location,
+                    amount: amount,
                     currentUserId: currentUserId!,
-                    userId: "${data['userId']}",
+                    userId: userId,
                     context: context,
                     data: data,
-                    profileImg: "${data['profileImg']}",
-                    desc: "${data['desc']}",
-                    phone: "${data['phone']}",
-                    email: "${data['email']}",
-                    recruterId: "${data['recruterId']}",
+                    profileImg: profileImg,
+                    desc: desc,
+                    phone: phone,
+                    email: email,
+                    recruterId: recruterId,
+                    docId: userId,
                   ),
+
                   // This widget is used to display the "About Me" section
-                  aboutMeContainer(text: "${data['desc']}"),
+                  aboutMeContainer(text: desc),
                   //<-------------This widget is used for the experience box--------------->
                   experienceContainer(
                     context,
-                    userId: "${data['userId']}",
+                    userId: userId,
                     currentUserId: currentUserId,
                   ),
 
                   SizedBox(
                     width: double.infinity,
-                    height: 300,
+                    height: 150,
                     // color: Colors.red,
                     child: Column(
                       children: [
-                        currentUserId == "${data['userId']}"
+                        currentUserId == userId
                             ? Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -97,7 +108,6 @@ class ProfileScreen extends StatelessWidget {
                                     width: 290,
                                     margin: 2,
                                     func: (value) {
-                                      log(value);
                                       tagModel = tagModel.copyWith(text: value);
                                     },
                                   ),
@@ -115,12 +125,15 @@ class ProfileScreen extends StatelessWidget {
                                 ],
                               )
                             : const SizedBox(),
-                        proficientTags(context,
-                            currentUserId: currentUserId,
-                            id: '${data['userId']}'),
+                        proficientTags(
+                          context,
+                          currentUserId: currentUserId,
+                          id: userId,
+                        ),
+                        // const SizedBox(height: 20),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

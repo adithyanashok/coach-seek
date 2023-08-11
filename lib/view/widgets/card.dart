@@ -1,16 +1,12 @@
-import 'dart:developer';
-import 'package:coach_seek/bloc/auth/auth_bloc.dart';
-import 'package:coach_seek/bloc/coach/coach_bloc.dart';
 import 'package:coach_seek/database/functions/profiecient_tag/proficient_tag.dart';
-import 'package:coach_seek/view/widgets/circle_loading_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../core/colors.dart';
 
 // Coach Card Widget
 Widget coachCard({Function? func, context, state}) {
   final id = state.userId;
+
   return GestureDetector(
     onTap: () {
       func!(id);
@@ -19,21 +15,26 @@ Widget coachCard({Function? func, context, state}) {
       padding: const EdgeInsets.only(left: 6, top: 30),
       margin: const EdgeInsets.only(left: 10, right: 10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(4),
         boxShadow: const [
           BoxShadow(color: Colors.white, offset: Offset(1, 20)),
         ],
       ),
-      height: 120,
+      height: 130,
       child: Row(
         children: [
           // Coach Profile Image
-          ClipRRect(
+          Container(
+            margin: const EdgeInsets.only(left: 5),
+            height: 150,
+            width: 130,
             child: Image.network(
               state.profileImg,
-              height: 150,
-              width: 140,
+              fit: BoxFit.cover,
             ),
+          ),
+          const SizedBox(
+            width: 10,
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -57,7 +58,7 @@ Widget coachCard({Function? func, context, state}) {
                       ),
                       // Coach Amount
                       Text(
-                        "\$${state.amount}",
+                        "₹${state.amount}  ",
                         style: GoogleFonts.inter(
                           textStyle: TextStyle(
                             fontSize: 19,
@@ -88,15 +89,8 @@ Widget coachCard({Function? func, context, state}) {
                       color: Color(0xFF4662C8),
                     ),
                   ),
-                  // Coach Rating (4.5 in this case)
-                  const Text(
-                    "4.5",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: "inter",
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF0F38C8),
-                    ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   // Coach Skill Tags (Batting, Keeping, Fielding, Bowling)
                   StreamBuilder(
@@ -105,7 +99,7 @@ Widget coachCard({Function? func, context, state}) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         // While waiting for data, display a CircularProgressIndicator.
                         return const Center(
-                          child: CircularProgressIndicator(),
+                          child: Text("Loading..."),
                         );
                       } else if (snapshot.hasError) {
                         // If there is an error while loading data, display an error message.
@@ -132,7 +126,7 @@ Widget coachCard({Function? func, context, state}) {
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               return Container(
-                                width: 54,
+                                width: 70,
                                 height: 20,
                                 decoration: BoxDecoration(
                                   color: const Color(0xFF0FA926),

@@ -1,8 +1,10 @@
 import 'dart:developer';
 
+import 'package:coach_seek/bloc/coach/coach_bloc.dart';
 import 'package:coach_seek/bloc/search_coach/search_coach_bloc.dart';
 import 'package:coach_seek/view/widgets/app_bar_widgets.dart';
 import 'package:coach_seek/view/widgets/card.dart';
+import 'package:coach_seek/view/widgets/circle_loading_widget.dart';
 import 'package:coach_seek/view/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +14,6 @@ class SearchResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.read<SearchCoachBloc>().state;
-    log("STATE SEARCH == $state");
     String? query;
     return Scaffold(
       appBar: const PreferredSize(
@@ -35,22 +35,27 @@ class SearchResultScreen extends StatelessWidget {
               },
             ),
             Expanded(
-              child: ListView.separated(
-                itemBuilder: (context, index) {
-                  // log("SEARCH STATE == ${state.coach[index]}");
-                  final data = state.coach[index];
-                  return coachCard(
-                    context: context,
-                    state: data,
-                    func: (id) {
-                      Navigator.of(context).pushNamed('profile', arguments: id);
-                    },
-                  );
+              child: BlocBuilder<SearchCoachBloc, SearchCoachState>(
+                builder: (context, state) {
+                  return state.loading == true
+                      ? circleLoadingWidget()
+                      : ListView.separated(
+                          itemBuilder: (context, index) {
+                            return coachCard(
+                              context: context,
+                              state: state.coach[index],
+                              func: (id) {
+                                Navigator.of(context)
+                                    .pushNamed('profile', arguments: id);
+                              },
+                            );
+                          },
+                          separatorBuilder: (context, index) => const SizedBox(
+                            height: 10,
+                          ),
+                          itemCount: state.coach.length,
+                        );
                 },
-                separatorBuilder: (context, index) => const SizedBox(
-                  height: 10,
-                ),
-                itemCount: state.coach.length,
               ),
             ),
           ],

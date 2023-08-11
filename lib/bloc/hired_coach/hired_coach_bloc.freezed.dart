@@ -223,7 +223,7 @@ abstract class GetHiredCoaches implements HiredCoachEvent {
 /// @nodoc
 mixin _$HiredCoachState {
   bool get loading => throw _privateConstructorUsedError;
-  List<UserModel> get coach => throw _privateConstructorUsedError;
+  List<HiredCoacheModel> get coach => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HiredCoachStateCopyWith<HiredCoachState> get copyWith =>
@@ -236,7 +236,7 @@ abstract class $HiredCoachStateCopyWith<$Res> {
           HiredCoachState value, $Res Function(HiredCoachState) then) =
       _$HiredCoachStateCopyWithImpl<$Res, HiredCoachState>;
   @useResult
-  $Res call({bool loading, List<UserModel> coach});
+  $Res call({bool loading, List<HiredCoacheModel> coach});
 }
 
 /// @nodoc
@@ -263,7 +263,7 @@ class _$HiredCoachStateCopyWithImpl<$Res, $Val extends HiredCoachState>
       coach: null == coach
           ? _value.coach
           : coach // ignore: cast_nullable_to_non_nullable
-              as List<UserModel>,
+              as List<HiredCoacheModel>,
     ) as $Val);
   }
 }
@@ -276,7 +276,7 @@ abstract class _$$_HiredCoachStateCopyWith<$Res>
       __$$_HiredCoachStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool loading, List<UserModel> coach});
+  $Res call({bool loading, List<HiredCoacheModel> coach});
 }
 
 /// @nodoc
@@ -301,7 +301,7 @@ class __$$_HiredCoachStateCopyWithImpl<$Res>
       coach: null == coach
           ? _value._coach
           : coach // ignore: cast_nullable_to_non_nullable
-              as List<UserModel>,
+              as List<HiredCoacheModel>,
     ));
   }
 }
@@ -310,14 +310,14 @@ class __$$_HiredCoachStateCopyWithImpl<$Res>
 
 class _$_HiredCoachState implements _HiredCoachState {
   const _$_HiredCoachState(
-      {required this.loading, required final List<UserModel> coach})
+      {required this.loading, required final List<HiredCoacheModel> coach})
       : _coach = coach;
 
   @override
   final bool loading;
-  final List<UserModel> _coach;
+  final List<HiredCoacheModel> _coach;
   @override
-  List<UserModel> get coach {
+  List<HiredCoacheModel> get coach {
     if (_coach is EqualUnmodifiableListView) return _coach;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_coach);
@@ -351,12 +351,12 @@ class _$_HiredCoachState implements _HiredCoachState {
 abstract class _HiredCoachState implements HiredCoachState {
   const factory _HiredCoachState(
       {required final bool loading,
-      required final List<UserModel> coach}) = _$_HiredCoachState;
+      required final List<HiredCoacheModel> coach}) = _$_HiredCoachState;
 
   @override
   bool get loading;
   @override
-  List<UserModel> get coach;
+  List<HiredCoacheModel> get coach;
   @override
   @JsonKey(ignore: true)
   _$$_HiredCoachStateCopyWith<_$_HiredCoachState> get copyWith =>

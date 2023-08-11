@@ -11,10 +11,12 @@ import 'package:coach_seek/database/functions/profiecient_tag/proficient_tag.dar
 import 'package:coach_seek/services/firebase_auth.dart';
 import 'package:coach_seek/services/firebase_sign_up_method.dart';
 import 'package:coach_seek/view/coaches/coaches.dart';
+import 'package:coach_seek/view/core/stripe_key.dart';
 import 'package:coach_seek/view/home/home_screen.dart';
 import 'package:coach_seek/view/main_page/main_page.dart';
 import 'package:coach_seek/view/onboarding_screen/onboarding.dart';
-import 'package:coach_seek/view/profile/profile_screen.dart';
+import 'package:coach_seek/view/payment_screen/payment_screen.dart';
+import 'package:coach_seek/view/profile_screen/profile_screen.dart';
 import 'package:coach_seek/view/search_result/search_result.dart';
 import 'package:coach_seek/view/sign_in/sign_in.dart';
 import 'package:coach_seek/view/sign_up/sign_up.dart';
@@ -22,21 +24,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
+  Stripe.publishableKey = StripeKeys.publishableKey;
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final id = FirebaseAuth.instance.currentUser?.uid;
     return RepositoryProvider(
       create: (context) => FirebaseSignUpMethod(context),
       child: MultiBlocProvider(
@@ -68,10 +72,13 @@ class MyApp extends StatelessWidget {
               initialData: null,
             ),
           ],
+          // Color.fromARGB(255, 238, 238, 238)
           child: MaterialApp(
             title: 'Flutter Demo',
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(),
+            theme: ThemeData(
+              scaffoldBackgroundColor: const Color.fromARGB(255, 238, 238, 238),
+            ),
             home: const AuthWrapper(),
             routes: {
               "signin": (context) => const SignInScreen(),
@@ -81,6 +88,7 @@ class MyApp extends StatelessWidget {
               "onboarding": (context) => const OnboardingScreen(),
               "search_result": (context) => const SearchResultScreen(),
               "coaches": (context) => Coaches(),
+              "payment": (context) => const PaymentScreen(),
               // "welcome": (context) => const OnboardingScreen(),
             },
           ),

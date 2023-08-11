@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:coach_seek/bloc/auth/auth_bloc.dart';
 import 'package:coach_seek/database/functions/experiences/experiences.dart';
 import 'package:coach_seek/database/model/experience/experiences.dart';
@@ -41,7 +39,6 @@ class ExperienceScreen extends StatelessWidget {
               hintText: "Enter about your experience",
               type: "desc",
               func: (value) {
-                log(value);
                 experience = experience.copyWith(desc: value);
               },
             ),

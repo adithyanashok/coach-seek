@@ -149,6 +149,9 @@ class FireBaseAuthClass {
     await FirebaseAuth.instance.signOut();
 
     // Navigate to the onboarding screen.
-    Navigator.of(context).pushReplacementNamed("onboarding");
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      "onboarding",
+      (route) => false,
+    );
   }
 }

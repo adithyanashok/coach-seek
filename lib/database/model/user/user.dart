@@ -7,10 +7,11 @@ class UserModel {
   String location;
   String amount;
   String desc;
-  String available;
+  bool available;
   String phone;
   String userId;
   String profileImg;
+  bool isPaymentCompleted;
   UserModel({
     this.recruterId = '',
     this.name = '',
@@ -19,7 +20,8 @@ class UserModel {
     this.location = '',
     this.amount = '',
     this.desc = '',
-    this.available = "Available",
+    this.available = true,
+    this.isPaymentCompleted = false,
     this.phone = '',
     this.userId = '',
     this.profileImg =
@@ -34,7 +36,8 @@ class UserModel {
       location: map['location'] ?? '',
       amount: map['amount'] ?? '',
       desc: map['desc'] ?? '',
-      available: map['available'] ?? 'Available',
+      available: map['available'] ?? true,
+      isPaymentCompleted: map['isPaymentCompleted'] ?? false,
       phone: map['phone'] ?? '',
       userId: map['userId'] ?? '',
       profileImg: map['profileImg'] ??
