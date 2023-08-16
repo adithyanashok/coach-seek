@@ -3,15 +3,17 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coach_seek/database/model/proficient_tag/proficient_tag.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProficientTag {
   static final Tag_Collection = "tags";
   BuildContext context;
+
   ProficientTag({
     required this.context,
   });
+
+  // Add a tag to the Firestore collection
   static Future<void> addTag(values) async {
     if (values.text == "") return;
     final db = FirebaseFirestore.instance;
@@ -19,6 +21,7 @@ class ProficientTag {
     final data = await db.collection(Tag_Collection).add(tags);
   }
 
+  // Get a stream of tags based on userId
   static Stream<List<TagModel>> getTag({String? userId}) {
     final db = FirebaseFirestore.instance;
     final data = db
@@ -44,11 +47,12 @@ class ProficientTag {
     return data;
   }
 
+  // Delete a tag from the Firestore collection using its id
   static Future<void> deleteTags(id) {
     final db = FirebaseFirestore.instance;
     return db.collection(Tag_Collection).doc(id).delete().then(
           (doc) => log("Document deleted"),
-          onError: (e) => log("Error updating document $e"),
+          onError: (e) => log("Error deleting document $e"),
         );
   }
 }

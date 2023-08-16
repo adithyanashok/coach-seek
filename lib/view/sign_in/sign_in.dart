@@ -1,6 +1,8 @@
 import 'package:coach_seek/bloc/auth/auth_bloc.dart';
 import 'package:coach_seek/bloc/signin_in/sign_in_bloc.dart';
+import 'package:coach_seek/services/firebase_auth.dart';
 import 'package:coach_seek/services/firebase_sign_in_method.dart';
+import 'package:coach_seek/view/phone_signin/phone_signin.dart';
 import 'package:coach_seek/view/widgets/circle_loading_widget.dart';
 import 'package:coach_seek/view/widgets/signup_button.dart';
 import 'package:coach_seek/view/widgets/sub_heading.dart';
@@ -71,10 +73,50 @@ class SignInScreen extends StatelessWidget {
                                     .add(PasswordEvent(passWord: value));
                               },
                             ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) {
+                                        return PhoneSignin();
+                                      },
+                                    ));
+                                  },
+                                  child: Image.asset(
+                                    'assets/icons/phone-icon.png',
+                                    width: 40,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    FireBaseAuthClass().googleSignIn(context);
+                                  },
+                                  child: Image.asset(
+                                    'assets/icons/google-icon.png',
+                                    width: 40,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    FireBaseAuthClass().facebookSignIn(context);
+                                  },
+                                  child: Image.asset(
+                                    'assets/icons/fb-icon.png',
+                                    width: 45,
+                                  ),
+                                ),
+                              ],
+                            ),
                             buildSignupButton(
                               buttonName: "Sign In",
                               buttonColor: "blue",
-                              top: 130,
+                              top: 60,
                               func: () async {
                                 // Show loading widget during sign-in process
                                 context

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:coach_seek/database/functions/profiecient_tag/proficient_tag.dart';
@@ -42,10 +43,11 @@ Widget proficientTags(context, {currentUserId, id}) {
           width: double.infinity,
           padding: const EdgeInsets.only(
             top: 10,
-            right: 20,
-            left: 20,
+            right: 30,
+            left: 30,
           ),
           child: ListView.separated(
+            padding: const EdgeInsets.only(left: 30, right: 30),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               // Use the profileActionButton widget to create each item in the ListView.
@@ -53,7 +55,7 @@ Widget proficientTags(context, {currentUserId, id}) {
                 onLongPress: () {
                   currentUserId == id
                       ? showDeleteConfirmationDialog(context, data[index].id,
-                          methodFor: "tag")
+                          methodFor: "delete-tag")
                       : "";
                 },
                 child: profileActionButton(

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../core/colors.dart';
+import '../core/colors.dart'; // Importing the color constants
 
 // Search bar widget
 Widget buildSearchBar({
-  required Function(String value) func,
-  required Function() onClick,
+  required Function(String value) func, // Function to handle input changes
+  required Function() onClick, // Function to handle search button click
 }) {
   return Container(
     width: double.infinity,
@@ -15,13 +15,14 @@ Widget buildSearchBar({
       top: 15,
     ),
     decoration: BoxDecoration(
-      color: AppColors.whiteColor,
+      color: AppColors.whiteColor, // Background color
       borderRadius: const BorderRadius.all(
-        Radius.circular(40),
+        Radius.circular(40), // Border radius
       ),
-      border: Border.all(color: AppColors.lightbluecolor),
+      border: Border.all(color: AppColors.lightbluecolor), // Border color
     ),
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         // Text field for user input
         SizedBox(
@@ -29,9 +30,9 @@ Widget buildSearchBar({
           height: 50,
           child: TextField(
             onChanged: (value) {
-              func(value);
+              func(value); // Calling the provided function with the input value
             },
-            cursorColor: AppColors.lightbluecolor,
+            cursorColor: AppColors.lightbluecolor, // Cursor color
             keyboardType: TextInputType.multiline,
             decoration: InputDecoration(
               hintText: "Search top coaches...", // Placeholder text
@@ -62,7 +63,7 @@ Widget buildSearchBar({
         // Icon button for search
         GestureDetector(
           onTap: () {
-            onClick();
+            onClick(); // Calling the provided function when the search icon is clicked
           },
           child: SizedBox(
             width: 50,

@@ -10,11 +10,15 @@ class RazorPayPayment {
   final id = FirebaseAuth.instance.currentUser?.uid;
   final razorpay;
 
+  // Function to initiate the Razorpay payment process
   void openCheckout(amount) async {
+    // Fetch user data
     final user = await UserDb.getCurrentUser(id!);
     log("User at razorpay: $user");
+
+    // Prepare payment options
     var options = {
-      'key': dotenv.env['RAZORPAYKEY'], // Replace with your Razorpay Key ID
+      'key': dotenv.env['RAZORPAYKEY'],
       'amount': calculateAmount(
           amount), // amount in paise (e.g., for INR 100, it's 100 * 100)
       'name': user.name,
@@ -27,12 +31,14 @@ class RazorPayPayment {
     };
 
     try {
+      // Open the Razorpay payment window with the provided options
       razorpay.open(options);
     } catch (e) {
       log('Error: $e');
     }
   }
 
+  // Function to convert the amount to paise (Razorpay uses paise as the unit)
   calculateAmount(String amount) {
     final data = int.parse(amount) * 100;
     return data.toString();

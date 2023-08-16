@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:coach_seek/database/functions/hired_coach/hired_coach.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -25,6 +27,7 @@ class CoachBloc extends Bloc<CoachEvent, CoachState> {
 
       final coaches =
           await HiredCoachDb.getWhoHiredMe(event.recruterId, event.userId);
+      log("coaches: $coaches");
 
       emit(state.copyWith(loading: false, coach: coaches));
     });

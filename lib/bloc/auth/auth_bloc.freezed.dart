@@ -20,6 +20,7 @@ mixin _$AuthEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(Map<String, dynamic>? user) signInEvent,
+    required TResult Function(String? userId) userEvent,
     required TResult Function(bool loading) updateEvent,
     required TResult Function(bool loading) loadingEvent,
   }) =>
@@ -28,6 +29,7 @@ mixin _$AuthEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(Map<String, dynamic>? user)? signInEvent,
+    TResult? Function(String? userId)? userEvent,
     TResult? Function(bool loading)? updateEvent,
     TResult? Function(bool loading)? loadingEvent,
   }) =>
@@ -36,6 +38,7 @@ mixin _$AuthEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(Map<String, dynamic>? user)? signInEvent,
+    TResult Function(String? userId)? userEvent,
     TResult Function(bool loading)? updateEvent,
     TResult Function(bool loading)? loadingEvent,
     required TResult orElse(),
@@ -45,6 +48,7 @@ mixin _$AuthEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(SignInEvent value) signInEvent,
+    required TResult Function(UserEvent value) userEvent,
     required TResult Function(UpdateEvent value) updateEvent,
     required TResult Function(LoadingEvent value) loadingEvent,
   }) =>
@@ -53,6 +57,7 @@ mixin _$AuthEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(SignInEvent value)? signInEvent,
+    TResult? Function(UserEvent value)? userEvent,
     TResult? Function(UpdateEvent value)? updateEvent,
     TResult? Function(LoadingEvent value)? loadingEvent,
   }) =>
@@ -61,6 +66,7 @@ mixin _$AuthEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(SignInEvent value)? signInEvent,
+    TResult Function(UserEvent value)? userEvent,
     TResult Function(UpdateEvent value)? updateEvent,
     TResult Function(LoadingEvent value)? loadingEvent,
     required TResult orElse(),
@@ -124,6 +130,7 @@ class _$_Started implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(Map<String, dynamic>? user) signInEvent,
+    required TResult Function(String? userId) userEvent,
     required TResult Function(bool loading) updateEvent,
     required TResult Function(bool loading) loadingEvent,
   }) {
@@ -135,6 +142,7 @@ class _$_Started implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(Map<String, dynamic>? user)? signInEvent,
+    TResult? Function(String? userId)? userEvent,
     TResult? Function(bool loading)? updateEvent,
     TResult? Function(bool loading)? loadingEvent,
   }) {
@@ -146,6 +154,7 @@ class _$_Started implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(Map<String, dynamic>? user)? signInEvent,
+    TResult Function(String? userId)? userEvent,
     TResult Function(bool loading)? updateEvent,
     TResult Function(bool loading)? loadingEvent,
     required TResult orElse(),
@@ -161,6 +170,7 @@ class _$_Started implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(SignInEvent value) signInEvent,
+    required TResult Function(UserEvent value) userEvent,
     required TResult Function(UpdateEvent value) updateEvent,
     required TResult Function(LoadingEvent value) loadingEvent,
   }) {
@@ -172,6 +182,7 @@ class _$_Started implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(SignInEvent value)? signInEvent,
+    TResult? Function(UserEvent value)? userEvent,
     TResult? Function(UpdateEvent value)? updateEvent,
     TResult? Function(LoadingEvent value)? loadingEvent,
   }) {
@@ -183,6 +194,7 @@ class _$_Started implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(SignInEvent value)? signInEvent,
+    TResult Function(UserEvent value)? userEvent,
     TResult Function(UpdateEvent value)? updateEvent,
     TResult Function(LoadingEvent value)? loadingEvent,
     required TResult orElse(),
@@ -273,6 +285,7 @@ class _$SignInEvent implements SignInEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(Map<String, dynamic>? user) signInEvent,
+    required TResult Function(String? userId) userEvent,
     required TResult Function(bool loading) updateEvent,
     required TResult Function(bool loading) loadingEvent,
   }) {
@@ -284,6 +297,7 @@ class _$SignInEvent implements SignInEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(Map<String, dynamic>? user)? signInEvent,
+    TResult? Function(String? userId)? userEvent,
     TResult? Function(bool loading)? updateEvent,
     TResult? Function(bool loading)? loadingEvent,
   }) {
@@ -295,6 +309,7 @@ class _$SignInEvent implements SignInEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(Map<String, dynamic>? user)? signInEvent,
+    TResult Function(String? userId)? userEvent,
     TResult Function(bool loading)? updateEvent,
     TResult Function(bool loading)? loadingEvent,
     required TResult orElse(),
@@ -310,6 +325,7 @@ class _$SignInEvent implements SignInEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(SignInEvent value) signInEvent,
+    required TResult Function(UserEvent value) userEvent,
     required TResult Function(UpdateEvent value) updateEvent,
     required TResult Function(LoadingEvent value) loadingEvent,
   }) {
@@ -321,6 +337,7 @@ class _$SignInEvent implements SignInEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(SignInEvent value)? signInEvent,
+    TResult? Function(UserEvent value)? userEvent,
     TResult? Function(UpdateEvent value)? updateEvent,
     TResult? Function(LoadingEvent value)? loadingEvent,
   }) {
@@ -332,6 +349,7 @@ class _$SignInEvent implements SignInEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(SignInEvent value)? signInEvent,
+    TResult Function(UserEvent value)? userEvent,
     TResult Function(UpdateEvent value)? updateEvent,
     TResult Function(LoadingEvent value)? loadingEvent,
     required TResult orElse(),
@@ -350,6 +368,157 @@ abstract class SignInEvent implements AuthEvent {
   Map<String, dynamic>? get user;
   @JsonKey(ignore: true)
   _$$SignInEventCopyWith<_$SignInEvent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UserEventCopyWith<$Res> {
+  factory _$$UserEventCopyWith(
+          _$UserEvent value, $Res Function(_$UserEvent) then) =
+      __$$UserEventCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? userId});
+}
+
+/// @nodoc
+class __$$UserEventCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$UserEvent>
+    implements _$$UserEventCopyWith<$Res> {
+  __$$UserEventCopyWithImpl(
+      _$UserEvent _value, $Res Function(_$UserEvent) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = freezed,
+  }) {
+    return _then(_$UserEvent(
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UserEvent implements UserEvent {
+  const _$UserEvent({this.userId});
+
+  @override
+  final String? userId;
+
+  @override
+  String toString() {
+    return 'AuthEvent.userEvent(userId: $userId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UserEvent &&
+            (identical(other.userId, userId) || other.userId == userId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UserEventCopyWith<_$UserEvent> get copyWith =>
+      __$$UserEventCopyWithImpl<_$UserEvent>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Map<String, dynamic>? user) signInEvent,
+    required TResult Function(String? userId) userEvent,
+    required TResult Function(bool loading) updateEvent,
+    required TResult Function(bool loading) loadingEvent,
+  }) {
+    return userEvent(userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Map<String, dynamic>? user)? signInEvent,
+    TResult? Function(String? userId)? userEvent,
+    TResult? Function(bool loading)? updateEvent,
+    TResult? Function(bool loading)? loadingEvent,
+  }) {
+    return userEvent?.call(userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Map<String, dynamic>? user)? signInEvent,
+    TResult Function(String? userId)? userEvent,
+    TResult Function(bool loading)? updateEvent,
+    TResult Function(bool loading)? loadingEvent,
+    required TResult orElse(),
+  }) {
+    if (userEvent != null) {
+      return userEvent(userId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(SignInEvent value) signInEvent,
+    required TResult Function(UserEvent value) userEvent,
+    required TResult Function(UpdateEvent value) updateEvent,
+    required TResult Function(LoadingEvent value) loadingEvent,
+  }) {
+    return userEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(SignInEvent value)? signInEvent,
+    TResult? Function(UserEvent value)? userEvent,
+    TResult? Function(UpdateEvent value)? updateEvent,
+    TResult? Function(LoadingEvent value)? loadingEvent,
+  }) {
+    return userEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(SignInEvent value)? signInEvent,
+    TResult Function(UserEvent value)? userEvent,
+    TResult Function(UpdateEvent value)? updateEvent,
+    TResult Function(LoadingEvent value)? loadingEvent,
+    required TResult orElse(),
+  }) {
+    if (userEvent != null) {
+      return userEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UserEvent implements AuthEvent {
+  const factory UserEvent({final String? userId}) = _$UserEvent;
+
+  String? get userId;
+  @JsonKey(ignore: true)
+  _$$UserEventCopyWith<_$UserEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -419,6 +588,7 @@ class _$UpdateEvent implements UpdateEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(Map<String, dynamic>? user) signInEvent,
+    required TResult Function(String? userId) userEvent,
     required TResult Function(bool loading) updateEvent,
     required TResult Function(bool loading) loadingEvent,
   }) {
@@ -430,6 +600,7 @@ class _$UpdateEvent implements UpdateEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(Map<String, dynamic>? user)? signInEvent,
+    TResult? Function(String? userId)? userEvent,
     TResult? Function(bool loading)? updateEvent,
     TResult? Function(bool loading)? loadingEvent,
   }) {
@@ -441,6 +612,7 @@ class _$UpdateEvent implements UpdateEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(Map<String, dynamic>? user)? signInEvent,
+    TResult Function(String? userId)? userEvent,
     TResult Function(bool loading)? updateEvent,
     TResult Function(bool loading)? loadingEvent,
     required TResult orElse(),
@@ -456,6 +628,7 @@ class _$UpdateEvent implements UpdateEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(SignInEvent value) signInEvent,
+    required TResult Function(UserEvent value) userEvent,
     required TResult Function(UpdateEvent value) updateEvent,
     required TResult Function(LoadingEvent value) loadingEvent,
   }) {
@@ -467,6 +640,7 @@ class _$UpdateEvent implements UpdateEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(SignInEvent value)? signInEvent,
+    TResult? Function(UserEvent value)? userEvent,
     TResult? Function(UpdateEvent value)? updateEvent,
     TResult? Function(LoadingEvent value)? loadingEvent,
   }) {
@@ -478,6 +652,7 @@ class _$UpdateEvent implements UpdateEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(SignInEvent value)? signInEvent,
+    TResult Function(UserEvent value)? userEvent,
     TResult Function(UpdateEvent value)? updateEvent,
     TResult Function(LoadingEvent value)? loadingEvent,
     required TResult orElse(),
@@ -564,6 +739,7 @@ class _$LoadingEvent implements LoadingEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(Map<String, dynamic>? user) signInEvent,
+    required TResult Function(String? userId) userEvent,
     required TResult Function(bool loading) updateEvent,
     required TResult Function(bool loading) loadingEvent,
   }) {
@@ -575,6 +751,7 @@ class _$LoadingEvent implements LoadingEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(Map<String, dynamic>? user)? signInEvent,
+    TResult? Function(String? userId)? userEvent,
     TResult? Function(bool loading)? updateEvent,
     TResult? Function(bool loading)? loadingEvent,
   }) {
@@ -586,6 +763,7 @@ class _$LoadingEvent implements LoadingEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(Map<String, dynamic>? user)? signInEvent,
+    TResult Function(String? userId)? userEvent,
     TResult Function(bool loading)? updateEvent,
     TResult Function(bool loading)? loadingEvent,
     required TResult orElse(),
@@ -601,6 +779,7 @@ class _$LoadingEvent implements LoadingEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(SignInEvent value) signInEvent,
+    required TResult Function(UserEvent value) userEvent,
     required TResult Function(UpdateEvent value) updateEvent,
     required TResult Function(LoadingEvent value) loadingEvent,
   }) {
@@ -612,6 +791,7 @@ class _$LoadingEvent implements LoadingEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(SignInEvent value)? signInEvent,
+    TResult? Function(UserEvent value)? userEvent,
     TResult? Function(UpdateEvent value)? updateEvent,
     TResult? Function(LoadingEvent value)? loadingEvent,
   }) {
@@ -623,6 +803,7 @@ class _$LoadingEvent implements LoadingEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(SignInEvent value)? signInEvent,
+    TResult Function(UserEvent value)? userEvent,
     TResult Function(UpdateEvent value)? updateEvent,
     TResult Function(LoadingEvent value)? loadingEvent,
     required TResult orElse(),

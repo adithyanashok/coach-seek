@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "529768599346",
+    "firebase_url": "https://coach-seek-default-rtdb.firebaseio.com",
     "project_id": "coach-seek",
     "storage_bucket": "coach-seek.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "529768599346-s70rhkkqpil764clf4j1hk59c0lgboik.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.coach_seek",
+            "certificate_hash": "2e222b9a5e3541f7cf328e7125a9acf93602e04e"
+          }
+        },
         {
           "client_id": "529768599346-3u2f40uv1370ti7alt137h8tj0b0d2a1.apps.googleusercontent.com",
           "client_type": 3

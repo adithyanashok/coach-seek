@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../core/colors.dart';
+import '../core/colors.dart'; // Importing the color constants
 
 class AppBarWidget extends StatelessWidget {
   final String title;
@@ -14,19 +13,21 @@ class AppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(
-        title,
+        title, // The provided title
         style: const TextStyle(
-          fontSize: 22,
-          fontWeight: FontWeight.w800,
+          fontSize: 22, // Font size
+          fontWeight: FontWeight.w800, // Font weight
         ),
       ),
-      elevation: 0,
-      backgroundColor: AppColors.lightbluecolor,
-      centerTitle: true,
+      elevation: 0, // No elevation
+      backgroundColor: AppColors.lightbluecolor, // Background color
+      centerTitle: true, // Center-align the title
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(37),
-          bottomRight: Radius.circular(37),
+          bottomLeft:
+              Radius.circular(37), // Border radius for bottom left corner
+          bottomRight:
+              Radius.circular(37), // Border radius for bottom right corner
         ),
       ),
     );

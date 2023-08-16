@@ -56,7 +56,7 @@ class BottomNavBarWidget extends StatelessWidget {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.group_sharp),
-                label: "My Coaches",
+                label: "Coaches",
               ),
               BottomNavigationBarItem(
                   icon: Icon(Icons.person_rounded), label: "Profile"),

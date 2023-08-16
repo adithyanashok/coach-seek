@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:coach_seek/bloc/coach/coach_bloc.dart';
 import 'package:coach_seek/bloc/hired_coach/hired_coach_bloc.dart';
 import 'package:coach_seek/database/functions/user/user.dart';
@@ -17,14 +19,17 @@ class Coaches extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Function to call events related to hiring coaches
     void callEvents() async {
+      // Get hired coaches and coaches who hired the current user
       BlocProvider.of<HiredCoachBloc>(context)
           .add(GetHiredCoaches(userId: id!));
-      final data = await UserDb().getUser(id!);
+      final data = await UserDb().getAUserFromHiredDb(id!);
       BlocProvider.of<CoachBloc>(context)
           .add(GetWhoHiredMe(recruterId: data.recruterId, userId: id!));
     }
 
+    // Call the events on screen build
     callEvents();
 
     return DefaultTabController(
@@ -36,6 +41,7 @@ class Coaches extends StatelessWidget {
         ),
         body: Column(
           children: [
+            // Tab bar for switching between "My Hirings" and "Who hired me" views
             TabBar(
               padding: const EdgeInsets.only(top: 10),
               indicatorSize: TabBarIndicatorSize.label,
@@ -51,6 +57,7 @@ class Coaches extends StatelessWidget {
                     width: 180),
               ],
             ),
+            // Tab bar views for "My Hirings" and "Who hired me"
             const Expanded(
               child: TabBarView(
                 children: [
@@ -80,10 +87,13 @@ class _MyHiringsState extends State<MyHirings>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
+    // Build the view of "My Hirings"
     return BlocBuilder<HiredCoachBloc, HiredCoachState>(
       builder: (context, state) {
         return RefreshIndicator(
           onRefresh: () async {
+            // Refresh the list of hired coaches
             BlocProvider.of<HiredCoachBloc>(context)
                 .add(GetHiredCoaches(userId: id!));
             // Simulate a delay before completing the refresh
@@ -126,12 +136,13 @@ class _WhoHiredMeState extends State<WhoHiredMe>
   Widget build(BuildContext context) {
     super.build(context);
 
+    // Build the view of "Who Hired Me"
     return BlocBuilder<CoachBloc, CoachState>(
       builder: (context, state) {
         return RefreshIndicator(
           onRefresh: () async {
-            final data = await UserDb().getUser(id!);
-
+            // Refresh the list of coaches who hired the current user
+            final data = await UserDb().getAUserFromHiredDb(id!);
             BlocProvider.of<CoachBloc>(context)
                 .add(GetWhoHiredMe(recruterId: data.recruterId, userId: id!));
             // Simulate a delay before completing the refresh

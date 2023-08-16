@@ -18,19 +18,16 @@ class FirebaseSignUpMethod {
   // If userData is null, it indicates a signup scenario.
   // If both imageFile and userData are provided, it means we are updating user details along with a new profile image.
   Future<void> uploadImageToFirebase({UserModel? userData, imageFile}) async {
-    // If imageFile is null, update the user details only.
     if (imageFile == null) {
+      // Update user details only if imageFile is null
       try {
-        // Updating user data in Firebase Authentication.
         FireBaseAuthClass().updateTheData(user: userData!);
       } catch (e) {
-        log("Error at image uploading and update the user: $e");
-        snackBar(
-            context: context,
-            msg: "Error at image uploading and update the user: $e");
+        log("Error updating user: $e");
+        snackBar(context: context, msg: "Error updating user: $e");
       }
     } else if (userData == null) {
-      // If userData is null, this is for signup. We upload the profile image to Firebase Storage and handle the signup process.
+      // Handle signup process with profile image upload
       try {
         String fileName = DateTime.now().toString();
         Reference firebaseStorageRef =
@@ -45,11 +42,11 @@ class FirebaseSignUpMethod {
         final profileImg = await taskSnapshot.ref.getDownloadURL();
         handleSignUp(profileImg);
       } catch (e) {
-        log("Error at file uplod: $e");
-        snackBar(context: context, msg: "Error at uploading file: $e");
+        log("Error uploading file: $e");
+        snackBar(context: context, msg: "Error uploading file: $e");
       }
     } else {
-      // If both imageFile and userData are provided, we upload the profile image to Firebase Storage and update the user data with the new profile image URL.
+      // Update user data with new profile image URL
       try {
         String fileName = DateTime.now().toString();
         Reference firebaseStorageRef =
@@ -63,18 +60,18 @@ class FirebaseSignUpMethod {
         // Get the download URL of the uploaded image.
         final profileImg = await taskSnapshot.ref.getDownloadURL();
         userData.profileImg = profileImg;
-        // Update the user data with the new profile image URL.
         FireBaseAuthClass().updateTheData(user: userData);
       } catch (e) {
         log(e.toString());
-        snackBar(context: context, msg: "Error at update the user data : $e");
+        snackBar(context: context, msg: "Error updating user data: $e");
       }
     }
   }
 
-  // Function to handle the signup process with the given user information and profile image URL.
+  // Handle the signup process with user information and profile image URL
   Future<void> handleSignUp(img) async {
     final state = context.read<SignUpBloc>().state;
+    log("Type at handleSignup: ${state.type}");
     final name = state.name;
     final email = state.email;
     final password = state.password;
@@ -84,20 +81,19 @@ class FirebaseSignUpMethod {
     final desc = state.desc;
     final role = state.role;
     final profileImg = img;
+    final type = state.type;
 
-    // Check if email is empty.
+    // Check for empty email or password fields
     if (email.isEmpty) {
       snackBar(context: context, msg: "You need to fill email address");
       return;
     }
-
-    // Check if password is empty.
     if (password.isEmpty) {
       snackBar(context: context, msg: "You need to fill password");
       return;
     }
 
-    // Perform the signup using Firebase Authentication.
+    // Perform signup using Firebase Authentication
     context.read<FireBaseAuthClass>().signUpWithEmail(
           name: name,
           email: email,
@@ -109,6 +105,7 @@ class FirebaseSignUpMethod {
           role: role,
           context: context,
           profileImg: profileImg,
+          type: type,
         );
   }
 }

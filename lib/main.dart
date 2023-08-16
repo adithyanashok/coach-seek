@@ -1,3 +1,14 @@
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:coach_seek/bloc/auth/auth_bloc.dart';
 import 'package:coach_seek/bloc/coach/coach_bloc.dart';
 import 'package:coach_seek/bloc/experience/experience_bloc.dart';
@@ -9,6 +20,7 @@ import 'package:coach_seek/bloc/signin_in/sign_in_bloc.dart';
 import 'package:coach_seek/database/functions/experiences/experiences.dart';
 import 'package:coach_seek/database/functions/profiecient_tag/proficient_tag.dart';
 import 'package:coach_seek/services/firebase_auth.dart';
+import 'package:coach_seek/services/firebase_notification/firebase_notification.dart';
 import 'package:coach_seek/services/firebase_sign_up_method.dart';
 import 'package:coach_seek/view/coaches/coaches.dart';
 import 'package:coach_seek/view/core/stripe_key.dart';
@@ -20,25 +32,38 @@ import 'package:coach_seek/view/profile_screen/profile_screen.dart';
 import 'package:coach_seek/view/search_result/search_result.dart';
 import 'package:coach_seek/view/sign_in/sign_in.dart';
 import 'package:coach_seek/view/sign_up/sign_up.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:provider/provider.dart';
+import 'package:coach_seek/view/sign_up/signup_as_user.dart';
 
+// Global key for the navigator
+final navigatorKey = GlobalKey<NavigatorState>();
+
+// Entry point of the application
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
+
+  // Set Stripe publishable key
   Stripe.publishableKey = StripeKeys.publishableKey;
+
   await Firebase.initializeApp();
+  final user = FirebaseAuth.instance.currentUser;
+  log('$user');
+  FirebaseMessaging.onBackgroundMessage(_firebaseNotificationBackgroundHandler);
+  FirebaseNotificationClass().isTokenRefresh();
+
   runApp(const MyApp());
 }
 
+// Firebase notification background handler
+Future<void> _firebaseNotificationBackgroundHandler(
+    RemoteMessage message) async {
+  await Firebase.initializeApp();
+}
+
+// Main application widget
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider(
@@ -46,7 +71,6 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => SignInBloc()),
-          BlocProvider(create: (context) => SignUpBloc()),
           BlocProvider(create: (context) => SignUpBloc()),
           BlocProvider(create: (context) => AuthBloc()),
           BlocProvider(create: (context) => ExperienceBloc()),
@@ -72,7 +96,6 @@ class MyApp extends StatelessWidget {
               initialData: null,
             ),
           ],
-          // Color.fromARGB(255, 238, 238, 238)
           child: MaterialApp(
             title: 'Flutter Demo',
             debugShowCheckedModeBanner: false,
@@ -89,6 +112,7 @@ class MyApp extends StatelessWidget {
               "search_result": (context) => const SearchResultScreen(),
               "coaches": (context) => Coaches(),
               "payment": (context) => const PaymentScreen(),
+              "user-signup": (context) => const UserSignupScreen(),
               // "welcome": (context) => const OnboardingScreen(),
             },
           ),
@@ -98,6 +122,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// Wrapper widget to manage authentication state
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({super.key});
 
@@ -105,7 +130,7 @@ class AuthWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User?>();
     if (firebaseUser != null) {
-      return const MainScreen();
+      return MainScreen();
     } else {
       return const OnboardingScreen();
     }

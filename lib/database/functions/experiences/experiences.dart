@@ -6,14 +6,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class ExperienceDb {
   // Adding Experience
-
   static Future<void> addExperience(model) async {
     final db = FirebaseFirestore.instance;
     final data = await db.collection("experience").add(model);
+    // Add a new experience document to the "experience" collection
   }
 
+  // Retrieving Experience based on user ID
   static Stream<List<ExperienceModel>> getExperience({String? userId}) {
-    // final userId = FirebaseAuth.instance.currentUser!.uid;
     final db = FirebaseFirestore.instance;
     return db
         .collection("experience")
@@ -35,13 +35,16 @@ class ExperienceDb {
             return experience;
           }).toList(),
         );
+    // Retrieve experiences from the "experience" collection based on user ID
   }
 
+  // Deleting an Experience
   static Future<void> deleteExperience(id) {
     final db = FirebaseFirestore.instance;
     return db.collection("experience").doc(id).delete().then(
           (doc) => log("Document deleted"),
           onError: (e) => log("Error updating document $e"),
         );
+    // Delete a specific experience document from the "experience" collection
   }
 }

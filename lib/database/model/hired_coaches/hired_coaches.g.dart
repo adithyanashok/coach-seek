@@ -20,6 +20,7 @@ _$_HiredCoacheModel _$$_HiredCoacheModelFromJson(Map<String, dynamic> json) =>
       userId: json['userId'] as String,
       profileImg: json['profileImg'] as String,
       isPaymentCompleted: json['isPaymentCompleted'] as bool?,
+      isCoach: json['isCoach'] as bool?,
       paymentId: json['paymentId'] as String?,
       id: json['id'] as String?,
     );
@@ -38,6 +39,7 @@ Map<String, dynamic> _$$_HiredCoacheModelToJson(_$_HiredCoacheModel instance) =>
       'userId': instance.userId,
       'profileImg': instance.profileImg,
       'isPaymentCompleted': instance.isPaymentCompleted,
+      'isCoach': instance.isCoach,
       'paymentId': instance.paymentId,
       'id': instance.id,
     };

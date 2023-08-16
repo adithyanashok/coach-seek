@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:coach_seek/database/functions/profiecient_tag/proficient_tag.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,7 +8,7 @@ import '../core/colors.dart';
 // Coach Card Widget
 Widget coachCard({Function? func, context, state}) {
   final id = state.userId;
-
+  log('${state.isCoach}');
   return GestureDetector(
     onTap: () {
       func!(id);
@@ -57,28 +59,40 @@ Widget coachCard({Function? func, context, state}) {
                         ),
                       ),
                       // Coach Amount
-                      Text(
-                        "₹${state.amount}  ",
-                        style: GoogleFonts.inter(
-                          textStyle: TextStyle(
-                            fontSize: 19,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.lightbluecolor,
-                          ),
-                        ),
-                      ),
+                      state.isCoach == true
+                          ? Text(
+                              "₹${state.amount}  ",
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.lightbluecolor,
+                                ),
+                              ),
+                            )
+                          : const SizedBox(),
                     ],
                   ),
                   // Coach Role
-                  Text(
-                    state.role,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      fontFamily: "inter",
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF8D8484),
-                    ),
-                  ),
+                  state.isCoach == true
+                      ? Text(
+                          state.role,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontFamily: "inter",
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xFF8D8484),
+                          ),
+                        )
+                      : Text(
+                          state.email,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontFamily: "inter",
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xFF8D8484),
+                          ),
+                        ),
                   // Coach Location
                   Text(
                     state.location,

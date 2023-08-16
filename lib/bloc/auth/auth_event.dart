@@ -6,6 +6,7 @@ class AuthEvent with _$AuthEvent {
 
   const factory AuthEvent.signInEvent({required Map<String, dynamic>? user}) =
       SignInEvent;
+  const factory AuthEvent.userEvent({String? userId}) = UserEvent;
 
   const factory AuthEvent.updateEvent({required bool loading}) = UpdateEvent;
   const factory AuthEvent.loadingEvent({required bool loading}) = LoadingEvent;

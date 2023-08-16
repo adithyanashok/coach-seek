@@ -74,129 +74,153 @@ class _ProfileUpdatingScreenState extends State<ProfileUpdatingScreen> {
           return SafeArea(
             child: Stack(
               children: [
-                SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //<---------------------Profile image(if not selected an image it takes the default avatar)---------->
-                      Center(
-                        child: profileImage(context),
+                Center(
+                  child: SizedBox(
+                    // color: const Color.fromRGBO(244, 67, 54, 1),
+                    width: 410,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          //<---------------------Profile image(if not selected an image it takes the default avatar)---------->
+                          Center(
+                            child: profileImage(context),
+                          ),
+                          //<---------------Name Text field--------------->
+
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: buildTextFieldLabel(title: "Name"),
+                          ),
+                          buildTextFormField(
+                            func: (value) {
+                              userData.name = value.isNotEmpty
+                                  ? value
+                                  : "${state.user['name']}";
+                            },
+                            hintText: "${state.user['name']}",
+                            type: "text",
+                            iconName: Icons.person,
+                            value: "${state.user['name']}",
+                          ),
+                          //<---------------Role Text field--------------->
+
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: buildTextFieldLabel(title: "Role"),
+                          ),
+                          buildTextFormField(
+                            func: (value) {
+                              userData.role = value.isNotEmpty
+                                  ? value
+                                  : "${state.user['role']}";
+                            },
+                            hintText: "${state.user['role']}",
+                            type: "text",
+                            iconName: Icons.person_pin,
+                            value: state.user['role'],
+                          ),
+                          //<---------------Location Text field--------------->
+
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: buildTextFieldLabel(title: "Location"),
+                          ),
+                          buildTextFormField(
+                            func: (value) {
+                              userData.location = value.isNotEmpty
+                                  ? value
+                                  : "${state.user['location']}";
+                            },
+                            hintText: "${state.user['location']}",
+                            type: "text",
+                            iconName: Icons.location_on_outlined,
+                            value: state.user['location'],
+                          ),
+                          //<---------------Amount Text field--------------->
+
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: buildTextFieldLabel(title: "Amount"),
+                          ),
+                          buildTextFormField(
+                            func: (value) {
+                              userData.amount = value.isNotEmpty
+                                  ? value
+                                  : "${state.user['amount']}";
+                            },
+                            hintText: "${state.user['amount']}",
+                            type: "phone",
+                            iconName: Icons.attach_money_outlined,
+                            value: state.user['amount'],
+                          ),
+                          //<---------------Phone Text field--------------->
+
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: buildTextFieldLabel(title: "Phone"),
+                          ),
+                          buildTextFormField(
+                            func: (value) {
+                              userData.phone = value.isNotEmpty
+                                  ? value
+                                  : "${state.user['phone']}";
+                            },
+                            hintText: "${state.user['phone']}",
+                            type: "phone",
+                            iconName: Icons.phone,
+                            value: state.user['phone'],
+                          ),
+                          //<---------------About Text field--------------->
+
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: buildTextFieldLabel(title: "About"),
+                          ),
+                          buildTextAreaFormField(
+                            func: (value) {
+                              userData.desc = value.isNotEmpty
+                                  ? value
+                                  : "${state.user['desc']}";
+                            },
+                            hintText: "${state.user['desc']}",
+                            type: "type",
+                            value: state.user['desc'],
+                          ),
+                          //<---------------Submit button Text field--------------->
+
+                          buildSignupButton(
+                            buttonName: "Edit",
+                            buttonColor: "blue",
+                            top: 20,
+                            //On tap function
+                            func: () async {
+                              // Changing state to loading true
+                              context
+                                  .read<AuthBloc>()
+                                  .add(const UpdateEvent(loading: true));
+
+                              // Calling update function
+                              await FirebaseSignUpMethod(context)
+                                  .uploadImageToFirebase(
+                                userData: userData,
+                                imageFile: imageFile,
+                              );
+
+                              // After updating profile, changing state to loading false
+                              // ignore: use_build_context_synchronously
+                              context
+                                  .read<AuthBloc>()
+                                  .add(const UpdateEvent(loading: false));
+
+                              // Pop the screen
+                              // ignore: use_build_context_synchronously
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
                       ),
-                      //<---------------Name Text field--------------->
-
-                      buildTextFieldLabel(title: "Name"),
-                      buildTextFormField(
-                        func: (value) {
-                          userData.name = value.isNotEmpty
-                              ? value
-                              : "${state.user['name']}";
-                        },
-                        hintText: "${state.user['name']}",
-                        type: "text",
-                        iconName: Icons.person,
-                        value: "${state.user['name']}",
-                      ),
-                      //<---------------Role Text field--------------->
-
-                      buildTextFieldLabel(title: "Role"),
-                      buildTextFormField(
-                        func: (value) {
-                          userData.role = value.isNotEmpty
-                              ? value
-                              : "${state.user['role']}";
-                        },
-                        hintText: "${state.user['role']}",
-                        type: "text",
-                        iconName: Icons.person_pin,
-                        value: state.user['role'],
-                      ),
-                      //<---------------Location Text field--------------->
-
-                      buildTextFieldLabel(title: "Location"),
-                      buildTextFormField(
-                        func: (value) {
-                          userData.location = value.isNotEmpty
-                              ? value
-                              : "${state.user['location']}";
-                        },
-                        hintText: "${state.user['location']}",
-                        type: "text",
-                        iconName: Icons.location_on_outlined,
-                        value: state.user['location'],
-                      ),
-                      //<---------------Amount Text field--------------->
-
-                      buildTextFieldLabel(title: "Amount"),
-                      buildTextFormField(
-                        func: (value) {
-                          userData.amount = value.isNotEmpty
-                              ? value
-                              : "${state.user['amount']}";
-                        },
-                        hintText: "${state.user['amount']}",
-                        type: "phone",
-                        iconName: Icons.attach_money_outlined,
-                        value: state.user['amount'],
-                      ),
-                      //<---------------Phone Text field--------------->
-
-                      buildTextFieldLabel(title: "Phone"),
-                      buildTextFormField(
-                        func: (value) {
-                          userData.phone = value.isNotEmpty
-                              ? value
-                              : "${state.user['phone']}";
-                        },
-                        hintText: "${state.user['phone']}",
-                        type: "phone",
-                        iconName: Icons.phone,
-                        value: state.user['phone'],
-                      ),
-                      //<---------------About Text field--------------->
-
-                      buildTextFieldLabel(title: "About"),
-                      buildTextAreaFormField(
-                        func: (value) {
-                          userData.desc = value.isNotEmpty
-                              ? value
-                              : "${state.user['desc']}";
-                        },
-                        hintText: "${state.user['desc']}",
-                        type: "type",
-                        value: state.user['desc'],
-                      ),
-                      //<---------------Submit button Text field--------------->
-
-                      buildSignupButton(
-                        buttonName: "Edit",
-                        buttonColor: "blue",
-                        top: 20,
-                        //On tap function
-                        func: () async {
-                          // Changing state to loading true
-                          context
-                              .read<AuthBloc>()
-                              .add(const UpdateEvent(loading: true));
-
-                          // Calling update function
-                          await FirebaseSignUpMethod(context)
-                              .uploadImageToFirebase(
-                            userData: userData,
-                            imageFile: imageFile,
-                          );
-
-                          // After updating profile, changing state to loading false
-                          // ignore: use_build_context_synchronously
-                          context
-                              .read<AuthBloc>()
-                              .add(const UpdateEvent(loading: false));
-
-                          // Pop the screen
-                          // ignore: use_build_context_synchronously
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
+                    ),
                   ),
                 ),
 

@@ -12,6 +12,8 @@ class UserModel {
   String userId;
   String profileImg;
   bool isPaymentCompleted;
+  String fcmToken;
+  bool isCoach;
   UserModel({
     this.recruterId = '',
     this.name = '',
@@ -22,7 +24,9 @@ class UserModel {
     this.desc = '',
     this.available = true,
     this.isPaymentCompleted = false,
+    this.isCoach = true,
     this.phone = '',
+    this.fcmToken = '',
     this.userId = '',
     this.profileImg =
         'https://static.vecteezy.com/system/resources/previews/002/002/403/original/man-with-beard-avatar-character-isolated-icon-free-vector.jpg',
@@ -38,8 +42,10 @@ class UserModel {
       desc: map['desc'] ?? '',
       available: map['available'] ?? true,
       isPaymentCompleted: map['isPaymentCompleted'] ?? false,
+      isCoach: map['isCoach'] ?? true,
       phone: map['phone'] ?? '',
       userId: map['userId'] ?? '',
+      fcmToken: map['fcmToken'] ?? '',
       profileImg: map['profileImg'] ??
           'https://static.vecteezy.com/system/resources/previews/002/002/403/original/man-with-beard-avatar-character-isolated-icon-free-vector.jpg',
     );
@@ -57,6 +63,8 @@ class UserModel {
       "phone": phone,
       "userId": userId,
       "profileImg": profileImg,
+      "fcmToken": fcmToken,
+      "isCoach": isCoach,
     };
   }
 }

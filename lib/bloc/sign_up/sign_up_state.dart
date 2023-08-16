@@ -12,6 +12,7 @@ class SignUpState with _$SignUpState {
     required String desc,
     required String phone,
     required String profileImg,
+    required bool type,
   }) = _SignUpstate;
 
   factory SignUpState.initialize() => const SignUpState(
@@ -24,5 +25,6 @@ class SignUpState with _$SignUpState {
         desc: "",
         phone: "",
         profileImg: "",
+        type: false,
       );
 }

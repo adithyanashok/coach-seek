@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Coach Seek</string>
+    <string name="facebook_app_id">560460186142213</string>
+    <string name="fb_login_protocol_scheme">fb560460186142213</string>
+    <string name="facebook_client_token">b13ee254973b7913746ffa1eb6fcb30e</string>
+</resources>

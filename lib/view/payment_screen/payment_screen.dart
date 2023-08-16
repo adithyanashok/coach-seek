@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:coach_seek/bloc/auth/auth_bloc.dart';
 import 'package:coach_seek/database/functions/hired_coach/hired_coach.dart';
 import 'package:coach_seek/services/payments/razorpay.dart';
 import 'package:coach_seek/services/payments/stripe_payment.dart';
-import 'package:coach_seek/view/core/colors.dart';
 import 'package:coach_seek/services/payments/googlepay.dart';
 import 'package:coach_seek/view/core/snack_bar.dart';
 import 'package:coach_seek/view/widgets/app_bar_widgets.dart';
@@ -24,7 +22,6 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
   final id = FirebaseAuth.instance.currentUser?.uid;
-
   late Razorpay _razorpay;
   late String amount;
   late String userId;
@@ -45,20 +42,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   final _paymentItems = <PaymentItem>[];
-
   Map<String, dynamic>? paymentIntentData;
 
   @override
   Widget build(BuildContext context) {
+    // Get user data from AuthBloc's state
     final state = context.read<AuthBloc>().state.user;
-    log("State at payment screen: ${state['userId']}");
-    final profileImg = state['profileImg'];
     final coachName = state['name'];
-    final coachRole = state['role'];
-    final coachLocation = state['location'];
     userId = state['userId'];
     amount = state['amount'];
+    log("STATE==${state}");
+
+    // Initialize payment items for Google Pay
     _paymentItems.add(PaymentItem(amount: amount, label: coachName));
+
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(60),
@@ -70,37 +67,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           children: [
             Column(
               children: [
-                ClipOval(
-                  child: SizedBox.fromSize(
-                    size: const Size.fromRadius(48), // Image radius
-                    child: Image.network(profileImg),
-                  ),
-                ),
-                // Coach Name
-                titleWidget(
-                  text: coachName,
-                  color: AppColors.lightbluecolor,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
-                ),
-                // Coach Role
-                titleWidget(
-                  text: coachRole,
-                  color: AppColors.lightbluecolor,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 15,
-                ),
-                // Coach Location
-                titleWidget(
-                  text: coachLocation,
-                  color: AppColors.greycolor,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 13,
-                ),
-                profileActionButton(
-                  text: "\$$amount",
-                  color: AppColors.lightbluecolor,
-                ),
+                // Google Pay Button
                 GooglePayButton(
                   width: 300,
                   paymentConfiguration:
@@ -115,9 +82,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     child: CircularProgressIndicator(),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
+                // Payment with Stripe
                 GestureDetector(
                   onTap: () {
                     const StripePayment().makePayment(
@@ -130,9 +96,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     color: Colors.blue,
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
+                // Payment with Razorpay
                 GestureDetector(
                   onTap: () {
                     RazorPayPayment(
@@ -156,6 +121,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
+  // Handle successful payment response
   void handlePaymentSuccess(PaymentSuccessResponse response) async {
     log("response ${response.paymentId}");
     final paymentId = response.paymentId;
@@ -164,14 +130,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
     snackBar(context: context, msg: "Payment Completed Successfully");
   }
 
+  // Handle payment failure response
   void handlePaymentError(PaymentFailureResponse response) {
-    // Handle payment failure
     log("response ${response.message}");
+    // Handle payment failure
   }
 
+  // Handle external wallet response
   void handleExternalWallet(ExternalWalletResponse response) {
-    // Handle external wallet
     log(response.toString());
     log("response ${response.walletName}");
+    // Handle external wallet
   }
 }

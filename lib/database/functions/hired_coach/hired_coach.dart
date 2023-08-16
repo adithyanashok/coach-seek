@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coach_seek/database/model/hired_coaches/hired_coaches.dart';
 import 'package:coach_seek/database/model/user/user.dart';
+import 'package:coach_seek/services/firebase_notification/firebase_notification.dart';
 import 'package:coach_seek/view/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -11,7 +12,8 @@ class HiredCoachDb {
   static const collectionHired = 'hired';
   static final currentUserId = FirebaseAuth.instance.currentUser!.uid;
 
-  static Future<void> hireTheCoach({HiredCoacheModel? hiredCoacheModel}) async {
+  static Future<void> hireTheCoach(
+      {HiredCoacheModel? hiredCoacheModel, required String fcmToken}) async {
     final db = FirebaseFirestore.instance;
     log("$hiredCoacheModel");
     try {
@@ -24,6 +26,10 @@ class HiredCoachDb {
           .update({"available": false, "recruterId": recruterId});
 
       await db.collection("hired").doc(userId).set(data.toJson());
+      await FirebaseNotificationClass().sendPushMessage(
+          title: "hired!",
+          body: "Someone hired you let's check out",
+          fcmToken: fcmToken);
     } catch (e) {
       log(e.toString());
     }
@@ -92,6 +98,7 @@ class HiredCoachDb {
   }
 
   static Future<List<UserModel>> getWhoHiredMe(recruterId, userId) async {
+    log("recruterId: $recruterId, userId: $userId");
     if (recruterId == null) return [];
     if (currentUserId != userId) return [];
     try {
@@ -112,6 +119,20 @@ class HiredCoachDb {
     } catch (e) {
       log("Error at Get Hired Coach: $e");
       return [];
+    }
+  }
+
+  static Future<void> deleteHirings(
+      {required recruterId, required userId}) async {
+    try {
+      final db = FirebaseFirestore.instance;
+      await db
+          .collection(collectionUsers)
+          .doc(userId)
+          .update({"available": true, "recruterId": ""});
+      await db.collection("hired").doc(userId).delete();
+    } catch (e) {
+      log("Error at Unhire coach: $e");
     }
   }
 

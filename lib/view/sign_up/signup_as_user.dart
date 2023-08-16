@@ -16,14 +16,14 @@ import '../widgets/signin_image.dart';
 import '../widgets/signup_button.dart';
 import '../widgets/text_form_field.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+class UserSignupScreen extends StatefulWidget {
+  const UserSignupScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<UserSignupScreen> createState() => _UserSignupScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _UserSignupScreenState extends State<UserSignupScreen> {
   File? imageFile;
 
   // Function to pick an image from the camera or gallery
@@ -45,6 +45,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // final user = ModalRoute.of(context)?.settings.arguments as String?;
+    log("user");
     return SafeArea(
       child: Scaffold(
         appBar: const PreferredSize(
@@ -125,43 +127,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   .add(SignUpEvent.locationEvent(value));
                             },
                           ),
-                          buildTextFieldLabel(title: "Role"),
-                          buildTextFormField(
-                            hintText: "eg: batting coach",
-                            type: "text",
-                            iconName: Icons.person_pin,
-                            func: (value) {
-                              context
-                                  .read<SignUpBloc>()
-                                  .add(SignUpEvent.roleEvent(value));
-                            },
-                          ),
-                          buildTextFieldLabel(title: "Amount"),
-                          buildTextFormField(
-                            hintText: "Amount per hour",
-                            type: "phone",
-                            iconName: Icons.attach_money_outlined,
-                            func: (value) {
-                              context
-                                  .read<SignUpBloc>()
-                                  .add(SignUpEvent.amountEvent(value));
-                            },
-                          ),
-                          buildTextFieldLabel(title: "About"),
-                          buildTextAreaFormField(
-                            hintText: "Write something about you...",
-                            type: "desc",
-                            func: (value) {
-                              context
-                                  .read<SignUpBloc>()
-                                  .add(SignUpEvent.descEvent(value));
-                            },
-                          ),
                           buildSignupButton(
                             buttonName: "Sign Up",
                             buttonColor: "blue",
                             top: 40,
                             func: () async {
+                              BlocProvider.of<SignUpBloc>(context)
+                                  .add(UserType(type: false));
                               // Show loading widget during image upload
 
                               BlocProvider.of<AuthBloc>(context)

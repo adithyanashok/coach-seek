@@ -17,6 +17,7 @@ class HiredCoacheModel with _$HiredCoacheModel {
     required String userId,
     required String profileImg,
     bool? isPaymentCompleted,
+    bool? isCoach,
     String? paymentId,
     String? id,
   }) = _HiredCoacheModel;

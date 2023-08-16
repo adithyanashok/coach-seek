@@ -32,30 +32,26 @@ class OnboardingScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 120,
                 //<---------------------------Column----------------------->
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //<---------------------Container(Heading CoachSeek)------------------------>
-                    Container(
-                      padding: const EdgeInsets.only(
-                        left: 30,
-                      ),
-                      child: Text(
-                        "CoachSeek",
-                        style: GoogleFonts.bakbakOne(
-                          textStyle: TextStyle(
-                            fontFamily: "bakbak one",
-                            fontSize: 33,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.lightbluecolor,
+                child: Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //<---------------------Container(Heading CoachSeek)------------------------>
+                      Container(
+                        child: Text(
+                          "CoachSeek",
+                          style: GoogleFonts.bakbakOne(
+                            textStyle: TextStyle(
+                              fontFamily: "bakbak one",
+                              fontSize: 33,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.lightbluecolor,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    //<-----------------------------Container(Sub Heading)---------------->>
-                    Container(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Text(
+                      //<-----------------------------Container(Sub Heading)---------------->>
+                      Text(
                         "Find and Hire Cricket Coaches\nNear You",
                         style: GoogleFonts.inter(
                           textStyle: TextStyle(
@@ -66,8 +62,8 @@ class OnboardingScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Column(
@@ -75,16 +71,25 @@ class OnboardingScreen extends StatelessWidget {
                   buildSignupButton(
                       buttonName: "Sign In",
                       buttonColor: "blue",
-                      top: 140,
+                      top: 80,
                       func: () {
                         Navigator.of(context).pushNamed("signin");
                       }),
                   buildSignupButton(
-                    buttonName: "Sign Up",
+                    buttonName: "signup as coach",
                     buttonColor: "white",
                     top: 20,
                     func: () {
                       Navigator.of(context).pushNamed("signup");
+                    },
+                  ),
+                  buildSignupButton(
+                    buttonName: "signup as user",
+                    buttonColor: "white",
+                    top: 20,
+                    func: () {
+                      Navigator.of(context)
+                          .pushNamed("user-signup", arguments: "user");
                     },
                   ),
                 ],

@@ -32,6 +32,7 @@ mixin _$HiredCoacheModel {
   String get userId => throw _privateConstructorUsedError;
   String get profileImg => throw _privateConstructorUsedError;
   bool? get isPaymentCompleted => throw _privateConstructorUsedError;
+  bool? get isCoach => throw _privateConstructorUsedError;
   String? get paymentId => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
 
@@ -60,6 +61,7 @@ abstract class $HiredCoacheModelCopyWith<$Res> {
       String userId,
       String profileImg,
       bool? isPaymentCompleted,
+      bool? isCoach,
       String? paymentId,
       String? id});
 }
@@ -89,6 +91,7 @@ class _$HiredCoacheModelCopyWithImpl<$Res, $Val extends HiredCoacheModel>
     Object? userId = null,
     Object? profileImg = null,
     Object? isPaymentCompleted = freezed,
+    Object? isCoach = freezed,
     Object? paymentId = freezed,
     Object? id = freezed,
   }) {
@@ -141,6 +144,10 @@ class _$HiredCoacheModelCopyWithImpl<$Res, $Val extends HiredCoacheModel>
           ? _value.isPaymentCompleted
           : isPaymentCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isCoach: freezed == isCoach
+          ? _value.isCoach
+          : isCoach // ignore: cast_nullable_to_non_nullable
+              as bool?,
       paymentId: freezed == paymentId
           ? _value.paymentId
           : paymentId // ignore: cast_nullable_to_non_nullable
@@ -174,6 +181,7 @@ abstract class _$$_HiredCoacheModelCopyWith<$Res>
       String userId,
       String profileImg,
       bool? isPaymentCompleted,
+      bool? isCoach,
       String? paymentId,
       String? id});
 }
@@ -201,6 +209,7 @@ class __$$_HiredCoacheModelCopyWithImpl<$Res>
     Object? userId = null,
     Object? profileImg = null,
     Object? isPaymentCompleted = freezed,
+    Object? isCoach = freezed,
     Object? paymentId = freezed,
     Object? id = freezed,
   }) {
@@ -253,6 +262,10 @@ class __$$_HiredCoacheModelCopyWithImpl<$Res>
           ? _value.isPaymentCompleted
           : isPaymentCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isCoach: freezed == isCoach
+          ? _value.isCoach
+          : isCoach // ignore: cast_nullable_to_non_nullable
+              as bool?,
       paymentId: freezed == paymentId
           ? _value.paymentId
           : paymentId // ignore: cast_nullable_to_non_nullable
@@ -281,6 +294,7 @@ class _$_HiredCoacheModel implements _HiredCoacheModel {
       required this.userId,
       required this.profileImg,
       this.isPaymentCompleted,
+      this.isCoach,
       this.paymentId,
       this.id});
 
@@ -312,13 +326,15 @@ class _$_HiredCoacheModel implements _HiredCoacheModel {
   @override
   final bool? isPaymentCompleted;
   @override
+  final bool? isCoach;
+  @override
   final String? paymentId;
   @override
   final String? id;
 
   @override
   String toString() {
-    return 'HiredCoacheModel(name: $name, recruterId: $recruterId, email: $email, role: $role, location: $location, amount: $amount, desc: $desc, available: $available, phone: $phone, userId: $userId, profileImg: $profileImg, isPaymentCompleted: $isPaymentCompleted, paymentId: $paymentId, id: $id)';
+    return 'HiredCoacheModel(name: $name, recruterId: $recruterId, email: $email, role: $role, location: $location, amount: $amount, desc: $desc, available: $available, phone: $phone, userId: $userId, profileImg: $profileImg, isPaymentCompleted: $isPaymentCompleted, isCoach: $isCoach, paymentId: $paymentId, id: $id)';
   }
 
   @override
@@ -343,6 +359,7 @@ class _$_HiredCoacheModel implements _HiredCoacheModel {
                 other.profileImg == profileImg) &&
             (identical(other.isPaymentCompleted, isPaymentCompleted) ||
                 other.isPaymentCompleted == isPaymentCompleted) &&
+            (identical(other.isCoach, isCoach) || other.isCoach == isCoach) &&
             (identical(other.paymentId, paymentId) ||
                 other.paymentId == paymentId) &&
             (identical(other.id, id) || other.id == id));
@@ -364,6 +381,7 @@ class _$_HiredCoacheModel implements _HiredCoacheModel {
       userId,
       profileImg,
       isPaymentCompleted,
+      isCoach,
       paymentId,
       id);
 
@@ -395,6 +413,7 @@ abstract class _HiredCoacheModel implements HiredCoacheModel {
       required final String userId,
       required final String profileImg,
       final bool? isPaymentCompleted,
+      final bool? isCoach,
       final String? paymentId,
       final String? id}) = _$_HiredCoacheModel;
 
@@ -425,6 +444,8 @@ abstract class _HiredCoacheModel implements HiredCoacheModel {
   String get profileImg;
   @override
   bool? get isPaymentCompleted;
+  @override
+  bool? get isCoach;
   @override
   String? get paymentId;
   @override

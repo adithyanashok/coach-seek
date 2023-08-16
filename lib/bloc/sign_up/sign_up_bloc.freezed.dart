@@ -28,6 +28,7 @@ mixin _$SignUpEvent {
     required TResult Function(String desc) descEvent,
     required TResult Function(String phone) phoneEvent,
     required TResult Function(String profileImg) profileImg,
+    required TResult Function(bool? type) userType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +43,7 @@ mixin _$SignUpEvent {
     TResult? Function(String desc)? descEvent,
     TResult? Function(String phone)? phoneEvent,
     TResult? Function(String profileImg)? profileImg,
+    TResult? Function(bool? type)? userType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +58,7 @@ mixin _$SignUpEvent {
     TResult Function(String desc)? descEvent,
     TResult Function(String phone)? phoneEvent,
     TResult Function(String profileImg)? profileImg,
+    TResult Function(bool? type)? userType,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -71,6 +74,7 @@ mixin _$SignUpEvent {
     required TResult Function(DescEvent value) descEvent,
     required TResult Function(PhoneEvent value) phoneEvent,
     required TResult Function(ProfileImg value) profileImg,
+    required TResult Function(UserType value) userType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,6 +89,7 @@ mixin _$SignUpEvent {
     TResult? Function(DescEvent value)? descEvent,
     TResult? Function(PhoneEvent value)? phoneEvent,
     TResult? Function(ProfileImg value)? profileImg,
+    TResult? Function(UserType value)? userType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -99,6 +104,7 @@ mixin _$SignUpEvent {
     TResult Function(DescEvent value)? descEvent,
     TResult Function(PhoneEvent value)? phoneEvent,
     TResult Function(ProfileImg value)? profileImg,
+    TResult Function(UserType value)? userType,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -170,6 +176,7 @@ class _$Initialize implements Initialize {
     required TResult Function(String desc) descEvent,
     required TResult Function(String phone) phoneEvent,
     required TResult Function(String profileImg) profileImg,
+    required TResult Function(bool? type) userType,
   }) {
     return initialize();
   }
@@ -187,6 +194,7 @@ class _$Initialize implements Initialize {
     TResult? Function(String desc)? descEvent,
     TResult? Function(String phone)? phoneEvent,
     TResult? Function(String profileImg)? profileImg,
+    TResult? Function(bool? type)? userType,
   }) {
     return initialize?.call();
   }
@@ -204,6 +212,7 @@ class _$Initialize implements Initialize {
     TResult Function(String desc)? descEvent,
     TResult Function(String phone)? phoneEvent,
     TResult Function(String profileImg)? profileImg,
+    TResult Function(bool? type)? userType,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -225,6 +234,7 @@ class _$Initialize implements Initialize {
     required TResult Function(DescEvent value) descEvent,
     required TResult Function(PhoneEvent value) phoneEvent,
     required TResult Function(ProfileImg value) profileImg,
+    required TResult Function(UserType value) userType,
   }) {
     return initialize(this);
   }
@@ -242,6 +252,7 @@ class _$Initialize implements Initialize {
     TResult? Function(DescEvent value)? descEvent,
     TResult? Function(PhoneEvent value)? phoneEvent,
     TResult? Function(ProfileImg value)? profileImg,
+    TResult? Function(UserType value)? userType,
   }) {
     return initialize?.call(this);
   }
@@ -259,6 +270,7 @@ class _$Initialize implements Initialize {
     TResult Function(DescEvent value)? descEvent,
     TResult Function(PhoneEvent value)? phoneEvent,
     TResult Function(ProfileImg value)? profileImg,
+    TResult Function(UserType value)? userType,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -346,6 +358,7 @@ class _$EmailEvent implements EmailEvent {
     required TResult Function(String desc) descEvent,
     required TResult Function(String phone) phoneEvent,
     required TResult Function(String profileImg) profileImg,
+    required TResult Function(bool? type) userType,
   }) {
     return emailEvent(email);
   }
@@ -363,6 +376,7 @@ class _$EmailEvent implements EmailEvent {
     TResult? Function(String desc)? descEvent,
     TResult? Function(String phone)? phoneEvent,
     TResult? Function(String profileImg)? profileImg,
+    TResult? Function(bool? type)? userType,
   }) {
     return emailEvent?.call(email);
   }
@@ -380,6 +394,7 @@ class _$EmailEvent implements EmailEvent {
     TResult Function(String desc)? descEvent,
     TResult Function(String phone)? phoneEvent,
     TResult Function(String profileImg)? profileImg,
+    TResult Function(bool? type)? userType,
     required TResult orElse(),
   }) {
     if (emailEvent != null) {
@@ -401,6 +416,7 @@ class _$EmailEvent implements EmailEvent {
     required TResult Function(DescEvent value) descEvent,
     required TResult Function(PhoneEvent value) phoneEvent,
     required TResult Function(ProfileImg value) profileImg,
+    required TResult Function(UserType value) userType,
   }) {
     return emailEvent(this);
   }
@@ -418,6 +434,7 @@ class _$EmailEvent implements EmailEvent {
     TResult? Function(DescEvent value)? descEvent,
     TResult? Function(PhoneEvent value)? phoneEvent,
     TResult? Function(ProfileImg value)? profileImg,
+    TResult? Function(UserType value)? userType,
   }) {
     return emailEvent?.call(this);
   }
@@ -435,6 +452,7 @@ class _$EmailEvent implements EmailEvent {
     TResult Function(DescEvent value)? descEvent,
     TResult Function(PhoneEvent value)? phoneEvent,
     TResult Function(ProfileImg value)? profileImg,
+    TResult Function(UserType value)? userType,
     required TResult orElse(),
   }) {
     if (emailEvent != null) {
@@ -528,6 +546,7 @@ class _$PasswordEvent implements PasswordEvent {
     required TResult Function(String desc) descEvent,
     required TResult Function(String phone) phoneEvent,
     required TResult Function(String profileImg) profileImg,
+    required TResult Function(bool? type) userType,
   }) {
     return passwordEvent(password);
   }
@@ -545,6 +564,7 @@ class _$PasswordEvent implements PasswordEvent {
     TResult? Function(String desc)? descEvent,
     TResult? Function(String phone)? phoneEvent,
     TResult? Function(String profileImg)? profileImg,
+    TResult? Function(bool? type)? userType,
   }) {
     return passwordEvent?.call(password);
   }
@@ -562,6 +582,7 @@ class _$PasswordEvent implements PasswordEvent {
     TResult Function(String desc)? descEvent,
     TResult Function(String phone)? phoneEvent,
     TResult Function(String profileImg)? profileImg,
+    TResult Function(bool? type)? userType,
     required TResult orElse(),
   }) {
     if (passwordEvent != null) {
@@ -583,6 +604,7 @@ class _$PasswordEvent implements PasswordEvent {
     required TResult Function(DescEvent value) descEvent,
     required TResult Function(PhoneEvent value) phoneEvent,
     required TResult Function(ProfileImg value) profileImg,
+    required TResult Function(UserType value) userType,
   }) {
     return passwordEvent(this);
   }
@@ -600,6 +622,7 @@ class _$PasswordEvent implements PasswordEvent {
     TResult? Function(DescEvent value)? descEvent,
     TResult? Function(PhoneEvent value)? phoneEvent,
     TResult? Function(ProfileImg value)? profileImg,
+    TResult? Function(UserType value)? userType,
   }) {
     return passwordEvent?.call(this);
   }
@@ -617,6 +640,7 @@ class _$PasswordEvent implements PasswordEvent {
     TResult Function(DescEvent value)? descEvent,
     TResult Function(PhoneEvent value)? phoneEvent,
     TResult Function(ProfileImg value)? profileImg,
+    TResult Function(UserType value)? userType,
     required TResult orElse(),
   }) {
     if (passwordEvent != null) {
@@ -709,6 +733,7 @@ class _$NameEvent implements NameEvent {
     required TResult Function(String desc) descEvent,
     required TResult Function(String phone) phoneEvent,
     required TResult Function(String profileImg) profileImg,
+    required TResult Function(bool? type) userType,
   }) {
     return nameEvent(name);
   }
@@ -726,6 +751,7 @@ class _$NameEvent implements NameEvent {
     TResult? Function(String desc)? descEvent,
     TResult? Function(String phone)? phoneEvent,
     TResult? Function(String profileImg)? profileImg,
+    TResult? Function(bool? type)? userType,
   }) {
     return nameEvent?.call(name);
   }
@@ -743,6 +769,7 @@ class _$NameEvent implements NameEvent {
     TResult Function(String desc)? descEvent,
     TResult Function(String phone)? phoneEvent,
     TResult Function(String profileImg)? profileImg,
+    TResult Function(bool? type)? userType,
     required TResult orElse(),
   }) {
     if (nameEvent != null) {
@@ -764,6 +791,7 @@ class _$NameEvent implements NameEvent {
     required TResult Function(DescEvent value) descEvent,
     required TResult Function(PhoneEvent value) phoneEvent,
     required TResult Function(ProfileImg value) profileImg,
+    required TResult Function(UserType value) userType,
   }) {
     return nameEvent(this);
   }
@@ -781,6 +809,7 @@ class _$NameEvent implements NameEvent {
     TResult? Function(DescEvent value)? descEvent,
     TResult? Function(PhoneEvent value)? phoneEvent,
     TResult? Function(ProfileImg value)? profileImg,
+    TResult? Function(UserType value)? userType,
   }) {
     return nameEvent?.call(this);
   }
@@ -798,6 +827,7 @@ class _$NameEvent implements NameEvent {
     TResult Function(DescEvent value)? descEvent,
     TResult Function(PhoneEvent value)? phoneEvent,
     TResult Function(ProfileImg value)? profileImg,
+    TResult Function(UserType value)? userType,
     required TResult orElse(),
   }) {
     if (nameEvent != null) {
@@ -890,6 +920,7 @@ class _$RoleEvent implements RoleEvent {
     required TResult Function(String desc) descEvent,
     required TResult Function(String phone) phoneEvent,
     required TResult Function(String profileImg) profileImg,
+    required TResult Function(bool? type) userType,
   }) {
     return roleEvent(role);
   }
@@ -907,6 +938,7 @@ class _$RoleEvent implements RoleEvent {
     TResult? Function(String desc)? descEvent,
     TResult? Function(String phone)? phoneEvent,
     TResult? Function(String profileImg)? profileImg,
+    TResult? Function(bool? type)? userType,
   }) {
     return roleEvent?.call(role);
   }
@@ -924,6 +956,7 @@ class _$RoleEvent implements RoleEvent {
     TResult Function(String desc)? descEvent,
     TResult Function(String phone)? phoneEvent,
     TResult Function(String profileImg)? profileImg,
+    TResult Function(bool? type)? userType,
     required TResult orElse(),
   }) {
     if (roleEvent != null) {
@@ -945,6 +978,7 @@ class _$RoleEvent implements RoleEvent {
     required TResult Function(DescEvent value) descEvent,
     required TResult Function(PhoneEvent value) phoneEvent,
     required TResult Function(ProfileImg value) profileImg,
+    required TResult Function(UserType value) userType,
   }) {
     return roleEvent(this);
   }
@@ -962,6 +996,7 @@ class _$RoleEvent implements RoleEvent {
     TResult? Function(DescEvent value)? descEvent,
     TResult? Function(PhoneEvent value)? phoneEvent,
     TResult? Function(ProfileImg value)? profileImg,
+    TResult? Function(UserType value)? userType,
   }) {
     return roleEvent?.call(this);
   }
@@ -979,6 +1014,7 @@ class _$RoleEvent implements RoleEvent {
     TResult Function(DescEvent value)? descEvent,
     TResult Function(PhoneEvent value)? phoneEvent,
     TResult Function(ProfileImg value)? profileImg,
+    TResult Function(UserType value)? userType,
     required TResult orElse(),
   }) {
     if (roleEvent != null) {
@@ -1071,6 +1107,7 @@ class _$AmountEvent implements AmountEvent {
     required TResult Function(String desc) descEvent,
     required TResult Function(String phone) phoneEvent,
     required TResult Function(String profileImg) profileImg,
+    required TResult Function(bool? type) userType,
   }) {
     return amountEvent(amount);
   }
@@ -1088,6 +1125,7 @@ class _$AmountEvent implements AmountEvent {
     TResult? Function(String desc)? descEvent,
     TResult? Function(String phone)? phoneEvent,
     TResult? Function(String profileImg)? profileImg,
+    TResult? Function(bool? type)? userType,
   }) {
     return amountEvent?.call(amount);
   }
@@ -1105,6 +1143,7 @@ class _$AmountEvent implements AmountEvent {
     TResult Function(String desc)? descEvent,
     TResult Function(String phone)? phoneEvent,
     TResult Function(String profileImg)? profileImg,
+    TResult Function(bool? type)? userType,
     required TResult orElse(),
   }) {
     if (amountEvent != null) {
@@ -1126,6 +1165,7 @@ class _$AmountEvent implements AmountEvent {
     required TResult Function(DescEvent value) descEvent,
     required TResult Function(PhoneEvent value) phoneEvent,
     required TResult Function(ProfileImg value) profileImg,
+    required TResult Function(UserType value) userType,
   }) {
     return amountEvent(this);
   }
@@ -1143,6 +1183,7 @@ class _$AmountEvent implements AmountEvent {
     TResult? Function(DescEvent value)? descEvent,
     TResult? Function(PhoneEvent value)? phoneEvent,
     TResult? Function(ProfileImg value)? profileImg,
+    TResult? Function(UserType value)? userType,
   }) {
     return amountEvent?.call(this);
   }
@@ -1160,6 +1201,7 @@ class _$AmountEvent implements AmountEvent {
     TResult Function(DescEvent value)? descEvent,
     TResult Function(PhoneEvent value)? phoneEvent,
     TResult Function(ProfileImg value)? profileImg,
+    TResult Function(UserType value)? userType,
     required TResult orElse(),
   }) {
     if (amountEvent != null) {
@@ -1253,6 +1295,7 @@ class _$LocationEvent implements LocationEvent {
     required TResult Function(String desc) descEvent,
     required TResult Function(String phone) phoneEvent,
     required TResult Function(String profileImg) profileImg,
+    required TResult Function(bool? type) userType,
   }) {
     return locationEvent(location);
   }
@@ -1270,6 +1313,7 @@ class _$LocationEvent implements LocationEvent {
     TResult? Function(String desc)? descEvent,
     TResult? Function(String phone)? phoneEvent,
     TResult? Function(String profileImg)? profileImg,
+    TResult? Function(bool? type)? userType,
   }) {
     return locationEvent?.call(location);
   }
@@ -1287,6 +1331,7 @@ class _$LocationEvent implements LocationEvent {
     TResult Function(String desc)? descEvent,
     TResult Function(String phone)? phoneEvent,
     TResult Function(String profileImg)? profileImg,
+    TResult Function(bool? type)? userType,
     required TResult orElse(),
   }) {
     if (locationEvent != null) {
@@ -1308,6 +1353,7 @@ class _$LocationEvent implements LocationEvent {
     required TResult Function(DescEvent value) descEvent,
     required TResult Function(PhoneEvent value) phoneEvent,
     required TResult Function(ProfileImg value) profileImg,
+    required TResult Function(UserType value) userType,
   }) {
     return locationEvent(this);
   }
@@ -1325,6 +1371,7 @@ class _$LocationEvent implements LocationEvent {
     TResult? Function(DescEvent value)? descEvent,
     TResult? Function(PhoneEvent value)? phoneEvent,
     TResult? Function(ProfileImg value)? profileImg,
+    TResult? Function(UserType value)? userType,
   }) {
     return locationEvent?.call(this);
   }
@@ -1342,6 +1389,7 @@ class _$LocationEvent implements LocationEvent {
     TResult Function(DescEvent value)? descEvent,
     TResult Function(PhoneEvent value)? phoneEvent,
     TResult Function(ProfileImg value)? profileImg,
+    TResult Function(UserType value)? userType,
     required TResult orElse(),
   }) {
     if (locationEvent != null) {
@@ -1434,6 +1482,7 @@ class _$DescEvent implements DescEvent {
     required TResult Function(String desc) descEvent,
     required TResult Function(String phone) phoneEvent,
     required TResult Function(String profileImg) profileImg,
+    required TResult Function(bool? type) userType,
   }) {
     return descEvent(desc);
   }
@@ -1451,6 +1500,7 @@ class _$DescEvent implements DescEvent {
     TResult? Function(String desc)? descEvent,
     TResult? Function(String phone)? phoneEvent,
     TResult? Function(String profileImg)? profileImg,
+    TResult? Function(bool? type)? userType,
   }) {
     return descEvent?.call(desc);
   }
@@ -1468,6 +1518,7 @@ class _$DescEvent implements DescEvent {
     TResult Function(String desc)? descEvent,
     TResult Function(String phone)? phoneEvent,
     TResult Function(String profileImg)? profileImg,
+    TResult Function(bool? type)? userType,
     required TResult orElse(),
   }) {
     if (descEvent != null) {
@@ -1489,6 +1540,7 @@ class _$DescEvent implements DescEvent {
     required TResult Function(DescEvent value) descEvent,
     required TResult Function(PhoneEvent value) phoneEvent,
     required TResult Function(ProfileImg value) profileImg,
+    required TResult Function(UserType value) userType,
   }) {
     return descEvent(this);
   }
@@ -1506,6 +1558,7 @@ class _$DescEvent implements DescEvent {
     TResult? Function(DescEvent value)? descEvent,
     TResult? Function(PhoneEvent value)? phoneEvent,
     TResult? Function(ProfileImg value)? profileImg,
+    TResult? Function(UserType value)? userType,
   }) {
     return descEvent?.call(this);
   }
@@ -1523,6 +1576,7 @@ class _$DescEvent implements DescEvent {
     TResult Function(DescEvent value)? descEvent,
     TResult Function(PhoneEvent value)? phoneEvent,
     TResult Function(ProfileImg value)? profileImg,
+    TResult Function(UserType value)? userType,
     required TResult orElse(),
   }) {
     if (descEvent != null) {
@@ -1615,6 +1669,7 @@ class _$PhoneEvent implements PhoneEvent {
     required TResult Function(String desc) descEvent,
     required TResult Function(String phone) phoneEvent,
     required TResult Function(String profileImg) profileImg,
+    required TResult Function(bool? type) userType,
   }) {
     return phoneEvent(phone);
   }
@@ -1632,6 +1687,7 @@ class _$PhoneEvent implements PhoneEvent {
     TResult? Function(String desc)? descEvent,
     TResult? Function(String phone)? phoneEvent,
     TResult? Function(String profileImg)? profileImg,
+    TResult? Function(bool? type)? userType,
   }) {
     return phoneEvent?.call(phone);
   }
@@ -1649,6 +1705,7 @@ class _$PhoneEvent implements PhoneEvent {
     TResult Function(String desc)? descEvent,
     TResult Function(String phone)? phoneEvent,
     TResult Function(String profileImg)? profileImg,
+    TResult Function(bool? type)? userType,
     required TResult orElse(),
   }) {
     if (phoneEvent != null) {
@@ -1670,6 +1727,7 @@ class _$PhoneEvent implements PhoneEvent {
     required TResult Function(DescEvent value) descEvent,
     required TResult Function(PhoneEvent value) phoneEvent,
     required TResult Function(ProfileImg value) profileImg,
+    required TResult Function(UserType value) userType,
   }) {
     return phoneEvent(this);
   }
@@ -1687,6 +1745,7 @@ class _$PhoneEvent implements PhoneEvent {
     TResult? Function(DescEvent value)? descEvent,
     TResult? Function(PhoneEvent value)? phoneEvent,
     TResult? Function(ProfileImg value)? profileImg,
+    TResult? Function(UserType value)? userType,
   }) {
     return phoneEvent?.call(this);
   }
@@ -1704,6 +1763,7 @@ class _$PhoneEvent implements PhoneEvent {
     TResult Function(DescEvent value)? descEvent,
     TResult Function(PhoneEvent value)? phoneEvent,
     TResult Function(ProfileImg value)? profileImg,
+    TResult Function(UserType value)? userType,
     required TResult orElse(),
   }) {
     if (phoneEvent != null) {
@@ -1797,6 +1857,7 @@ class _$ProfileImg implements ProfileImg {
     required TResult Function(String desc) descEvent,
     required TResult Function(String phone) phoneEvent,
     required TResult Function(String profileImg) profileImg,
+    required TResult Function(bool? type) userType,
   }) {
     return profileImg(this.profileImg);
   }
@@ -1814,6 +1875,7 @@ class _$ProfileImg implements ProfileImg {
     TResult? Function(String desc)? descEvent,
     TResult? Function(String phone)? phoneEvent,
     TResult? Function(String profileImg)? profileImg,
+    TResult? Function(bool? type)? userType,
   }) {
     return profileImg?.call(this.profileImg);
   }
@@ -1831,6 +1893,7 @@ class _$ProfileImg implements ProfileImg {
     TResult Function(String desc)? descEvent,
     TResult Function(String phone)? phoneEvent,
     TResult Function(String profileImg)? profileImg,
+    TResult Function(bool? type)? userType,
     required TResult orElse(),
   }) {
     if (profileImg != null) {
@@ -1852,6 +1915,7 @@ class _$ProfileImg implements ProfileImg {
     required TResult Function(DescEvent value) descEvent,
     required TResult Function(PhoneEvent value) phoneEvent,
     required TResult Function(ProfileImg value) profileImg,
+    required TResult Function(UserType value) userType,
   }) {
     return profileImg(this);
   }
@@ -1869,6 +1933,7 @@ class _$ProfileImg implements ProfileImg {
     TResult? Function(DescEvent value)? descEvent,
     TResult? Function(PhoneEvent value)? phoneEvent,
     TResult? Function(ProfileImg value)? profileImg,
+    TResult? Function(UserType value)? userType,
   }) {
     return profileImg?.call(this);
   }
@@ -1886,6 +1951,7 @@ class _$ProfileImg implements ProfileImg {
     TResult Function(DescEvent value)? descEvent,
     TResult Function(PhoneEvent value)? phoneEvent,
     TResult Function(ProfileImg value)? profileImg,
+    TResult Function(UserType value)? userType,
     required TResult orElse(),
   }) {
     if (profileImg != null) {
@@ -1905,6 +1971,192 @@ abstract class ProfileImg implements SignUpEvent {
 }
 
 /// @nodoc
+abstract class _$$UserTypeCopyWith<$Res> {
+  factory _$$UserTypeCopyWith(
+          _$UserType value, $Res Function(_$UserType) then) =
+      __$$UserTypeCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool? type});
+}
+
+/// @nodoc
+class __$$UserTypeCopyWithImpl<$Res>
+    extends _$SignUpEventCopyWithImpl<$Res, _$UserType>
+    implements _$$UserTypeCopyWith<$Res> {
+  __$$UserTypeCopyWithImpl(_$UserType _value, $Res Function(_$UserType) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = freezed,
+  }) {
+    return _then(_$UserType(
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UserType implements UserType {
+  const _$UserType({this.type});
+
+  @override
+  final bool? type;
+
+  @override
+  String toString() {
+    return 'SignUpEvent.userType(type: $type)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UserType &&
+            (identical(other.type, type) || other.type == type));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, type);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UserTypeCopyWith<_$UserType> get copyWith =>
+      __$$UserTypeCopyWithImpl<_$UserType>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(String email) emailEvent,
+    required TResult Function(String password) passwordEvent,
+    required TResult Function(String name) nameEvent,
+    required TResult Function(String role) roleEvent,
+    required TResult Function(String amount) amountEvent,
+    required TResult Function(String location) locationEvent,
+    required TResult Function(String desc) descEvent,
+    required TResult Function(String phone) phoneEvent,
+    required TResult Function(String profileImg) profileImg,
+    required TResult Function(bool? type) userType,
+  }) {
+    return userType(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(String email)? emailEvent,
+    TResult? Function(String password)? passwordEvent,
+    TResult? Function(String name)? nameEvent,
+    TResult? Function(String role)? roleEvent,
+    TResult? Function(String amount)? amountEvent,
+    TResult? Function(String location)? locationEvent,
+    TResult? Function(String desc)? descEvent,
+    TResult? Function(String phone)? phoneEvent,
+    TResult? Function(String profileImg)? profileImg,
+    TResult? Function(bool? type)? userType,
+  }) {
+    return userType?.call(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(String email)? emailEvent,
+    TResult Function(String password)? passwordEvent,
+    TResult Function(String name)? nameEvent,
+    TResult Function(String role)? roleEvent,
+    TResult Function(String amount)? amountEvent,
+    TResult Function(String location)? locationEvent,
+    TResult Function(String desc)? descEvent,
+    TResult Function(String phone)? phoneEvent,
+    TResult Function(String profileImg)? profileImg,
+    TResult Function(bool? type)? userType,
+    required TResult orElse(),
+  }) {
+    if (userType != null) {
+      return userType(type);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initialize value) initialize,
+    required TResult Function(EmailEvent value) emailEvent,
+    required TResult Function(PasswordEvent value) passwordEvent,
+    required TResult Function(NameEvent value) nameEvent,
+    required TResult Function(RoleEvent value) roleEvent,
+    required TResult Function(AmountEvent value) amountEvent,
+    required TResult Function(LocationEvent value) locationEvent,
+    required TResult Function(DescEvent value) descEvent,
+    required TResult Function(PhoneEvent value) phoneEvent,
+    required TResult Function(ProfileImg value) profileImg,
+    required TResult Function(UserType value) userType,
+  }) {
+    return userType(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initialize value)? initialize,
+    TResult? Function(EmailEvent value)? emailEvent,
+    TResult? Function(PasswordEvent value)? passwordEvent,
+    TResult? Function(NameEvent value)? nameEvent,
+    TResult? Function(RoleEvent value)? roleEvent,
+    TResult? Function(AmountEvent value)? amountEvent,
+    TResult? Function(LocationEvent value)? locationEvent,
+    TResult? Function(DescEvent value)? descEvent,
+    TResult? Function(PhoneEvent value)? phoneEvent,
+    TResult? Function(ProfileImg value)? profileImg,
+    TResult? Function(UserType value)? userType,
+  }) {
+    return userType?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initialize value)? initialize,
+    TResult Function(EmailEvent value)? emailEvent,
+    TResult Function(PasswordEvent value)? passwordEvent,
+    TResult Function(NameEvent value)? nameEvent,
+    TResult Function(RoleEvent value)? roleEvent,
+    TResult Function(AmountEvent value)? amountEvent,
+    TResult Function(LocationEvent value)? locationEvent,
+    TResult Function(DescEvent value)? descEvent,
+    TResult Function(PhoneEvent value)? phoneEvent,
+    TResult Function(ProfileImg value)? profileImg,
+    TResult Function(UserType value)? userType,
+    required TResult orElse(),
+  }) {
+    if (userType != null) {
+      return userType(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UserType implements SignUpEvent {
+  const factory UserType({final bool? type}) = _$UserType;
+
+  bool? get type;
+  @JsonKey(ignore: true)
+  _$$UserTypeCopyWith<_$UserType> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$SignUpState {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
@@ -1915,6 +2167,7 @@ mixin _$SignUpState {
   String get desc => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
   String get profileImg => throw _privateConstructorUsedError;
+  bool get type => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignUpStateCopyWith<SignUpState> get copyWith =>
@@ -1936,7 +2189,8 @@ abstract class $SignUpStateCopyWith<$Res> {
       String amount,
       String desc,
       String phone,
-      String profileImg});
+      String profileImg,
+      bool type});
 }
 
 /// @nodoc
@@ -1961,6 +2215,7 @@ class _$SignUpStateCopyWithImpl<$Res, $Val extends SignUpState>
     Object? desc = null,
     Object? phone = null,
     Object? profileImg = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -1999,6 +2254,10 @@ class _$SignUpStateCopyWithImpl<$Res, $Val extends SignUpState>
           ? _value.profileImg
           : profileImg // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -2020,7 +2279,8 @@ abstract class _$$_SignUpstateCopyWith<$Res>
       String amount,
       String desc,
       String phone,
-      String profileImg});
+      String profileImg,
+      bool type});
 }
 
 /// @nodoc
@@ -2043,6 +2303,7 @@ class __$$_SignUpstateCopyWithImpl<$Res>
     Object? desc = null,
     Object? phone = null,
     Object? profileImg = null,
+    Object? type = null,
   }) {
     return _then(_$_SignUpstate(
       name: null == name
@@ -2081,6 +2342,10 @@ class __$$_SignUpstateCopyWithImpl<$Res>
           ? _value.profileImg
           : profileImg // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -2097,7 +2362,8 @@ class _$_SignUpstate implements _SignUpstate {
       required this.amount,
       required this.desc,
       required this.phone,
-      required this.profileImg});
+      required this.profileImg,
+      required this.type});
 
   @override
   final String name;
@@ -2117,10 +2383,12 @@ class _$_SignUpstate implements _SignUpstate {
   final String phone;
   @override
   final String profileImg;
+  @override
+  final bool type;
 
   @override
   String toString() {
-    return 'SignUpState(name: $name, email: $email, password: $password, role: $role, location: $location, amount: $amount, desc: $desc, phone: $phone, profileImg: $profileImg)';
+    return 'SignUpState(name: $name, email: $email, password: $password, role: $role, location: $location, amount: $amount, desc: $desc, phone: $phone, profileImg: $profileImg, type: $type)';
   }
 
   @override
@@ -2139,12 +2407,13 @@ class _$_SignUpstate implements _SignUpstate {
             (identical(other.desc, desc) || other.desc == desc) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.profileImg, profileImg) ||
-                other.profileImg == profileImg));
+                other.profileImg == profileImg) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, name, email, password, role,
-      location, amount, desc, phone, profileImg);
+      location, amount, desc, phone, profileImg, type);
 
   @JsonKey(ignore: true)
   @override
@@ -2163,7 +2432,8 @@ abstract class _SignUpstate implements SignUpState {
       required final String amount,
       required final String desc,
       required final String phone,
-      required final String profileImg}) = _$_SignUpstate;
+      required final String profileImg,
+      required final bool type}) = _$_SignUpstate;
 
   @override
   String get name;
@@ -2183,6 +2453,8 @@ abstract class _SignUpstate implements SignUpState {
   String get phone;
   @override
   String get profileImg;
+  @override
+  bool get type;
   @override
   @JsonKey(ignore: true)
   _$$_SignUpstateCopyWith<_$_SignUpstate> get copyWith =>
