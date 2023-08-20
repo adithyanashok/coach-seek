@@ -1,8 +1,6 @@
-import 'dart:developer';
-
-import 'package:coach_seek/bloc/coach/coach_bloc.dart';
-import 'package:coach_seek/bloc/hired_coach/hired_coach_bloc.dart';
-import 'package:coach_seek/database/functions/user/user.dart';
+import 'package:coach_seek/controller/bloc/coach/coach_bloc.dart';
+import 'package:coach_seek/controller/bloc/hired_coach/hired_coach_bloc.dart';
+import 'package:coach_seek/controller/db/user/user.dart';
 import 'package:coach_seek/view/core/colors.dart';
 
 import 'package:coach_seek/view/widgets/app_bar_widgets.dart';

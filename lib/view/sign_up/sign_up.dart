@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:coach_seek/bloc/auth/auth_bloc.dart';
-import 'package:coach_seek/bloc/sign_up/sign_up_bloc.dart';
-import 'package:coach_seek/services/firebase_sign_up_method.dart';
+import 'package:coach_seek/controller/bloc/auth/auth_bloc.dart';
+import 'package:coach_seek/controller/bloc/sign_up/sign_up_bloc.dart';
+import 'package:coach_seek/services/firebase_auth/firebase_sign_up_method.dart';
 import 'package:coach_seek/view/core/colors.dart';
 import 'package:coach_seek/view/core/snack_bar.dart';
 import 'package:coach_seek/view/widgets/circle_loading_widget.dart';
@@ -162,6 +162,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             buttonColor: "blue",
                             top: 40,
                             func: () async {
+                              context
+                                  .read<SignUpBloc>()
+                                  .add(const UserType(type: true));
                               // Show loading widget during image upload
 
                               BlocProvider.of<AuthBloc>(context)

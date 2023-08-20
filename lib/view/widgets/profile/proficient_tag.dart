@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'package:coach_seek/database/functions/profiecient_tag/proficient_tag.dart';
+import 'package:coach_seek/controller/db/profiecient_tag/proficient_tag.dart';
 import 'package:coach_seek/view/core/colors.dart';
 import 'package:coach_seek/view/widgets/circle_loading_widget.dart';
 import 'package:coach_seek/view/widgets/profile_widgets.dart';
@@ -54,7 +54,9 @@ Widget proficientTags(context, {currentUserId, id}) {
               return GestureDetector(
                 onLongPress: () {
                   currentUserId == id
-                      ? showDeleteConfirmationDialog(context, data[index].id,
+                      ? showDeleteConfirmationDialog(
+                          context: context,
+                          userId: data[index].id,
                           methodFor: "delete-tag")
                       : "";
                 },

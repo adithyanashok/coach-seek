@@ -1,6 +1,6 @@
 import 'dart:developer';
-import 'package:coach_seek/bloc/auth/auth_bloc.dart';
-import 'package:coach_seek/database/functions/hired_coach/hired_coach.dart';
+import 'package:coach_seek/controller/bloc/auth/auth_bloc.dart';
+import 'package:coach_seek/controller/db/hired_coach/hired_coach.dart';
 import 'package:coach_seek/services/payments/razorpay.dart';
 import 'package:coach_seek/services/payments/stripe_payment.dart';
 import 'package:coach_seek/services/payments/googlepay.dart';
@@ -25,6 +25,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
   late Razorpay _razorpay;
   late String amount;
   late String userId;
+  late String email;
+  late String phone;
 
   @override
   void initState() {
@@ -46,12 +48,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // BlocProvider.of<AuthBloc>(context).add(UserEvent(userId: id));
     // Get user data from AuthBloc's state
     final state = context.read<AuthBloc>().state.user;
     final coachName = state['name'];
     userId = state['userId'];
     amount = state['amount'];
-    log("STATE==${state}");
+    email = state['email'];
+    phone = state['phone'];
+    // log("STATE==${state}");
 
     // Initialize payment items for Google Pay
     _paymentItems.add(PaymentItem(amount: amount, label: coachName));

@@ -1,5 +1,12 @@
 import 'dart:developer';
 
+import 'package:coach_seek/controller/bloc/auth/auth_bloc.dart';
+import 'package:coach_seek/controller/bloc/coach/coach_bloc.dart';
+import 'package:coach_seek/controller/bloc/experience/experience_bloc.dart';
+import 'package:coach_seek/controller/bloc/hired_coach/hired_coach_bloc.dart';
+import 'package:coach_seek/controller/bloc/search_coach/search_coach_bloc.dart';
+import 'package:coach_seek/controller/bloc/sign_up/sign_up_bloc.dart';
+import 'package:coach_seek/controller/bloc/signin_in/sign_in_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -9,19 +16,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:coach_seek/bloc/auth/auth_bloc.dart';
-import 'package:coach_seek/bloc/coach/coach_bloc.dart';
-import 'package:coach_seek/bloc/experience/experience_bloc.dart';
-import 'package:coach_seek/bloc/hired_coach/hired_coach_bloc.dart';
-import 'package:coach_seek/bloc/search_coach/search_coach_bloc.dart';
-import 'package:coach_seek/bloc/sign_up/sign_up_bloc.dart';
-import 'package:coach_seek/bloc/signin_in/sign_in_bloc.dart';
-
-import 'package:coach_seek/database/functions/experiences/experiences.dart';
-import 'package:coach_seek/database/functions/profiecient_tag/proficient_tag.dart';
-import 'package:coach_seek/services/firebase_auth.dart';
+import 'package:coach_seek/controller/db/experiences/experiences.dart';
+import 'package:coach_seek/controller/db/profiecient_tag/proficient_tag.dart';
 import 'package:coach_seek/services/firebase_notification/firebase_notification.dart';
-import 'package:coach_seek/services/firebase_sign_up_method.dart';
 import 'package:coach_seek/view/coaches/coaches.dart';
 import 'package:coach_seek/view/core/stripe_key.dart';
 import 'package:coach_seek/view/home/home_screen.dart';
@@ -33,6 +30,9 @@ import 'package:coach_seek/view/search_result/search_result.dart';
 import 'package:coach_seek/view/sign_in/sign_in.dart';
 import 'package:coach_seek/view/sign_up/sign_up.dart';
 import 'package:coach_seek/view/sign_up/signup_as_user.dart';
+
+import 'services/firebase_auth/firebase_auth.dart';
+import 'services/firebase_auth/firebase_sign_up_method.dart';
 
 // Global key for the navigator
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -113,7 +113,6 @@ class MyApp extends StatelessWidget {
               "coaches": (context) => Coaches(),
               "payment": (context) => const PaymentScreen(),
               "user-signup": (context) => const UserSignupScreen(),
-              // "welcome": (context) => const OnboardingScreen(),
             },
           ),
         ),

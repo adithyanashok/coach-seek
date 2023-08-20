@@ -1,10 +1,9 @@
-import 'package:coach_seek/database/functions/experiences/experiences.dart';
-import 'package:coach_seek/database/functions/hired_coach/hired_coach.dart';
-import 'package:coach_seek/database/functions/profiecient_tag/proficient_tag.dart';
-import 'package:coach_seek/database/functions/user/user.dart';
-import 'package:coach_seek/database/model/hired_coaches/hired_coaches.dart';
-import 'package:coach_seek/services/firebase_auth.dart';
-import 'package:coach_seek/services/firebase_notification/firebase_notification.dart';
+import 'package:coach_seek/controller/db/experiences/experiences.dart';
+import 'package:coach_seek/controller/db/hired_coach/hired_coach.dart';
+import 'package:coach_seek/controller/db/profiecient_tag/proficient_tag.dart';
+
+import 'package:coach_seek/model/hired_coaches/hired_coaches.dart';
+import 'package:coach_seek/services/firebase_auth/firebase_auth.dart';
 
 import 'package:coach_seek/view/core/colors.dart';
 import 'package:coach_seek/view/core/snack_bar.dart';
@@ -47,6 +46,7 @@ Widget profileHead({
     phone: phone,
     userId: userId,
     profileImg: profileImg,
+    isCoach: isCoach,
   );
 
   void makePhoneCall(phoneNumber) async {
@@ -153,7 +153,9 @@ Widget profileHead({
               recruterId == currentUserId
                   ? GestureDetector(
                       onTap: () {
-                        showDeleteConfirmationDialog(context, userId,
+                        showDeleteConfirmationDialog(
+                            context: context,
+                            userId: userId,
                             methodFor: 'un-hire');
                       },
                       child: profileActionButton(
@@ -381,8 +383,8 @@ class ExperienceList extends StatelessWidget {
                                   // Call the function to show the confirmation dialog before deleting
                                   showDeleteConfirmationDialog(
                                       methodFor: 'delete-experience',
-                                      context,
-                                      id);
+                                      context: context,
+                                      userId: id);
                                 },
                                 icon: const Icon(Icons.delete),
                               )
@@ -414,8 +416,12 @@ class ExperienceList extends StatelessWidget {
 }
 
 // Define a custom function to show the confirmation dialog
-void showDeleteConfirmationDialog(BuildContext context, String? id,
-    {required String? methodFor, String? recruterId}) {
+void showDeleteConfirmationDialog({
+  required BuildContext context,
+  String? userId,
+  required String? methodFor,
+  String? recruterId,
+}) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -466,18 +472,21 @@ void showDeleteConfirmationDialog(BuildContext context, String? id,
               Navigator.of(context).pop();
               // Call the function to delete the item using the given id
               if (methodFor == "delete-tag") {
-                ProficientTag.deleteTags(id);
+                ProficientTag.deleteTags(userId);
               } else if (methodFor == "delete-hiring") {
                 await HiredCoachDb.deleteHirings(
                   recruterId: recruterId,
-                  userId: id,
+                  userId: userId,
                 );
+                Navigator.of(context).pop();
 
                 return snackBar(context: context, msg: "Cancelled");
               } else if (methodFor == "delete-experience") {
-                ExperienceDb.deleteExperience(id);
+                ExperienceDb.deleteExperience(userId);
               } else if (methodFor == 'un-hire') {
-                await HiredCoachDb.unHireCoach(docId: id, userId: id);
+                await HiredCoachDb.unHireCoach(docId: userId, userId: userId);
+              } else if (methodFor == 'logout') {
+                await FireBaseAuthClass().signOut(context, userId);
               }
             },
             child: Text(

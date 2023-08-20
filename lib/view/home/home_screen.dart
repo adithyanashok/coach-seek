@@ -1,5 +1,5 @@
-import 'package:coach_seek/bloc/coach/coach_bloc.dart';
-import 'package:coach_seek/services/firebase_auth.dart';
+import 'package:coach_seek/controller/bloc/coach/coach_bloc.dart';
+import 'package:coach_seek/services/firebase_auth/firebase_auth.dart';
 import 'package:coach_seek/view/widgets/app_bar_widgets.dart';
 import 'package:coach_seek/view/widgets/circle_loading_widget.dart';
 import 'package:coach_seek/view/widgets/sub_heading.dart';
@@ -61,13 +61,6 @@ class HomeScreen extends StatelessWidget {
                         );
                 },
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // Sign out the current user
-                FireBaseAuthClass().signOut(context, user!.uid);
-              },
-              child: const Text("Signout"),
             ),
           ],
         ),

@@ -84,7 +84,7 @@ class OnboardingScreen extends StatelessWidget {
                     },
                   ),
                   buildSignupButton(
-                    buttonName: "signup as user",
+                    buttonName: "signup as recruiter",
                     buttonColor: "white",
                     top: 20,
                     func: () {

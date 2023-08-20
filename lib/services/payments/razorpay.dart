@@ -1,20 +1,22 @@
 import 'dart:developer';
-import 'package:coach_seek/database/functions/user/user.dart';
+import 'package:coach_seek/controller/db/user/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class RazorPayPayment {
-  RazorPayPayment({this.userId, this.context, this.razorpay});
-  final context;
-  final userId;
-  final id = FirebaseAuth.instance.currentUser?.uid;
-  final razorpay;
+  RazorPayPayment(
+      {required this.userId, required this.context, required this.razorpay});
+  BuildContext context;
+  String userId;
+  String? id = FirebaseAuth.instance.currentUser?.uid;
+  Razorpay razorpay;
 
   // Function to initiate the Razorpay payment process
   void openCheckout(amount) async {
     // Fetch user data
     final user = await UserDb.getCurrentUser(id!);
-    log("User at razorpay: $user");
 
     // Prepare payment options
     var options = {

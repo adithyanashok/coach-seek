@@ -1,13 +1,14 @@
 import 'dart:developer';
 
+import 'package:coach_seek/controller/bloc/auth/auth_bloc.dart';
+import 'package:coach_seek/model/proficient_tag/proficient_tag.dart';
+import 'package:coach_seek/services/firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:coach_seek/bloc/auth/auth_bloc.dart';
-import 'package:coach_seek/database/functions/profiecient_tag/proficient_tag.dart';
-import 'package:coach_seek/database/functions/user/user.dart';
-import 'package:coach_seek/database/model/proficient_tag/proficient_tag.dart';
+import 'package:coach_seek/controller/db/profiecient_tag/proficient_tag.dart';
+import 'package:coach_seek/controller/db/user/user.dart';
 import 'package:coach_seek/view/core/colors.dart';
 import 'package:coach_seek/view/widgets/app_bar_widgets.dart';
 import 'package:coach_seek/view/widgets/profile/proficient_tag.dart';
@@ -15,11 +16,11 @@ import 'package:coach_seek/view/widgets/profile_widgets.dart';
 import 'package:coach_seek/view/widgets/text_form_field.dart';
 
 class ProfileScreen extends StatelessWidget {
-  final currentUserId = FirebaseAuth.instance.currentUser?.uid;
-
   ProfileScreen({
     Key? key,
   }) : super(key: key);
+
+  final currentUserId = FirebaseAuth.instance.currentUser?.uid;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +28,6 @@ class ProfileScreen extends StatelessWidget {
     MediaQueryData mediaQuery = MediaQuery.of(context);
     double deviceWidth = mediaQuery.size.width;
     log("Width: $deviceWidth");
-
-    // Fetch user data and update user state in AuthBloc
-    BlocProvider.of<AuthBloc>(context).add(UserEvent(userId: currentUserId));
 
     final state = context.read<AuthBloc>().state.user;
     final currentUserRecruiterId = state['recruterId'];
@@ -64,7 +62,7 @@ class ProfileScreen extends StatelessWidget {
           final email = data['email'];
           final isCoach = data['isCoach'];
           final fcmToken = data['fcmToken'];
-
+          log("currentUserRecruterId: $currentUserRecruiterId, currentUserId: $currentUserId, userId: $userId");
           // Update user state in AuthBloc
           context.read<AuthBloc>().add(AuthEvent.signInEvent(user: data));
 
@@ -111,7 +109,7 @@ class ProfileScreen extends StatelessWidget {
                   if (isCoach == true)
                     SizedBox(
                       width: double.infinity,
-                      height: isCoach == true ? 250 : 50,
+                      height: isCoach == true ? 250 : 100,
                       child: Column(
                         children: [
                           // Add cricket aspect tag
@@ -150,34 +148,56 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           // Display "Cancel Hiring" button if applicable
                           if (currentUserRecruiterId == userId)
-                            GestureDetector(
+                            buildDangerbutton(
+                              context: context,
+                              currentUserRecruiterId: currentUserRecruiterId,
+                              buttonName: 'Cancel Hiring',
                               onTap: () {
                                 showDeleteConfirmationDialog(
-                                  context,
-                                  currentUserId,
-                                  methodFor: "delete-hiring",
+                                  context: context,
+                                  methodFor: 'delete-hiring',
                                   recruterId: currentUserRecruiterId,
                                 );
                               },
-                              child: Container(
-                                margin: const EdgeInsets.only(top: 30),
-                                child: profileActionButton(
-                                  text: "Cancel Hiring",
-                                  color: Colors.red,
-                                  width: 280,
-                                  height: 40,
-                                ),
-                              ),
                             ),
                         ],
                       ),
                     ),
+                  if (currentUserId == userId)
+                    buildDangerbutton(
+                      context: context,
+                      buttonName: "Signout",
+                      onTap: () {
+                        FireBaseAuthClass().signOut(context, currentUserId);
+                      },
+                    )
                 ],
               ),
             ),
           );
         }
       },
+    );
+  }
+
+  Widget buildDangerbutton(
+      {required BuildContext context,
+      currentUserRecruiterId,
+      required String buttonName,
+      Function? onTap}) {
+    return GestureDetector(
+      onTap: () {
+        onTap!();
+      },
+      child: Container(
+        margin: const EdgeInsets.only(top: 30),
+        child: profileActionButton(
+          text: buttonName,
+          color: Colors.red,
+          width: 280,
+          height: 40,
+        ),
+      ),
     );
   }
 }

@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:coach_seek/bloc/auth/auth_bloc.dart';
-import 'package:coach_seek/database/model/user/user.dart';
+import 'package:coach_seek/controller/bloc/auth/auth_bloc.dart';
+import 'package:coach_seek/model/user/user.dart';
+import 'package:coach_seek/services/firebase_auth/firebase_sign_up_method.dart';
 
-import 'package:coach_seek/services/firebase_sign_up_method.dart';
 import 'package:coach_seek/view/core/colors.dart';
 import 'package:coach_seek/view/core/snack_bar.dart';
 import 'package:coach_seek/view/widgets/circle_loading_widget.dart';

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:coach_seek/database/functions/hired_coach/hired_coach.dart';
+import 'package:coach_seek/controller/db/hired_coach/hired_coach.dart';
 import 'package:coach_seek/view/core/stripe_key.dart';
 import 'package:http/http.dart' as http;
 import 'package:coach_seek/view/core/snack_bar.dart';

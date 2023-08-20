@@ -1,6 +1,7 @@
 import 'dart:developer';
-import 'package:coach_seek/bloc/auth/auth_bloc.dart';
-import 'package:coach_seek/bloc/coach/coach_bloc.dart';
+
+import 'package:coach_seek/controller/bloc/auth/auth_bloc.dart';
+import 'package:coach_seek/controller/bloc/coach/coach_bloc.dart';
 import 'package:coach_seek/services/firebase_notification/firebase_notification.dart';
 import 'package:coach_seek/view/coaches/coaches.dart';
 import 'package:coach_seek/view/home/home_screen.dart';

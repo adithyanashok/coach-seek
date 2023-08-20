@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:coach_seek/database/functions/profiecient_tag/proficient_tag.dart';
+import 'package:coach_seek/controller/db/profiecient_tag/proficient_tag.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../core/colors.dart';

@@ -1,6 +1,6 @@
-import 'package:coach_seek/bloc/auth/auth_bloc.dart';
-import 'package:coach_seek/database/functions/experiences/experiences.dart';
-import 'package:coach_seek/database/model/experience/experiences.dart';
+import 'package:coach_seek/controller/bloc/auth/auth_bloc.dart';
+import 'package:coach_seek/controller/db/experiences/experiences.dart';
+import 'package:coach_seek/model/experience/experiences.dart';
 import 'package:coach_seek/view/widgets/app_bar_widgets.dart';
 import 'package:coach_seek/view/widgets/signup_button.dart';
 import 'package:coach_seek/view/widgets/text_form_field.dart';

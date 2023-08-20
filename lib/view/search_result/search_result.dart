@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:coach_seek/bloc/search_coach/search_coach_bloc.dart';
+import 'package:coach_seek/controller/bloc/search_coach/search_coach_bloc.dart';
 import 'package:coach_seek/view/widgets/app_bar_widgets.dart';
 import 'package:coach_seek/view/widgets/card.dart'; // Assuming you have a widget named coachCard
 import 'package:coach_seek/view/widgets/circle_loading_widget.dart';

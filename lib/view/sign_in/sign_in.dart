@@ -1,8 +1,8 @@
-import 'package:coach_seek/bloc/auth/auth_bloc.dart';
-import 'package:coach_seek/bloc/signin_in/sign_in_bloc.dart';
-import 'package:coach_seek/services/firebase_auth.dart';
-import 'package:coach_seek/services/firebase_sign_in_method.dart';
-import 'package:coach_seek/view/phone_signin/phone_signin.dart';
+import 'package:coach_seek/controller/bloc/auth/auth_bloc.dart';
+import 'package:coach_seek/controller/bloc/signin_in/sign_in_bloc.dart';
+import 'package:coach_seek/services/firebase_auth/firebase_auth.dart';
+import 'package:coach_seek/services/firebase_auth/firebase_sign_in_method.dart';
+
 import 'package:coach_seek/view/widgets/circle_loading_widget.dart';
 import 'package:coach_seek/view/widgets/signup_button.dart';
 import 'package:coach_seek/view/widgets/sub_heading.dart';
@@ -47,52 +47,48 @@ class SignInScreen extends StatelessWidget {
                         buildLoginImage(imageName: "signup-image"),
                         buildSubHeadings(text: "Sign in to your\naccount"),
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             //<----------------Email text form field------------------>
-                            buildTextFieldLabel(title: "Email"),
-                            buildTextFormField(
-                              hintText: "Enter your email",
-                              type: "email",
-                              iconName: Icons.email_outlined,
-                              func: (value) {
-                                context
-                                    .read<SignInBloc>()
-                                    .add(EmailEvent(email: value));
-                              },
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                buildTextFieldLabel(title: "Email"),
+                                buildTextFormField(
+                                  hintText: "Enter your email",
+                                  type: "email",
+                                  iconName: Icons.email_outlined,
+                                  func: (value) {
+                                    context
+                                        .read<SignInBloc>()
+                                        .add(EmailEvent(email: value));
+                                  },
+                                ),
+                              ],
                             ),
                             //<----------------------password text form field------------>
-                            buildTextFieldLabel(title: "Password"),
-                            buildTextFormField(
-                              hintText: "Enter your password",
-                              type: "password",
-                              iconName: Icons.lock_outline,
-                              func: (value) {
-                                context
-                                    .read<SignInBloc>()
-                                    .add(PasswordEvent(passWord: value));
-                              },
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                buildTextFieldLabel(title: "Password"),
+                                buildTextFormField(
+                                  hintText: "Enter your password",
+                                  type: "password",
+                                  iconName: Icons.lock_outline,
+                                  func: (value) {
+                                    context
+                                        .read<SignInBloc>()
+                                        .add(PasswordEvent(passWord: value));
+                                  },
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               height: 10,
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                      builder: (context) {
-                                        return PhoneSignin();
-                                      },
-                                    ));
-                                  },
-                                  child: Image.asset(
-                                    'assets/icons/phone-icon.png',
-                                    width: 40,
-                                  ),
-                                ),
                                 GestureDetector(
                                   onTap: () {
                                     FireBaseAuthClass().googleSignIn(context);
@@ -101,6 +97,9 @@ class SignInScreen extends StatelessWidget {
                                     'assets/icons/google-icon.png',
                                     width: 40,
                                   ),
+                                ),
+                                const SizedBox(
+                                  width: 20,
                                 ),
                                 GestureDetector(
                                   onTap: () {
@@ -124,10 +123,11 @@ class SignInScreen extends StatelessWidget {
                                     .add(const LoadingEvent(loading: true));
 
                                 // Call the sign-in method to handle sign-in with email
-                                FirabaseSignInMethod(context)
+                                await FirabaseSignInMethod(context)
                                     .signInHandle("email");
 
                                 // Hide loading widget after sign-in process
+
                                 context
                                     .read<AuthBloc>()
                                     .add(const LoadingEvent(loading: false));
